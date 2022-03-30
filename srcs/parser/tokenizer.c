@@ -1,0 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/29 15:26:22 by adouib            #+#    #+#             */
+/*   Updated: 2022/03/30 22:28:44 by adouib           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../incl/minishell.h"
+
+void	redirectionhelper(char *s, int *to)
+{
+	int	i;
+
+	i = (*to);
+	if (s[i + 1] == LREDIR || s[i + 1] == RREDIR)
+		i = i + 2;
+	else
+		i++;
+	*to = i;
+}
+
+char	*pipehelper(int *from, int *lastpos)
+{
+	int	i;
+
+	i = (*from);
+	i++;
+	(*from) = i;
+	(*lastpos) = i;
+	return (NULL);
+}
+
+void	quoteshelper(char *s, int *pos, char c)
+{
+	char	k;
+	int		i;
+	int		dqstate;
+	int		sqstate;
+
+	if_c_else_k(&c, &k, &dqstate, &sqstate);
+	i = (*pos);
+	while (s[i])
+	{
+		if (s[i] == ' ' && !sqstate && !dqstate)
+			break ;
+		else if (s[i] == c)
+			localhelper2(&dqstate, sqstate);
+		else if (s[i] == k)
+			localhelper3(&sqstate, dqstate);
+		else if ((s[i] == '<' || s[i] == '>' || s[i] == '|') \
+			&& !sqstate && !dqstate)
+			break ;
+		i++;
+	}
+	if (c == '"' || c == '\'')
+		if (dqstate || sqstate)
+			quit("Quotes Error! Restart Minishell", 1);
+	(*pos) = i;
+}
+
+char	*get_token(char *s, int *lastpos)
+{
+	char	*token;
+	int		to;
+	int		from;
+
+	from = *lastpos;
+	while (iswhitespace(s[from]))
+		from++;
+	if (s[from] == '|')
+		if (!pipehelper(&from, lastpos))
+			return (NULL);
+	to = from;
+	if (s[to] == LREDIR || s[to] == RREDIR)
+		redirectionhelper(s, &to);
+	else if (s[to] == DOUBLEQUOTE)
+		quoteshelper(s, &to, DOUBLEQUOTE);
+	else if ((from == to && s[to] == SINGLEQUOTE))
+		quoteshelper(s, &to, SINGLEQUOTE);
+	else
+		gettoken_helper2(s, &to);
+	token = ft_strcut_from_to(s, from, to);
+	if (!gettoken_helper(token, to, lastpos))
+		return (NULL);
+	return (token);
+}

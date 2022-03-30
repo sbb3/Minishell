@@ -1,0 +1,27 @@
+{
+	"files.associations": {
+		"minishell.h": "c",
+		"pipex.h": "c",
+		"wait.h": "c",
+		"stdlib.h": "c",
+		"unistd.h": "c",
+		"string.h": "c",
+		"strings.h": "c",
+		"_size_t.h": "c",
+		"_null.h": "c",
+		"stdbool.h": "c",
+		"*.tcc": "c",
+		"unordered_map": "c",
+		"numeric": "c",
+		"ostream": "c",
+		"array": "c",
+		"deque": "c",
+		"string": "c",
+		"vector": "c",
+		"string_view": "c",
+		"initializer_list": "c",
+		"ranges": "c",
+		"history.h": "c",
+		"readline.h": "c"
+	}
+}
