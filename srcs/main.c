@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 21:01:37 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 21:38:35 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	main(void)
 		parser(&data);
 		printing(&data);
 		// expander();
-
 	}
 	return (0);
 }

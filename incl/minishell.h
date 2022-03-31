@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:00:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 21:34:19 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 22:04:25 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <stdbool.h>
 # include <sys/wait.h>
 # include <errno.h>
@@ -155,7 +156,6 @@ void		if_c_else_k(char *c, char *k, int *dqstate, int *sqstate);
 void		skipspaces(char *s, int *pos, int *space);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 size_t		malloc_size(void *p);
-
 
 
 
