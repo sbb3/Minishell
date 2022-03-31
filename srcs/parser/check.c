@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:20:36 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 15:14:23 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 21:30:04 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ int	check(char *s)
 /**
  handle hardcoded arrays
  check more errors
- handle realloc function
  handle leaks
+//  handle realloc function
 //  handle norm (header file)
 //  handle exit quotes in check function
 //  ignore whitespaces in check < > |

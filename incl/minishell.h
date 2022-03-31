@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:00:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 18:23:07 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 21:34:19 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,14 @@
 # define MINISHELL_H
 
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
-# include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <string.h>
 
-# define INITIAL 2
+# define INITIAL 200
 
 extern char	**environ;
 
@@ -99,6 +95,8 @@ void		env_cmd(void);
 void		ft_error(int c);
 void		ft_error2(int c);
 int			syntax_error(char *s);
+void		quit(char *s, int errornum);
+void		exit_if_null(void *p, char *message);
 
 // PARSING
 void		parser(t_shell *data);
@@ -109,6 +107,7 @@ void		envinit(t_shell *data);
 void		phasezero(t_shell *data);
 void		phaseone(t_shell *data);
 void		phasetwo(t_shell *data);
+char		**test(char **tokens, size_t size, size_t tkns_len);
 char		*pipehelper(int *from, int *lastpos);
 void		redirectionhelper(char *s, int *to);
 int			skip_redirection(int token_type);
@@ -148,27 +147,22 @@ int			count(char *s[]);
 int			quotes_count(char *s, int start, char c);
 void		quoteshelper(char *s, int *to, char c);
 void		set_null(t_shell *data);
-void		exit_if_null(void *p, char *message);
 char		*getkey(char *s);
 void		reset_memory(t_shell *data);
+void		ft_free(char **tokens, size_t tkns_len);
 int			iswhitespace(char c);
 void		if_c_else_k(char *c, char *k, int *dqstate, int *sqstate);
 void		skipspaces(char *s, int *pos, int *space);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 size_t		malloc_size(void *p);
-void	*ft_realloc(void *p, size_t size);
-
-
-size_t getsize(void * p);
 
 
 
-void		quit(char *s, int errornum);
+
+
 void		printing(t_shell *data);
 
 
-char	**test(char **tokens, size_t size, size_t tkns_len);
-void	ft_free(char **tokens, size_t tkns_len);
 
 
 #endif

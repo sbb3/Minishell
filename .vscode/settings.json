@@ -22,6 +22,7 @@
 		"initializer_list": "c",
 		"ranges": "c",
 		"history.h": "c",
-		"readline.h": "c"
+		"readline.h": "c",
+		"__config": "c"
 	}
 }
