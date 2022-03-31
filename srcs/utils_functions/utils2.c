@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:26:18 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 13:31:26 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 18:00:45 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	reset_memory(t_shell *data)
 	if (data->tokens)
 	{
 		i = -1;
-		while (data->tokens[++i])
+		while (++i < data->tokens_len)
 			free(data->tokens[i]);
 		free(data->tokens);
 	}

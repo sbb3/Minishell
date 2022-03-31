@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:34:26 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/29 15:25:59 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 15:11:58 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,21 @@ void	envinit(t_shell *data)
 	t_env	*newnode;
 	char	*key;
 	char	*value;
+	int		i;
+	int		envlen;
 
+	envlen = count(environ);
+	data->envs = malloc(sizeof(int *) * (envlen + 1));
+	exit_if_null(data->envs, "Allocation failed");
 	data->envp = NULL;
-	while (*environ)
+	i = -1;
+	while (environ[++i])
 	{
-		key = getkey(*environ);
+		data->envs[i] = ft_strdup(environ[i]);
+		key = getkey(environ[i]);
 		value = getenv(key);
 		newnode = lstinit(key, value);
 		pushback(&data->envp, newnode);
-		environ++;
 	}
+	data->envs[i] = NULL;
 }

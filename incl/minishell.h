@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:00:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 14:00:16 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 18:23:07 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <readline/history.h>
 # include <string.h>
 
-# define INITIAL 200
+# define INITIAL 2
 
 extern char	**environ;
 
@@ -60,6 +60,7 @@ typedef struct s_shell
 {
 	struct s_component	**separator;
 	struct s_env		*envp;
+	char				**envs;
 	char				*prompt_input;
 	int					parts_count;
 	int					exit_status;
@@ -143,10 +144,9 @@ void		pushback(t_env **head, t_env *new);
 // UTILS FUNCTIONS 2
 int			pipes_count(char *input);
 int			*token_recognition(t_shell *data);
-int			tokens_count(char *s[]);
+int			count(char *s[]);
 int			quotes_count(char *s, int start, char c);
 void		quoteshelper(char *s, int *to, char c);
-void		*ft_realloc(void *ptr, size_t size);
 void		set_null(t_shell *data);
 void		exit_if_null(void *p, char *message);
 char		*getkey(char *s);
@@ -154,13 +154,21 @@ void		reset_memory(t_shell *data);
 int			iswhitespace(char c);
 void		if_c_else_k(char *c, char *k, int *dqstate, int *sqstate);
 void		skipspaces(char *s, int *pos, int *space);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
+size_t		malloc_size(void *p);
+void	*ft_realloc(void *p, size_t size);
 
 
+size_t getsize(void * p);
 
 
 
 void		quit(char *s, int errornum);
 void		printing(t_shell *data);
+
+
+char	**test(char **tokens, size_t size, size_t tkns_len);
+void	ft_free(char **tokens, size_t tkns_len);
 
 
 #endif
