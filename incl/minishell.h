@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:00:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/30 23:34:58 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 14:00:16 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void		redirectionhelper(char *s, int *to);
 int			skip_redirection(int token_type);
 int			gettoken_helper(char *token, int to, int *lastpos);
 void		gettoken_helper2(char *token, int *end);
-void		phaseone_helper(t_shell *data, int *k, int l, int type1, int type2);
+void		phaseone_helper(t_shell *data, int *k, int type1, int type2);
 void		phasetwo_helper(t_shell *data, int i);
 void		localhelper(int *state);
 void		localhelper2(int *dqstate, int sqstate);
@@ -159,12 +159,8 @@ void		skipspaces(char *s, int *pos, int *space);
 
 
 
-char		*strip_quotes(char *tkn, int tkn_type);
 void		quit(char *s, int errornum);
 void		printing(t_shell *data);
-int			intlen(long num);
-int			lencutted(char *s, char c);
-char		*cut(char *s);
 
 
 #endif

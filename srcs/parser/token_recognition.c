@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:29:19 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/29 15:00:04 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 14:00:46 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ void	phaseone(t_shell *data)
 	while (++i < data->tokens_len)
 	{
 		if (!ft_strcmp(data->tokens[i], "<"))
-			phaseone_helper(data, &i, 0, LESS, INFILE);
+			phaseone_helper(data, &i, LESS, INFILE);
 		else if (!ft_strcmp(data->tokens[i], ">"))
-			phaseone_helper(data, &i, 0, GREATER, OUTFILE);
+			phaseone_helper(data, &i, GREATER, OUTFILE);
 		else if (!ft_strcmp(data->tokens[i], "<<"))
-			phaseone_helper(data, &i, 0, HEREDOC, DELIMITER);
+			phaseone_helper(data, &i, HEREDOC, DELIMITER);
 		else if (!ft_strcmp(data->tokens[i], ">>"))
-			phaseone_helper(data, &i, 0, APPEND, OUTFILE_APPEND);
+			phaseone_helper(data, &i, APPEND, OUTFILE_APPEND);
 		else
 		{
 			if (!k)
 			{
-				phaseone_helper(data, &i, 1, 0, 0);
+				phaseone_helper(data, &i, 0, 0);
 				k = 1;
 			}
 		}
