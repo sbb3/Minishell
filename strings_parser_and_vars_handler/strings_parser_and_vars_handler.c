@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:02:24 by jchakir           #+#    #+#             */
-/*   Updated: 2022/03/31 15:54:18 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/01 17:42:19 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,36 @@ static char	*squotes_dquotes_str_and_vars_hundler(char *str, t_env *env, int exi
 	return (final_str);
 }
 
-void	strings_parser_and_vars_handler(t_shell *shell)
+static void	strings_parser_and_vars_handler__in_components_(t_component *component, t_env *envp, int exit_status)
+{
+	char		*str;
+
+	while (component)
+	{
+		str = squotes_dquotes_str_and_vars_hundler(component->content, envp, exit_status);
+		free(component->content);
+		component->content = str;
+		component = component->next;
+	}
+}
+
+bool	strings_parser_and_vars_handler(t_shell *shell)
 {
 	t_component	*component;
 	int			index;
-	char		*str;
+
+	if (quotes_and_forbidden_chars_checker(shell) == false)
+	{
+		put_custom_error(SHELL_NAME, QUOTES_OR_FORB_CHAR_ERROR);
+		return (false);
+	}
 
 	index = 0;
 	while (index < shell->parts_count)
 	{
 		component = shell->separator[index];
-		while (component)
-		{
-			str = squotes_dquotes_str_and_vars_hundler(component->content, shell->envp, shell->exit_status);
-			free(component->content);
-			component->content = str;
-			component = component->next;
-		}
+		strings_parser_and_vars_handler__in_components_(component, shell->envp, shell->exit_status);
 		index++;
 	}
+	return (true);
 }

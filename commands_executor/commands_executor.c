@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/03/31 22:26:52 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/01 17:29:49 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,6 @@ void	commands_executor(t_shell *shell)
 	int			*pids_and_pipefds;
 	int			*other_fds;
 	int			exit_status[1];
-
-	if (quotes_and_forbidden_chars_checker(shell) == false)
-	{
-		put_custom_error(NULL, QUOTES_OR_FORB_CHAR_ERROR);
-		return ;
-	}
-
-	strings_parser_and_vars_handler(shell);
 
 	pids_and_pipefds = ft_calloc(shell->parts_count * 2, sizeof(int));
 	other_fds = ft_calloc(shell->parts_count * 2, sizeof(int));

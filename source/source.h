@@ -14,6 +14,26 @@
 #include <readline/history.h>
 #include <string.h>
 
+
+
+# define SHELL_NAME "MiniShell: "
+# define QUOTES_OR_FORB_CHAR_ERROR "unclosed quote or invalid identifier"
+
+
+# define MALLOC_ERROR "error malloc()"
+# define PIPE_ERROR "error pipe()"
+# define FORK_ERROR "error fork()"
+# define WAITPID_ERROR "error waitpid()"
+# define DUP2_ERROR "error dup2()"
+# define READ_ERROR "error read()"
+# define WRITE_ERROR "error write()"
+# define OPEN_ERROR "error open()"
+# define READ_OR_WRITE_ERROR "error read()/write()"
+# define COMMAND_NOT_FOUND_ERROR ": command not found"
+
+
+
+
 #define INITIAL 200
 
 extern char **environ;
@@ -94,5 +114,8 @@ typedef struct s_pipex
 
 } t_pipex;
 
+
+void	custom_msg_then_perror(char *str);
+void	put_custom_error(char *str_error1, char *str_error2);
 
 #endif
