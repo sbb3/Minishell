@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:10:32 by jchakir           #+#    #+#             */
-/*   Updated: 2022/03/31 13:01:42 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/03/31 23:39:22 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static bool	set_input_fd(int *infd, t_cmd_data *cmd_data)
 			if (*infd > 2)
 				close(*infd);
 			if (component->type == INFILE)
-				*infd = open(component->final_content, O_RDONLY);
+				*infd = open(component->content, O_RDONLY);
 			if (component->type == DELIMITER)
-				*infd = ft_get_here_doc(component->final_content);
+				*infd = ft_get_here_doc(component->content);
 			if (*infd < 0)
 			{
-				perror(component->final_content);
+				custom_msg_then_perror(component->content);
 				return (false);
 			}
 		}
@@ -50,12 +50,12 @@ static bool	set_output_fd(int *outfd, t_cmd_data *cmd_data)
 			if (*outfd > 2)
 				close(*outfd);
 			if (component->type == OUTFILE)
-				*outfd = open(component->final_content, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+				*outfd = open(component->content, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 			if (component->type == OUTFILE_APPEND)
-				*outfd = open(component->final_content, O_WRONLY | O_APPEND | O_CREAT, 0644);
+				*outfd = open(component->content, O_WRONLY | O_APPEND | O_CREAT, 0644);
 			if (*outfd < 0)
 			{
-				perror(component->final_content);
+				custom_msg_then_perror(component->content);
 				return (false);
 			}
 		}
@@ -72,10 +72,6 @@ bool	set_input_and_output_fds__minner_(int *infd, int *outfd, t_cmd_data *cmd_da
 	if (set_input_fd(infd, cmd_data) == false)
 		return (false);
 	if (set_output_fd(outfd, cmd_data) == false)
-	{
-		if (*infd > 2)
-			close(*infd);
 		return (false);
-	}
 	return (true);
 }
