@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:02:24 by jchakir           #+#    #+#             */
-/*   Updated: 2022/03/30 21:31:15 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/03/31 15:54:18 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	strings_parser_and_vars_handler(t_shell *shell)
 {
 	t_component	*component;
 	int			index;
+	char		*str;
 
 	index = 0;
 	while (index < shell->parts_count)
@@ -85,7 +86,9 @@ void	strings_parser_and_vars_handler(t_shell *shell)
 		component = shell->separator[index];
 		while (component)
 		{
-			component->final_content = squotes_dquotes_str_and_vars_hundler(component->content, shell->envp, shell->exit_status);
+			str = squotes_dquotes_str_and_vars_hundler(component->content, shell->envp, shell->exit_status);
+			free(component->content);
+			component->content = str;
 			component = component->next;
 		}
 		index++;

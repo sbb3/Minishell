@@ -6,37 +6,19 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/03/30 22:53:33 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/03/31 22:26:52 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cmds_executor.h"
 
-void	free_all__final_content__in_all_components(t_shell *shell)
+static char	*get_path_env_from_envp(t_env *envp)
 {
-	int	index;
-	t_component *component;
-
-	index = 0;
-	while (index < shell->parts_count)
+	while (envp)
 	{
-		component = shell->separator[index];
-		while (component)
-		{
-			free(component->final_content);
-			component = component->next;
-		}
-		index++;
-	}
-}
-
-static char	*get_path_env_from_env(t_env *env)
-{
-	while (env)
-	{
-		if (ft_memcmp(env->key, "PATH", 5) == 0)
-			return (env->value);
-		env = env->next;
+		if (ft_memcmp(envp->key, "PATH", 5) == 0)
+			return (envp->value);
+		envp = envp->next;
 	}
 	return (NULL);
 }
@@ -60,18 +42,16 @@ void	commands_executor(t_shell *shell)
 	pids_and_pipefds = ft_calloc(shell->parts_count * 2, sizeof(int));
 	other_fds = ft_calloc(shell->parts_count * 2, sizeof(int));
 
-	index = 0;
 	cmd_data->infd = 0;
-	cmd_data->env = shell->envp;
-	cmd_data->path_env = get_path_env_from_env(shell->envp);
+	cmd_data->path_env = get_path_env_from_envp(shell->envp);
 
+	index = 0;
 	while (index < shell->parts_count)
 	{
 		cmd_data->component = shell->separator[index];
 		cmd_data->pid_and_pipefd = pids_and_pipefds + index;
-		cmd_data->other_fds = other_fds + index;
 		cmd_data->cmd_id = index;
-		cmd_executor(cmd_data);
+		cmd_executor(cmd_data, shell);
 		cmd_data->infd = cmd_data->pid_and_pipefd[index + 1];
 		index++;
 	}
@@ -79,7 +59,8 @@ void	commands_executor(t_shell *shell)
 	index = 0;
 	while (index < shell->parts_count * 2)
 	{
-		waitpid(pids_and_pipefds[index], exit_status, 0);
+		if (pids_and_pipefds[index] > 0)
+			waitpid(pids_and_pipefds[index], exit_status, 0);
 		index = index + 2;
 	}
 
@@ -91,15 +72,6 @@ void	commands_executor(t_shell *shell)
 		index = index + 2;
 	}
 
-	index = 0
-	while (index < shell->parts_count * 2)
-	{
-		if (other_fds[index] > 2)
-			close(other_fds[index]);
-		index++;
-	}
-
-	free_all__final_content__in_all_components(shell);
 	free(pids_and_pipefds);
 	shell->exit_status = exit_status[0];
 }

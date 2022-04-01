@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:19:25 by jchakir           #+#    #+#             */
-/*   Updated: 2021/11/20 17:56:36 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/03/31 23:52:43 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	**ft_split_subprocess(const char *str, char c, int l)
 	j = 0;
 	s = malloc((l + 1) * sizeof(char *));
 	if (! s)
-		return (s);
+		return (NULL);
 	while (j < l)
 	{
 		i = ft_setword(str, s + j, c, i);
