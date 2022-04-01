@@ -6,86 +6,19 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:00:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 14:00:16 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/01 15:48:48 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <errno.h>
-# include <limits.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <string.h>
-
-# define INITIAL 200
+#include "source.h"
+// #include "../srcs/execution/execution.h"
+// #include "../srcs/builtins/builtins.h"
 
 extern char	**environ;
-
-enum e_id
-{
-	LESS,
-	HEREDOC,
-	GREATER,
-	APPEND,
-	INFILE,
-	DELIMITER,
-	OUTFILE,
-	OUTFILE_APPEND,
-	COMMAND,
-	ARGS,
-	DQUOTES,
-	SQUOTES,
-	USD,
-	SQ_USD,
-};
-
-enum e_types
-{
-	LREDIR = '<',
-	RREDIR = '>',
-	DOUBLEQUOTE = '"',
-	SINGLEQUOTE = '\'',
-	PIPE = '|',
-};
-
-typedef struct s_shell
-{
-	struct s_component	**separator;
-	struct s_env		*envp;
-	char				*prompt_input;
-	int					parts_count;
-	int					exit_status;
-	int					*tkns_recognition;
-	int					start;
-	char				**tokens;
-	int					tokens_len;
-	int					infile_fd;
-	int					outfile_fd;
-	int					*pids_and_pipefds;
-
-}	t_shell;
-
-typedef struct s_component
-{
-	char				*content;
-	int					type;
-	struct s_component	*next;
-}	t_component;
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
+# define INITIAL 200
 
 // BUILTINS FUNCTIONS
 bool		is_builtin_cmd(char *cmd);
@@ -98,6 +31,8 @@ void		env_cmd(void);
 void		ft_error(int c);
 void		ft_error2(int c);
 int			syntax_error(char *s);
+void		quit(char *s, int errornum);
+void		exit_if_null(void *p, char *message);
 
 // PARSING
 void		parser(t_shell *data);
@@ -108,6 +43,7 @@ void		envinit(t_shell *data);
 void		phasezero(t_shell *data);
 void		phaseone(t_shell *data);
 void		phasetwo(t_shell *data);
+char		**test(char **tokens, size_t size, size_t tkns_len);
 char		*pipehelper(int *from, int *lastpos);
 void		redirectionhelper(char *s, int *to);
 int			skip_redirection(int token_type);
@@ -143,24 +79,25 @@ void		pushback(t_env **head, t_env *new);
 // UTILS FUNCTIONS 2
 int			pipes_count(char *input);
 int			*token_recognition(t_shell *data);
-int			tokens_count(char *s[]);
+int			count(char *s[]);
 int			quotes_count(char *s, int start, char c);
 void		quoteshelper(char *s, int *to, char c);
-void		*ft_realloc(void *ptr, size_t size);
 void		set_null(t_shell *data);
-void		exit_if_null(void *p, char *message);
 char		*getkey(char *s);
 void		reset_memory(t_shell *data);
+void		ft_free(char **tokens, size_t tkns_len);
 int			iswhitespace(char c);
 void		if_c_else_k(char *c, char *k, int *dqstate, int *sqstate);
 void		skipspaces(char *s, int *pos, int *space);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
+size_t		malloc_size(void *p);
 
 
 
 
-
-void		quit(char *s, int errornum);
 void		printing(t_shell *data);
+
+
 
 
 #endif

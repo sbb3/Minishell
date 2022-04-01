@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 14:11:20 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/01 15:48:23 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,20 @@ char	*prompt(void)
 
 int	main(void)
 {
-	t_shell	data;
+	t_shell	*shell;
 
-	envinit(&data);
-	/*
-	while (data.envp)
-	{d
-		printf("%s=%s\n", data.envp->key, data.envp->value);
-		data.envp = data.envp->next;
-	}
-	*/
+	shell = malloc(sizeof(t_shell));
+	exit_if_null(shell, "Allocation failed");
+	envinit(shell);
+
 	while (21)
 	{
-		data.prompt_input = prompt();
-		parser(&data);
-		printing(&data);
+		shell->prompt_input = prompt();
+		parser(shell);
+		printing(shell);
 		// expander();
-
+		// executor();
 	}
+	
 	return (0);
 }

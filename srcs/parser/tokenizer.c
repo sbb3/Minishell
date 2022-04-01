@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:26:22 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/30 22:28:44 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 21:27:51 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ void	quoteshelper(char *s, int *pos, char c)
 			break ;
 		i++;
 	}
-	if (c == '"' || c == '\'')
-		if (dqstate || sqstate)
-			quit("Quotes Error! Restart Minishell", 1);
 	(*pos) = i;
 }
 

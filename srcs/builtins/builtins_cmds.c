@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:42 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/30 22:49:08 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/01 15:46:58 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	cd_cmd(char *next_path)
 
 void	builtin_cmd_executor(char **cmd)
 {
-	if (!strcmp(cmd[0], "cd"))
+	if (!ft_strcmp(cmd[0], "cd"))
 		cd_cmd(cmd[1]);
-	else if (!strcmp(cmd[0], "pwd"))
+	else if (!ft_strcmp(cmd[0], "pwd"))
 		pwd_cmd();
-	else if (!strcmp(cmd[0], "cd"))
+	else if (!ft_strcmp(cmd[0], "cd"))
 		printf("still did not coded cd");
 	// else if (!strcmp(cmd[0], "env"))
 	// 	// env_cmd();
@@ -64,7 +64,7 @@ bool	is_builtin_cmd(char *cmd)
 	char *builtins_cmds[5] = {"echo", "pwd", "cd", "env", NULL};
 	while (builtins_cmds[i])
 	{
-		if (!strcmp(builtins_cmds[i], cmd))
+		if (!ft_strcmp(builtins_cmds[i], cmd))
 			return true;
 		i++;
 	}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 15:32:20 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/29 16:44:36 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/01 15:48:37 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,28 @@ char	**tokenizer(char *s, int *start)
 {
 	char	**tokens;
 	char	*token;
-	int		i;
-	int		current_size;
+	size_t	tkns_len;
+	size_t	current_size;
 
 	current_size = INITIAL;
-	tokens = malloc(sizeof(*tokens) * INITIAL);
-	exit_if_null(tokens, "Allocation failed\n");
+	tokens = malloc(sizeof(char *) * INITIAL);
+	exit_if_null(tokens, "Allocation failed");
 	token = get_token(s, start);
-	i = 0;
+	tkns_len = 0;
 	while (token)
 	{
-		if (i == current_size)
+		if (tkns_len == current_size - 1)
 		{
 			current_size *= 2;
-			tokens = realloc(tokens, sizeof(*tokens) * current_size);
-			exit_if_null(tokens, "Reallocation failed\n");
+			tokens = test(tokens, current_size, tkns_len);
 		}
-		tokens[i] = ft_strdup(token);
+		tokens[tkns_len] = ft_strdup(token);
 		free(token);
 		token = get_token(s, start);
-		i++;
+		tkns_len++;
 	}
-	tokens[i] = NULL;
+	free(token);
+	tokens[tkns_len] = NULL;
 	return (tokens);
 }
 
@@ -62,7 +62,7 @@ void	parser(t_shell *data)
 	while (++i < data->parts_count)
 	{
 		data->tokens = tokenizer(data->prompt_input, &(data->start));
-		data->tokens_len = tokens_count(data->tokens);
+		data->tokens_len = count(data->tokens);
 		data->tkns_recognition = token_recognition(data);
 		j = -1;
 		while (++j < data->tokens_len)

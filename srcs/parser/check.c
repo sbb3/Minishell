@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:20:36 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 13:34:40 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 22:59:21 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int	check_redir(char *s, int i, char c)
 				return (syntax_error("Syntax Error!"));
 			count++;
 		}
-		if (whitespace != 0 && s[i + 1] == '\0')
-			return (syntax_error("Syntax Error!"));
-		if (s[i] != c)
+		else if (s[i] != c)
 			return (1);
+		else if (whitespace != 0 && s[i + 1] == '\0')
+			return (syntax_error("Syntax Error!"));
 		i++;
 	}
 	if (s[i] == '\0')
@@ -133,10 +133,25 @@ int	check(char *s)
 /**
  handle hardcoded arrays
  check more errors
- handle realloc function
-//  handle norm (header file)
  handle leaks
+//  handle realloc function
+//  handle norm (header file)
 //  handle exit quotes in check function
-
 //  ignore whitespaces in check < > |
+
+
+fzdsz|dcxz|sdaf"|""||||" sdafasdf   => realloc
+fzdsz|dcxz|sdaf"|""||||" sdafasdf
+fzdsz|dcxz|sdaf"|""||||" sdafasdf5 er fefef
+fzdsz|dcxz|sdaf'"fxg|'"xfd"   => realloc
+dfgsgd || fsgs
+fzdsz|dcxz|sdaf'"fxg|'"xfd"
+
+< a
+sdgf < | sd
+sdf > a > d
+dsfd > a > d <f < t > l > y < s
+
+
+
 */

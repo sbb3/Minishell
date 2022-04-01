@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc.c                                            :+:      :+:    :+:   */
+/*   alloc_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:15:30 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/29 10:18:47 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/01 15:48:16 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,20 @@ int	pipes_count(char *input)
 {
 	int	i;
 	int	count;
+	int	dqstate;
+	int	sqstate;
 
+	dqstate = 0;
+	sqstate = 0;
 	i = 0;
 	count = 0;
 	while (input[i])
 	{
-		if (input[i] == '|')
+		if (input[i] == '"')
+			localhelper2(&dqstate, sqstate);
+		else if (input[i] == '\'')
+			localhelper3(&sqstate, dqstate);
+		else if (input[i] == '|' && !dqstate && !sqstate)
 			count++;
 		i++;
 	}

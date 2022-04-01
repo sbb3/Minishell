@@ -6,13 +6,13 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:31:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 13:32:39 by adouib           ###   ########.fr       */
+/*   Updated: 2022/03/31 21:34:42 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-int	tokens_count(char *s[])
+int	count(char *s[])
 {
 	int	i;
 
@@ -100,22 +100,3 @@ void	skipspaces(char *s, int *pos, int *space)
 	*pos = i;
 	*space = whitespace;
 }
-
-void	printing(t_shell *data)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < data->parts_count)
-	{
-		j = -1;
-		while (data->separator[i])
-		{
-			printf("%s\n", data->separator[i]->content);
-			printf("%d\n", data->separator[i]->type);
-			data->separator[i] = data->separator[i]->next;
-		}
-	}
-}
-
