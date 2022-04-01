@@ -239,6 +239,39 @@ echo abc'zsh
 echo abc'zs"h'
 
 echo "abc"'"zsh"
+
+
+/**
+ handle hardcoded arrays
+ check more errors
+ handle leaks
+//  handle realloc function
+//  handle norm (header file)
+//  handle exit quotes in check function
+//  ignore whitespaces in check < > |
+
+
+// fzdsz|dcxz|sdaf"|""||||" sdafasdf   => realloc
+// fzdsz|dcxz|sdaf"|""||||" sdafasdf
+// fzdsz|dcxz|sdaf"|""||||" sdafasdf5 er fefef
+// fzdsz|dcxz|sdaf'"fxg|'"xfd"   => realloc
+// dfgsgd || fsgs
+
+< whitespace
+< a
+sdgf < | sd
+sdf > a > d
+dsfd > a > d <f < t > l > y < s
+
+first check
+	pipe
+
+second check
+	content = <
+	content = < && next == NULL => < space or < or < |
+	
+
+*/
 */
 
 */

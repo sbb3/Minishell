@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:17:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 21:34:47 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/01 23:48:56 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,35 @@ void	ft_free(char **tokens, size_t tkns_len)
 	free(tokens);
 }
 
+int	ft_isprint(int c)
+{
+	if (c > 32 && c <= 126)
+		return (1);
+	return (0);
+}
+
+int	another_helper(int *count, int whitespace)
+{
+	if (*count > 2 || whitespace != 0)
+		return (0);
+	(*count)++;
+	return (1);
+}
+
 void	printing(t_shell *data)
 {
-	int	i;
-	int	j;
+	t_component	*current_part;
+	int			i;
 
 	i = -1;
 	while (++i < data->parts_count)
 	{
-		j = -1;
-		while (data->separator[i])
+		current_part = data->separator[i];
+		while (current_part)
 		{
-			printf("%s\n", data->separator[i]->content);
-			printf("%d\n", data->separator[i]->type);
-			data->separator[i] = data->separator[i]->next;
+			printf("%s\n", current_part->content);
+			printf("%d\n", current_part->type);
+			current_part = current_part->next;
 		}
 	}
 }

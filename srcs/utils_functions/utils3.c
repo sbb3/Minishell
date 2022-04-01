@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:27:57 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 13:59:55 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/01 21:52:45 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	phaseone_helper(t_shell *data, int *k, int type1, int type2)
 	{
 		data->tkns_recognition[i] = type1;
 		data->tkns_recognition[++i] = type2;
+		(*k) = i;
 	}
 	else
 		data->tkns_recognition[i] = COMMAND;
-	(*k) = i;
 }

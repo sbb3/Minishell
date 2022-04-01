@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:20:36 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 22:59:21 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/01 23:49:35 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_pipe(char *s, int i)
 		}
 		if (s[i] == '|')
 		{
-			if (count > 2 || space != 0)
+			if (count >= 2 || space != 0)
 				return (syntax_error("Syntax Error!"));
 			count++;
 		}
@@ -55,14 +55,14 @@ int	check_redir(char *s, int i, char c)
 		skipspaces(s, &i, &whitespace);
 		if (s[i] == c)
 		{
-			if (count > 2 || whitespace != 0)
+			if (!another_helper(&count, whitespace))
 				return (syntax_error("Syntax Error!"));
-			count++;
 		}
+		else if ((whitespace != 0 && s[i + 1] == '\0' && !ft_isprint(s[i])) || \
+			(s[i] == '|' && whitespace != 0))
+			return (syntax_error("Syntax Error!"));
 		else if (s[i] != c)
 			return (1);
-		else if (whitespace != 0 && s[i + 1] == '\0')
-			return (syntax_error("Syntax Error!"));
 		i++;
 	}
 	if (s[i] == '\0')
@@ -130,7 +130,7 @@ int	check(char *s)
 	return (1);
 }
 
-/**
+/*
  handle hardcoded arrays
  check more errors
  handle leaks
@@ -140,18 +140,15 @@ int	check(char *s)
 //  ignore whitespaces in check < > |
 
 
-fzdsz|dcxz|sdaf"|""||||" sdafasdf   => realloc
-fzdsz|dcxz|sdaf"|""||||" sdafasdf
-fzdsz|dcxz|sdaf"|""||||" sdafasdf5 er fefef
-fzdsz|dcxz|sdaf'"fxg|'"xfd"   => realloc
-dfgsgd || fsgs
-fzdsz|dcxz|sdaf'"fxg|'"xfd"
+// fzdsz|dcxz|sdaf"|""||||" sdafasdf   => realloc
+// fzdsz|dcxz|sdaf"|""||||" sdafasdf
+// fzdsz|dcxz|sdaf"|""||||" sdafasdf5 er fefef
+// fzdsz|dcxz|sdaf'"fxg|'"xfd"   => realloc
+// dfgsgd || fsgs
 
+< whitespace
 < a
 sdgf < | sd
 sdf > a > d
 dsfd > a > d <f < t > l > y < s
-
-
-
 */
