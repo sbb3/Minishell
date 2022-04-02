@@ -6,16 +6,14 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:02:24 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/01 17:42:19 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/02 09:56:45 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmds_executor.h"
+#include "strings_parser_and_vars_handler.h"
 
 static char	*get__address__until_limiter(char *str, char limiter)
 {
-	char	*until_limiter;
-
 	while (*str)
 	{
 		if (limiter == '\0' && (*str == '"' || *str == '\''))
@@ -27,7 +25,7 @@ static char	*get__address__until_limiter(char *str, char limiter)
 	return (str);
 }
 
-static char	*squotes_dquotes_str_and_vars_hundler(char *str, t_env *env, int exit_status)
+static char	*squotes_dquotes_and_vars_hundler(char *str, t_env *env, int exit_status)
 {
 	int		str_type;
 	char	limiter;
@@ -35,6 +33,7 @@ static char	*squotes_dquotes_str_and_vars_hundler(char *str, t_env *env, int exi
 	char	*final_str;
 	char	*temp_final_str;
 	char	*temp_ptr;
+	int 	extra_param[2];
 
 	final_str = ft_strdup("");
 	while (*str)
@@ -56,19 +55,24 @@ static char	*squotes_dquotes_str_and_vars_hundler(char *str, t_env *env, int exi
 			str_type = SIMPLE_STR;
 			limiter = '\0';
 		}
-		end_str = get__address__until_limiter(str, *str);
-		if (str_type == SQUOTES)
+		end_str = get__address__until_limiter(str, limiter);
+
+		extra_param[0] = str_type;
+		extra_param[1] = *end_str;
+
+		if (str_type == SINGLE_Q)
 			temp_ptr = strdup_from_to__address_(str, end_str);
 		else
-			temp_ptr = var_to_value_in__str__from_to__address_(str, end_str, env, exit_status);
+			temp_ptr = var_to_value_in__str__from_to__address_(str, end_str, env, exit_status, extra_param);
 		temp_final_str = ft_strjoin(final_str, temp_ptr);
 
 		free(temp_ptr);
 		free(final_str);
 		final_str = temp_final_str;
+
 		str = end_str;
 
-		if (*str)
+		if (limiter)
 			str++;
 	}
 	return (final_str);
@@ -80,7 +84,11 @@ static void	strings_parser_and_vars_handler__in_components_(t_component *compone
 
 	while (component)
 	{
-		str = squotes_dquotes_str_and_vars_hundler(component->content, envp, exit_status);
+		if (ft_strchr(component->content, '"') || ft_strchr(component->content, '\''))
+			str = squotes_dquotes_and_vars_hundler(component->content, envp, exit_status);
+		else
+			str = var_to_value_in_str(component->content, envp, exit_status, NULL);
+
 		free(component->content);
 		component->content = str;
 		component = component->next;
@@ -94,7 +102,7 @@ bool	strings_parser_and_vars_handler(t_shell *shell)
 
 	if (quotes_and_forbidden_chars_checker(shell) == false)
 	{
-		put_custom_error(SHELL_NAME, QUOTES_OR_FORB_CHAR_ERROR);
+		put_custom_error(NULL, QUOTES_OR_FORB_CHAR_ERROR);
 		return (false);
 	}
 

@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:17:02 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/01 17:44:31 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/01 18:01:11 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@
 #include <sys/wait.h>
 #include <stdio.h>
 
-
-
-enum e_str_types
-{
-	SINGLE_Q,
-	DOUBLE_Q,
-	SIMPLE_STR,
-};
 
 
 typedef struct s_cmd_data

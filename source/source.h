@@ -14,6 +14,7 @@
 #include <readline/history.h>
 #include <string.h>
 
+# include "../libft/libft.h"
 
 
 # define SHELL_NAME "MiniShell: "
