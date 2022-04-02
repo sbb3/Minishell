@@ -6,13 +6,13 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:55:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/01 00:08:58 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/02 17:20:16 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cmds_executor.h"
 
-static char *ft_get_cmd_full_path(char *path, char const *cmd)
+static char *ft_get_cmd_full_path(char *path, char *cmd)
 {
 	char	*path_slash;
 	char	*cmd_full_path;
@@ -45,13 +45,12 @@ static char	**get_cmd_and_args__from_component_(t_component *component)
 	int		index;
 	char	**cmd_and_args;
 
-	index = ft_lstsize(component);
+	index = list_component_size(component);
 	cmd_and_args = (char **)ft_calloc(index + 1, sizeof(char *));
 	index = 0;
 	while (component)
 	{
-		if (component->type != INFILE && component->type != DELIMITER && \
-				component->type != OUTFILE && component->type != OUTFILE_APPEND)
+		if (component->type == ARGS)
 		{
 			cmd_and_args[index] = component->content;
 			index++;
@@ -101,6 +100,37 @@ int get__infd_outfd__and_cmd_full_path_then_exec_it(t_cmd_data *cmd_data, char *
 	exit(EXIT_FAILURE);
 }
 
+static bool	this_is_builtin_command(t_component *component)
+{
+	char	*str;
+	char	*builtin_cmds[7] = {"echo", "cd", "pwd", "export", "unset", "env", "exit"};
+	// char	*builtin_cmds[7];
+	int		index;
+
+	str = NULL;
+	while (component)
+	{
+		if (component->type == ARGS)
+		{
+			str = component->content;
+			break ;
+		}
+		component = component->next;
+	}
+	printf("%15s: ", str);
+
+	if (str == NULL)
+		return (false);
+	index = 0;
+	while (index < 7)
+	{
+		if (ft_memcmp(str, builtin_cmds[index], ft_strlen(str) + 1) == 0)
+			return (true);
+		index++;
+	}
+	return (false);
+}
+
 void	cmd_executor__fork_child_proc_(t_cmd_data *cmd_data, t_shell *shell)
 {
 	int	pipe_fds[2];
@@ -114,12 +144,20 @@ void	cmd_executor__fork_child_proc_(t_cmd_data *cmd_data, t_shell *shell)
 	else
 		outfd = 1;
 
-	cmd_data->pid_and_pipefd[0] = fork();
-	if (cmd_data->pid_and_pipefd[0] == 0)
-	{
-		close(pipe_fds[0]);
-		get__infd_outfd__and_cmd_full_path_then_exec_it(cmd_data,shell->envs, outfd);
-	}
+	if (this_is_builtin_command(cmd_data->component))
+		printf("builtin function\n");
+	else
+		printf("other function\n");
+	// {
+	// 	cmd_data->pid_and_pipefd[0] = fork();
+	// 	if (cmd_data->pid_and_pipefd[0] == 0)
+	// 	{
+	// 		close(pipe_fds[0]);
+	// 		get__infd_outfd__and_cmd_full_path_then_exec_it(cmd_data,shell->envs, outfd);
+	// 	}
+	// }
 
+	// printf("pipe fd is: %d\n", pipe_fds[1]);
+	
 	close(pipe_fds[1]);
 }

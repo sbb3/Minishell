@@ -100,23 +100,12 @@ typedef struct s_shell
 } t_shell;
 
 
-typedef struct s_pipex
-{
-	int infile_fd;
-	int outfile_fd;
-	int pipefd[2];
-	pid_t pid;
-	char *cmd1_fullpath;
-	char *cmd2_fullpath;
-	char **cmd1_args;
-	char **cmd2_args;
-	char *path;
-	char *paths;
-
-} t_pipex;
-
 
 void	custom_msg_then_perror(char *str);
 void	put_custom_error(char *str_error1, char *str_error2);
+int	list_component_size(t_component *lst);
+
+
+//  cc $FLAg libft/libft.a testMain.c strings_parser_and_vars_handler/*.c source/*.c commands_executor/*.c -o minishell; ./minishel
 
 #endif
