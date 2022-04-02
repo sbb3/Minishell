@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:15:30 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/01 15:48:16 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/01 18:51:43 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,13 @@ void	alloc_init(t_shell *data)
 	data->separator = malloc(sizeof(t_component *) * data->parts_count);
 	exit_if_null(data->separator, "Allocation failed");
 	set_null(data);
+}
+
+t_shell	*init(void)
+{
+	t_shell	*shell;
+
+	shell = malloc(sizeof(t_shell));
+	exit_if_null(shell, "Allocation failed");
+	return (shell);
 }

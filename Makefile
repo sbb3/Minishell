@@ -6,13 +6,13 @@
 #    By: adouib <adouib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/01 15:47:25 by adouib           ###   ########.fr        #
+#    Updated: 2022/04/01 21:49:56 by adouib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -I./incl/ -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -I./incl/ -Wall -Wextra -Werror
 # -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = rm -rf
 

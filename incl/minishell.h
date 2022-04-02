@@ -6,16 +6,16 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:00:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/01 15:48:48 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/01 23:48:34 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "source.h"
-// #include "../srcs/execution/execution.h"
-// #include "../srcs/builtins/builtins.h"
+# include "source.h"
+// # include "../srcs/execution/execution.h"
+// # include "../srcs/builtins/builtins.h"
 
 extern char	**environ;
 # define INITIAL 200
@@ -63,9 +63,11 @@ void		quotescheck(char c, int *dqstate, int *sqstate);
 int			check_redirec(char *s, int i);
 void		check_helper1(int *dq);
 void		check_helper2(int *sq);
+int			another_helper(int *count, int whitespace);
 
 // UTILS FUNCTIONS 1
 int			ft_isalnum(int c);
+int			ft_isprint(int c);
 int			ft_strlen(const char *s);
 char		*ft_strdup(const char *s);
 char		*ft_strcut_from_to(char *s, int from, int to);
@@ -89,8 +91,9 @@ void		ft_free(char **tokens, size_t tkns_len);
 int			iswhitespace(char c);
 void		if_c_else_k(char *c, char *k, int *dqstate, int *sqstate);
 void		skipspaces(char *s, int *pos, int *space);
-void		*ft_memcpy(void *dest, const void *src, size_t n);
-size_t		malloc_size(void *p);
+t_shell		*init(void);
+
+
 
 
 
