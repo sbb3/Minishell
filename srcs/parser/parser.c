@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 15:32:20 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/01 22:14:22 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/02 15:51:41 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	*token_recognition(t_shell *data)
 	exit_if_null(data->tkns_recognition, "Allocation failed");
 	phasezero(data);
 	phaseone(data);
-	phasetwo(data);
 	return (data->tkns_recognition);
 }
 
@@ -39,7 +38,7 @@ char	**tokenizer(char *s, int *start)
 		if (tkns_len == current_size - 1)
 		{
 			current_size *= 2;
-			tokens = test(tokens, current_size, tkns_len);
+			tokens = ft_realloc_and_copy(tokens, current_size, tkns_len);
 		}
 		tokens[tkns_len] = ft_strdup(token);
 		free(token);

@@ -1,5 +1,8 @@
 {
 	"files.associations": {
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"builtin_commands.h": "c",
+		"cmds_executor.h": "c",
+		"__config": "c"
 	}
 }

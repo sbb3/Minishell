@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:31:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 21:34:42 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/02 18:03:34 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,21 @@ char	*ft_strcut_from_to(char *s, int from, int to)
 
 int	gettoken_helper(char *token, int to, int *lastpos)
 {
-	if (*token == '\0')
+	if ((*token) == '\0')
 	{
 		if (ft_strlen(token) == to)
 		{
-			*lastpos = to;
+			(*lastpos) = to;
 			return (0);
 		}
 		else
 		{
-			*lastpos = to + 1;
+			(*lastpos) = to + 1;
 			return (0);
 		}
 	}
 	else
-		*lastpos = to;
+		(*lastpos) = to;
 	return (1);
 }
 
@@ -78,7 +78,7 @@ void	gettoken_helper2(char *token, int *end)
 			quoteshelper(token, &to, SINGLEQUOTE);
 		if (token[to] == ' ')
 			break ;
-		if (token[to] == '<' || token[to] == '>' || token[to] == '|')
+		if (token[to] == LREDIR || token[to] == RREDIR || token[to] == PIPE)
 			break ;
 		to++;
 	}
@@ -97,6 +97,22 @@ void	skipspaces(char *s, int *pos, int *space)
 		whitespace++;
 		i++;
 	}
-	*pos = i;
-	*space = whitespace;
+	(*pos) = i;
+	(*space) = whitespace;
+}
+
+void	skipspaces2(char *s, int *pos, int *space)
+{
+	int	i;
+	int	whitespace;
+
+	i = (*pos);
+	whitespace = (*space);
+	while (iswhitespace(s[i]) || s[i] == '<' || s[i] == '>')
+	{
+		whitespace++;
+		i++;
+	}
+	(*pos) = i;
+	(*space) = whitespace;
 }

@@ -6,13 +6,13 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:17:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/01 23:48:56 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/02 18:34:05 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-char	**test(char **tokens, size_t size, size_t tkns_len)
+char	**ft_realloc_and_copy(char **tokens, size_t size, size_t tkns_len)
 {
 	char	**new;
 	size_t	y;
@@ -42,7 +42,7 @@ void	ft_free(char **tokens, size_t tkns_len)
 	free(tokens);
 }
 
-int	ft_isprint(int c)
+int	isprintable(int c)
 {
 	if (c > 32 && c <= 126)
 		return (1);
@@ -54,6 +54,27 @@ int	another_helper(int *count, int whitespace)
 	if (*count > 2 || whitespace != 0)
 		return (0);
 	(*count)++;
+	return (1);
+}
+
+int	check_helper(char *s, int i, int dqstate, int sqstate)
+{
+	if ((s[i] == PIPE) && (!dqstate && !sqstate))
+	{
+		if (!check_pipe(s, i))
+			return (0);
+	}
+	else if ((s[i] == '&' || s[i] == '\\' || s[i] == ';') && \
+		(!dqstate && !sqstate))
+		return (syntax_error("Unsupported character!"));
+	return (1);
+}
+
+int	check_redir_helper(char *s, int i)
+{
+	if ((s[i] == '>' && s[i + 1] == '<') || (s[i] == '<' && s[i + 1] == '>') || \
+		(s[i] == '<' && s[i + 1] == '|') || (s[i] == '>' && s[i + 1] == '|'))
+		return (0);
 	return (1);
 }
 

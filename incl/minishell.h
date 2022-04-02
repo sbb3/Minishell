@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:00:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/01 23:48:34 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/02 18:34:46 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 # include "source.h"
-// # include "../srcs/execution/execution.h"
-// # include "../srcs/builtins/builtins.h"
+// # include "../commands_executor/cmds_executor.h"
+// # include "../builtin_commands/builtin_commands.h"
 
 extern char	**environ;
 # define INITIAL 200
@@ -42,16 +42,13 @@ void		alloc_init(t_shell *data);
 void		envinit(t_shell *data);
 void		phasezero(t_shell *data);
 void		phaseone(t_shell *data);
-void		phasetwo(t_shell *data);
-char		**test(char **tokens, size_t size, size_t tkns_len);
+char		**ft_realloc_and_copy(char **tokens, size_t size, size_t tkns_len);
 char		*pipehelper(int *from, int *lastpos);
 void		redirectionhelper(char *s, int *to);
 int			skip_redirection(int token_type);
 int			gettoken_helper(char *token, int to, int *lastpos);
 void		gettoken_helper2(char *token, int *end);
 void		phaseone_helper(t_shell *data, int *k, int type1, int type2);
-void		phasetwo_helper(t_shell *data, int i);
-void		localhelper(int *state);
 void		localhelper2(int *dqstate, int sqstate);
 void		localhelper3(int *sqstate, int dqstate);
 
@@ -67,7 +64,7 @@ int			another_helper(int *count, int whitespace);
 
 // UTILS FUNCTIONS 1
 int			ft_isalnum(int c);
-int			ft_isprint(int c);
+int			isprintable(int c);
 int			ft_strlen(const char *s);
 char		*ft_strdup(const char *s);
 char		*ft_strcut_from_to(char *s, int from, int to);
@@ -91,7 +88,10 @@ void		ft_free(char **tokens, size_t tkns_len);
 int			iswhitespace(char c);
 void		if_c_else_k(char *c, char *k, int *dqstate, int *sqstate);
 void		skipspaces(char *s, int *pos, int *space);
+void		skipspaces2(char *s, int *pos, int *space);
 t_shell		*init(void);
+int			check_helper(char *s, int i, int dqstate, int sqstate);
+int			check_redir_helper(char *s, int i);
 
 
 

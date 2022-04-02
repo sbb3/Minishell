@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:29:19 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 18:18:02 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/02 15:21:07 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,5 @@ void	phaseone(t_shell *data)
 				k = 1;
 			}
 		}
-	}
-}
-
-void	phasetwo(t_shell *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->tokens_len)
-	{
-		if (data->tkns_recognition[i] == ARGS)
-			phasetwo_helper(data, i);
 	}
 }

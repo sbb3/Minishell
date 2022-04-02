@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:31:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/01 15:41:15 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/02 18:35:34 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SOURCE_H
+#ifndef SOURCE_H
 # define SOURCE_H
 
 # include <unistd.h>
@@ -37,8 +37,6 @@ enum e_id
 	ARGS,
 	DQUOTES,
 	SQUOTES,
-	USD,
-	SQ_USD,
 };
 
 enum e_types
@@ -82,4 +80,4 @@ typedef struct s_shell
 
 }	t_shell;
 
-# endif
+#endif

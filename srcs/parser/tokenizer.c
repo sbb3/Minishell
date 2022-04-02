@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:26:22 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 21:27:51 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/02 15:54:32 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	redirectionhelper(char *s, int *to)
 		i = i + 2;
 	else
 		i++;
-	*to = i;
+	(*to) = i;
 }
 
 char	*pipehelper(int *from, int *lastpos)
@@ -52,7 +52,7 @@ void	quoteshelper(char *s, int *pos, char c)
 			localhelper2(&dqstate, sqstate);
 		else if (s[i] == k)
 			localhelper3(&sqstate, dqstate);
-		else if ((s[i] == '<' || s[i] == '>' || s[i] == '|') \
+		else if ((s[i] == LREDIR || s[i] == RREDIR || s[i] == PIPE) \
 			&& !sqstate && !dqstate)
 			break ;
 		i++;

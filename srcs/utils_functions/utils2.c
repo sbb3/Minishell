@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:26:18 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 18:00:45 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/02 15:52:31 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	iswhitespace(char c)
 
 void	if_c_else_k(char *c, char *k, int *dqstate, int *sqstate)
 {
-	*dqstate = 0;
-	*sqstate = 0;
+	(*dqstate) = 0;
+	(*sqstate) = 0;
 	if (*c == '"')
 		*k = '\'';
 	else if (*c == '\'')

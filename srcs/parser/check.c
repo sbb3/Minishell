@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:20:36 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/01 23:49:35 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/02 18:31:59 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,24 @@
 int	check_pipe(char *s, int i)
 {
 	int	count;
-	int	space;
+	int	ws;
 
 	count = 1;
-	space = 0;
+	ws = 0;
 	if ((s[0] == '|') || (s[i] == '|' && s[i + 1] == '\0'))
 		return (syntax_error("Syntax Error!"));
 	while (s[i])
 	{
-		while (iswhitespace(s[i]) || s[i] == '<' || s[i] == '>')
-		{
-			space++;
-			i++;
-		}
+		skipspaces2(s, &i, &ws);
 		if (s[i] == '|')
 		{
-			if (count >= 2 || space != 0)
+			if (count >= 2 || ws != 0)
 				return (syntax_error("Syntax Error!"));
 			count++;
 		}
-		if (s[i] != '|')
+		else if (ws != 0 && s[i + 1] == '\0' && !isprintable(s[i]))
+			return (syntax_error("Syntax Error!"));
+		else if (s[i] != '|')
 			return (1);
 		i++;
 	}
@@ -44,22 +42,22 @@ int	check_pipe(char *s, int i)
 int	check_redir(char *s, int i, char c)
 {
 	int	count;
-	int	whitespace;
+	int	ws;
 
 	count = 1;
-	whitespace = 0;
-	if ((s[i] == '>' && s[i + 1] == '<') || (s[i] == '<' && s[i + 1] == '>'))
+	ws = 0;
+	if (!check_redir_helper(s, i))
 		return (syntax_error("Syntax Error!"));
 	while (s[i])
 	{
-		skipspaces(s, &i, &whitespace);
+		skipspaces(s, &i, &ws);
 		if (s[i] == c)
 		{
-			if (!another_helper(&count, whitespace))
+			if (!another_helper(&count, ws))
 				return (syntax_error("Syntax Error!"));
 		}
-		else if ((whitespace != 0 && s[i + 1] == '\0' && !ft_isprint(s[i])) || \
-			(s[i] == '|' && whitespace != 0))
+		else if ((ws != 0 && s[i + 1] == '\0' && !isprintable(s[i])) || \
+			(s[i] == '|' && ws != 0))
 			return (syntax_error("Syntax Error!"));
 		else if (s[i] != c)
 			return (1);
@@ -121,8 +119,8 @@ int	check(char *s)
 			if (!check_redirec(s, i))
 				return (0);
 		}
-		else if ((s[i] == PIPE) && (!dqstate && !sqstate))
-			if (!check_pipe(s, i))
+		else
+			if (!check_helper(s, i, dqstate, dqstate))
 				return (0);
 	}
 	if (dqstate || sqstate)
@@ -151,4 +149,16 @@ int	check(char *s)
 sdgf < | sd
 sdf > a > d
 dsfd > a > d <f < t > l > y < s
+
+
+echo $'$dfgdf'"$user"
+echo '$dfgd'
+echo "dfg'$d'f"dfgdf
+
+echo $dfgdfg
+
+echo |      space => error
+
+; & \
+ls <| ls
 */
