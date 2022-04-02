@@ -6,11 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 21:13:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/03/30 21:00:38 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/02 08:46:47 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmds_executor.c"
+#include "strings_parser_and_vars_handler.h"
 
 char	*ft_strjoin_with_char(char const *s, char c)
 {
@@ -59,7 +59,7 @@ char	*get_var_value_by_its_key(char *key, t_env *env)
 		return (NULL);
 	while (env)
 	{
-		if (! ft_memcmp(env->key, key, ft_strlen(key) + 1))
+		if (ft_memcmp(env->key, key, ft_strlen(key) + 1) == 0)
 			return (env->value);
 		env = env->next;
 	}
@@ -97,15 +97,15 @@ char	*find_var_and_replace_it(char **src, char *str, t_env *env, int exit_status
 	return (ft_strjoin(str, var_value));
 }
 
-char    *var_to_value_in_str(char *src, t_env *env, int exit_status)
+char    *var_to_value_in_str(char *src, t_env *env, int exit_status, int *extra_param)
 {
     char    *temp_str;
     char    *str;
 
-    str = NULL;
+    str = ft_strdup("");
     while (*src)
-    {
-        if (*src == '$' && (ft_isalnum(*(str + 1)) || *(str + 1) == '_' || *(str + 1) == '?'))
+	{
+        if (*src == '$' && (ft_isalnum(*(src + 1)) || *(src + 1) == '_' || *(src + 1) == '?'))
 		{
 			src++;
 			temp_str = find_var_and_replace_it(&src, str, env, exit_status);
@@ -117,6 +117,15 @@ char    *var_to_value_in_str(char *src, t_env *env, int exit_status)
 		}
         else
 		{
+			if (extra_param && *src == '$' && *(src + 1) == '\0')
+			{
+				if (extra_param[0] == SIMPLE_STR && (extra_param[1] == '"' || extra_param[1] == '\''))
+				{
+					src++;
+					continue ;
+				}
+				
+			}
 			temp_str = ft_strjoin_with_char(str, *src);
 			free(str);
 			str = temp_str;
@@ -134,14 +143,12 @@ char	*strdup_from_to__address_(char *start, char *end)
 	size_t	len;
 
 	len = 0;
-	if (! start || ! end || start >= end)
+	if (! start || ! end || start > end)
 		return (NULL);
 	ptr = start;
 	while (ptr++ < end)
 		len++;
 	str = (char *)malloc(len + 1);
-	if (! str)
-		return (NULL);
 	ptr = str;
 	while (start < end)
 		*str++ = *start++;
@@ -149,7 +156,7 @@ char	*strdup_from_to__address_(char *start, char *end)
 	return (ptr);
 }
 
-char	*var_to_value_in__str__from_to__address_(char *start, char *end, t_env *env, int exit_status)
+char	*var_to_value_in__str__from_to__address_(char *start, char *end, t_env *env, int exit_status, int *extra_param)
 {
 	// copy str from (address) start to end (start included, end excluded)
 	char	*str;
@@ -158,7 +165,7 @@ char	*var_to_value_in__str__from_to__address_(char *start, char *end, t_env *env
 	str = strdup_from_to__address_(start, end);
 	if (! str)
 		return (NULL);
-	vars_in_str = var_to_value_in_str(str, env, exit_status);
+	vars_in_str = var_to_value_in_str(str, env, exit_status, extra_param);
 	free(str);
 	return (vars_in_str);
 }
