@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:00:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/02 18:34:46 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/03 18:19:45 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,6 @@ t_shell		*init(void);
 int			check_helper(char *s, int i, int dqstate, int sqstate);
 int			check_redir_helper(char *s, int i);
 
-
-
-
-
-
 void		printing(t_shell *data);
-
-
-
 
 #endif

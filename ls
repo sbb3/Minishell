@@ -1,9 +1,0 @@
-Makefile
-builtin_commands
-commands_executor
-incl
-libft
-ls
-minishell
-notes
-srcs

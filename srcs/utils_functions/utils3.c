@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:27:57 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/02 15:58:12 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/04 12:26:53 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,31 @@ void	localhelper3(int *sqstate, int dqstate)
 		(*sqstate) = 0;
 }
 
-void	phaseone_helper(t_shell *data, int *k, int type1, int type2)
+int	another_helper(int *count, int whitespace)
 {
-	int	i;
+	if (*count > 2 || whitespace != 0)
+		return (0);
+	(*count)++;
+	return (1);
+}
 
-	i = (*k);
-	if (type1 || type2)
+int	check_redir_helper(char *s, int i)
+{
+	if ((s[i] == '>' && s[i + 1] == '<') || (s[i] == '<' && s[i + 1] == '>') || \
+		(s[i] == '<' && s[i + 1] == '|') || (s[i] == '>' && s[i + 1] == '|'))
+		return (0);
+	return (1);
+}
+
+int	check_helper(char *s, int i, int dqstate, int sqstate)
+{
+	if ((s[i] == PIPE) && (!dqstate && !sqstate))
 	{
-		data->tkns_recognition[i] = type1;
-		data->tkns_recognition[++i] = type2;
-		(*k) = i;
+		if (!check_pipe(s, i))
+			return (0);
 	}
-	else
-		data->tkns_recognition[i] = COMMAND;
+	else if ((s[i] == '&' || s[i] == '\\' || s[i] == ';') && \
+		(!dqstate && !sqstate))
+		return (syntax_error("Unsupported character!"));
+	return (1);
 }

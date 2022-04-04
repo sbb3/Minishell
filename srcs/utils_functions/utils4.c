@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:31:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/02 18:03:34 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/03 18:29:30 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,23 @@ char	*ft_strcut_from_to(char *s, int from, int to)
 	}
 	buf[i] = '\0';
 	return (buf);
+}
+
+char	**ft_realloc_and_copy(char **tokens, size_t size, size_t tkns_len)
+{
+	char	**new;
+	size_t	y;
+
+	new = malloc(sizeof(char *) * size);
+	exit_if_null(new, "Allocation failed");
+	y = 0;
+	while (y < tkns_len)
+	{
+		new[y] = ft_strdup(tokens[y]);
+		y++;
+	}
+	ft_free(tokens, tkns_len);
+	return (new);
 }
 
 int	gettoken_helper(char *token, int to, int *lastpos)
@@ -83,36 +100,4 @@ void	gettoken_helper2(char *token, int *end)
 		to++;
 	}
 	(*end) = to;
-}
-
-void	skipspaces(char *s, int *pos, int *space)
-{
-	int	i;
-	int	whitespace;
-
-	i = (*pos);
-	whitespace = (*space);
-	while (iswhitespace(s[i]))
-	{
-		whitespace++;
-		i++;
-	}
-	(*pos) = i;
-	(*space) = whitespace;
-}
-
-void	skipspaces2(char *s, int *pos, int *space)
-{
-	int	i;
-	int	whitespace;
-
-	i = (*pos);
-	whitespace = (*space);
-	while (iswhitespace(s[i]) || s[i] == '<' || s[i] == '>')
-	{
-		whitespace++;
-		i++;
-	}
-	(*pos) = i;
-	(*space) = whitespace;
 }

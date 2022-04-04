@@ -6,11 +6,26 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:29:19 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/02 15:21:07 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/03 18:20:55 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
+
+void	phaseone_helper(t_shell *data, int *k, int type1, int type2)
+{
+	int	i;
+
+	i = (*k);
+	if (type1 || type2)
+	{
+		data->tkns_recognition[i] = type1;
+		data->tkns_recognition[++i] = type2;
+		(*k) = i;
+	}
+	else
+		data->tkns_recognition[i] = COMMAND;
+}
 
 void	phasezero(t_shell *data)
 {
