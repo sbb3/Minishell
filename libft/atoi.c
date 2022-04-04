@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   atoi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 16:54:11 by jchakir           #+#    #+#             */
-/*   Updated: 2021/11/20 17:56:13 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/03 23:58:06 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static int	ft_isspace(char c)
 
 int	ft_atoi(const char *str)
 {
-	int		sign;
-	long	res;
+	int					sign;
+	unsigned long long	res;
 
 	res = 0;
 	sign = 1;
@@ -33,9 +33,9 @@ int	ft_atoi(const char *str)
 	if (*str == '-' || *str == '+')
 		if (*str++ == '-')
 			sign = -1;
-	while (ft_isdigit(*str) && res < 2147483648)
+	while (ft_isdigit(*str) && res < LONG_MAX)
 		res = res * 10 + *str++ - 48;
-	if (res > 2147483648)
+	if (res > LONG_MAX)
 	{
 		if (sign == -1)
 			return (0);

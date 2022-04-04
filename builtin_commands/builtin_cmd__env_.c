@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_commands.h                                 :+:      :+:    :+:   */
+/*   builtin_cmd__env_.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/26 17:40:29 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/04 00:02:37 by jchakir          ###   ########.fr       */
+/*   Created: 2022/04/03 17:39:44 by jchakir           #+#    #+#             */
+/*   Updated: 2022/04/03 18:08:08 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_COMMANDS_H
-#define BUILTIN_COMMANDS_H
+#include "builtin_commands.h"
 
-#include "../source/source.h"
-
-
-
-
-void	builtin_cmd__echo_(char **args, int outfd);
-void	builtin_cmd__env_(t_env	*env);
-void	builtin_cmd__exit_(char	**args);
-void	builtin_cmd__pwd_(char **args, int outfd);
-void	builtin_cmd__unset_(t_shell	*shell, char **args);
-
-
-
-#endif
+void	builtin_cmd__env_(t_env	*env, char **args)
+{
+	if (args[0])
+	{
+		put_custom_error("env: ", "too many arguments");
+		return ;
+	}
+	if (env == NULL)
+		return ;
+	while (env)
+	{
+		if (*env->key != '\0')
+			printf("%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
+}

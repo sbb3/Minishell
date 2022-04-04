@@ -3,7 +3,7 @@
 #include "source/source.h"
 #include "strings_parser_and_vars_handler/strings_parser_and_vars_handler.h"
 #include "commands_executor/cmds_executor.h"
-
+#include "builtin_commands/builtin_commands.h"
 
 
 
@@ -159,14 +159,14 @@ static t_shell	*initialize_shell_struct(void)
 // }
 
 
-static void	print_all_components(t_component *component)
-{
-	while (component)
-	{
-		printf("%s\n", component->content);
-		component = component->next;
-	}
-}
+// static void	print_all_components(t_component *component)
+// {
+// 	while (component)
+// 	{
+// 		printf("%s\n", component->content);
+// 		component = component->next;
+// 	}
+// }
 
 
 int main(void)
@@ -176,7 +176,18 @@ int main(void)
 	shell = initialize_shell_struct();
 
 
-	strings_parser_and_vars_handler(shell);
+	// strings_parser_and_vars_handler(shell);
+
+
+	/* --------------------
+
+	shell->parts_count = 1;
+
+	// char *unset_args[4] = {"USER", "var", "jawad", NULL};
+
+	// builtin_cmd__unset_(shell, unset_args);
+
+	*/
 
 
 	// commands_executor(shell);
@@ -184,9 +195,9 @@ int main(void)
 
 	// print_all_components(shell->separator[0]);
 	// print_all_components(shell->separator[1]);
-	print_all_components(shell->separator[2]);
+	// print_all_components(shell->separator[2]);
 
-	// system("leaks minishell");
+	// system("leaks unset");
 	// printf("pid: %d\n", getpid());
 	// while (1){}
 
