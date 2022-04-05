@@ -42,7 +42,7 @@ static t_env	*initialize_env(void)
 	char	*env2[2] = {"PWD", "/home/jaw"};
 	char	*env3[2] = {"HOME", "/Users/jchakir"};
 	char	*env4[2] = {"PATH", "/usr/bin"};
-	char	*env5[2] = {"var", "echo"};
+	char	*env5[2] = {"OLDPWD", "/Users/jchakir/py"};
 
 
 	env = new_env(env1[0], env1[1]);
@@ -172,16 +172,16 @@ int main(int argc, char **argv)
 
 	*/
 
-	// shell->parts_count = 1;
+	shell->parts_count = 1;
 	// shell->envp = NULL;
 
 
 	// char *args[2] = {"-", NULL};
 
-	// builtin_cmd__cd_(argv + 1, &shell->envp, 0, shell->parts_count);
+	builtin_cmd__cd_(argv + 1, &shell->envp, 0, shell->parts_count);
 
 
-	// print_all_envs(shell->envp);
+	print_all_envs(shell->envp);
 
 	// builtin_cmd__cd_(args, &shell->envp, 0, shell->parts_count);
 
@@ -199,11 +199,9 @@ int main(int argc, char **argv)
 	// print_all_components(shell->separator[1]);
 	// print_all_components(shell->separator[2]);
 
-	// system("leaks unset");
+	// system("leaks cd");
 	// printf("pid: %d\n", getpid());
 	// while (1){}
 
 	return 0;
-
-
 }
