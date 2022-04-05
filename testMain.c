@@ -134,14 +134,14 @@ static t_shell	*initialize_shell_struct(void)
 }
 
 
-static void	print_all_envs(t_env *env)
-{
-	while (env)
-	{
-		printf("%s : %s\n", env->key, env->value);
-		env = env->next;
-	}
-}
+// static void	print_all_envs(t_env *env)
+// {
+// 	while (env)
+// 	{
+// 		printf("%s : %s\n", env->key, env->value);
+// 		env = env->next;
+// 	}
+// }
 
 
 // static void	print_all_components(t_component *component)
@@ -161,47 +161,28 @@ int main(int argc, char **argv)
 	shell = initialize_shell_struct();
 
 	(void)argc;
-	// strings_parser_and_vars_handler(shell);
 
-
-	/* --------------------
-
-
-
-	// builtin_cmd__unset_(shell, unset_args);
-
-	*/
 
 	shell->parts_count = 1;
-	// shell->envp = NULL;
+	shell->envp = NULL;
 
+	char *args[1] = {NULL};
 
-	// char *args[2] = {"-", NULL};
+	builtin_cmd__export_(argv + 1, &shell->envp, 1, shell->parts_count);
 
-	builtin_cmd__cd_(argv + 1, &shell->envp, 0, shell->parts_count);
+	printf("\n\n");
 
+	builtin_cmd__export_(args, &shell->envp, 1, shell->parts_count);
 
-	print_all_envs(shell->envp);
+	printf("\n\n");
 
-	// builtin_cmd__cd_(args, &shell->envp, 0, shell->parts_count);
-
-	// printf("\n\n\n");
+	builtin_cmd__env_(shell->envp, args);
 
 	// print_all_envs(shell->envp);
 
 
 
-
-	// commands_executor(shell);
-
-
-	// print_all_components(shell->separator[0]);
-	// print_all_components(shell->separator[1]);
-	// print_all_components(shell->separator[2]);
-
-	// system("leaks cd");
-	// printf("pid: %d\n", getpid());
-	// while (1){}
+	// system("leaks export");
 
 	return 0;
 }

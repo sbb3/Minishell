@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 21:13:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/02 08:46:47 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/05 18:27:15 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,27 +133,6 @@ char    *var_to_value_in_str(char *src, t_env *env, int exit_status, int *extra_
 		}
     }
 	return (str);
-}
-
-char	*strdup_from_to__address_(char *start, char *end)
-{
-	// copy str from (address) start to end (start included, end excluded)
-	char	*str;
-	char	*ptr;
-	size_t	len;
-
-	len = 0;
-	if (! start || ! end || start > end)
-		return (NULL);
-	ptr = start;
-	while (ptr++ < end)
-		len++;
-	str = (char *)malloc(len + 1);
-	ptr = str;
-	while (start < end)
-		*str++ = *start++;
-	*str = '\0';
-	return (ptr);
 }
 
 char	*var_to_value_in__str__from_to__address_(char *start, char *end, t_env *env, int exit_status, int *extra_param)

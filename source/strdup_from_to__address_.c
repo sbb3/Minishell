@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_custom_error.c                                 :+:      :+:    :+:   */
+/*   strdup_from_to__address_.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:04:38 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/05 20:09:23 by jchakir          ###   ########.fr       */
+/*   Created: 2022/04/05 18:26:50 by jchakir           #+#    #+#             */
+/*   Updated: 2022/04/05 18:27:26 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "source.h"
 
-void put_custom_error(char *str_error1, char *str_error2)
+char	*strdup_from_to__address_(char *start, char *end)
 {
-    ft_putstr_fd(SHELL_NAME, 2);
-    if (str_error1)
-    	ft_putstr_fd(str_error1, 2);
-    if (str_error2)
-	    ft_putstr_fd(str_error2, 2);
-    write(2, "\n", 1);
-}
+	// copy str from (address) start to end (start included, end excluded)
+	char	*str;
+	char	*ptr;
+	size_t	len;
 
-void    custom_msg_then_perror(char *str)
-{
-    // ft_putstr_fd(SHELL_NAME, 2);
-    perror(str);
+	len = 0;
+	if (! start || ! end || start > end)
+		return (NULL);
+	ptr = start;
+	while (ptr++ < end)
+		len++;
+	str = (char *)malloc(len + 1);
+	ptr = str;
+	while (start < end)
+		*str++ = *start++;
+	*str = '\0';
+	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:19:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/03/31 23:52:43 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/05 22:28:04 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,14 @@ char	**ft_split(const char *str, char c)
 	if (! str)
 	{
 		s = malloc(sizeof(char *));
-		s[0] = 0;
+		s[0] = NULL;
 		return (s);
 	}
 	len = ft_words(str, c);
 	if (! len)
 	{
 		s = malloc(sizeof(char *));
-		s[0] = 0;
+		s[0] = NULL;
 		return (s);
 	}
 	s = ft_split_subprocess(str, c, len);

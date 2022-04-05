@@ -6,11 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/02 16:50:35 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/05 23:06:18 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cmds_executor.h"
+# include "commands_executor.h"
 
 static char	*get_path_env_from_envp(t_env *envp)
 {
@@ -31,6 +31,7 @@ void	commands_executor(t_shell *shell)
 	int			exit_status[1];
 
 
+	// free();
 
 	cmd_data = ft_calloc(1, sizeof(t_cmd_data));
 	pids_and_pipefds = ft_calloc(shell->parts_count * 2, sizeof(int));
@@ -69,7 +70,6 @@ void	commands_executor(t_shell *shell)
 		pids_and_pipefds[index + 1] = 0;
 		index = index + 2;
 	}
-
 	free(pids_and_pipefds);
 	shell->exit_status = exit_status[0];
 	free(cmd_data);
