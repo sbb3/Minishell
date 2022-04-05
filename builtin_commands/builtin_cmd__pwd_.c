@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 23:07:28 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/02 23:33:40 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:38:06 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ void	builtin_cmd__pwd_(char **args, int outfd)
 		perror("pwd");
 		return ;
 	}
-	write(outfd, buff, ft_strlen(buff));
-	write(outfd, "\n", 1);
+	if (outfd > 0)
+	{
+		write(outfd, buff, ft_strlen(buff));
+		write(outfd, "\n", 1);
+	}
 }
 
 

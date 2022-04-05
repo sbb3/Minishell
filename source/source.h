@@ -13,6 +13,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <string.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 # include "../libft/libft.h"
 
@@ -103,9 +105,10 @@ typedef struct s_shell
 
 void	custom_msg_then_perror(char *str);
 void	put_custom_error(char *str_error1, char *str_error2);
-int	list_component_size(t_component *lst);
+int		list_component_size(t_component *lst);
+t_env	*new_env(char *key, char *value);
+void	env_add_back_to_envs(t_env **envs, t_env *new_env);
 
 
-//  cc $FLAg libft/libft.a testMain.c strings_parser_and_vars_handler/*.c source/*.c commands_executor/*.c -o minishell; ./minishel
 
 #endif

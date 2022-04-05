@@ -35,27 +35,12 @@ static t_component *new_component(char *content, int type)
 	return component;
 }
 
-
-static t_env	*new_env(char *key, char *value)
-{
-	t_env	*env;
-
-	env = malloc(sizeof(t_env));
-	env->key = ft_strdup(key);
-	env->value = ft_strdup(value);
-	// env->key = key;
-	// env->value = value;
-	env->next = NULL;
-
-	return (env);
-}
-
 static t_env	*initialize_env(void)
 {
 	t_env	*env;
 	char	*env1[2] = {"USER", "root"};
 	char	*env2[2] = {"PWD", "/home/jaw"};
-	char	*env3[2] = {"jawad", "chakir"};
+	char	*env3[2] = {"HOME", "/Users/jchakir"};
 	char	*env4[2] = {"PATH", "/usr/bin"};
 	char	*env5[2] = {"var", "echo"};
 
@@ -149,14 +134,14 @@ static t_shell	*initialize_shell_struct(void)
 }
 
 
-// static void	print_all_envs(t_env *env)
-// {
-// 	while (env)
-// 	{
-// 		printf("%s : %s\n", env->key, env->value);
-// 		env = env->next;
-// 	}
-// }
+static void	print_all_envs(t_env *env)
+{
+	while (env)
+	{
+		printf("%s : %s\n", env->key, env->value);
+		env = env->next;
+	}
+}
 
 
 // static void	print_all_components(t_component *component)
@@ -169,25 +154,42 @@ static t_shell	*initialize_shell_struct(void)
 // }
 
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_shell 	*shell;
 
 	shell = initialize_shell_struct();
 
-
+	(void)argc;
 	// strings_parser_and_vars_handler(shell);
 
 
 	/* --------------------
 
-	shell->parts_count = 1;
 
-	// char *unset_args[4] = {"USER", "var", "jawad", NULL};
 
 	// builtin_cmd__unset_(shell, unset_args);
 
 	*/
+
+	// shell->parts_count = 1;
+	// shell->envp = NULL;
+
+
+	// char *args[2] = {"-", NULL};
+
+	// builtin_cmd__cd_(argv + 1, &shell->envp, 0, shell->parts_count);
+
+
+	// print_all_envs(shell->envp);
+
+	// builtin_cmd__cd_(args, &shell->envp, 0, shell->parts_count);
+
+	// printf("\n\n\n");
+
+	// print_all_envs(shell->envp);
+
+
 
 
 	// commands_executor(shell);
