@@ -6,11 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:10:32 by jchakir           #+#    #+#             */
-/*   Updated: 2022/03/31 23:39:22 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/06 17:06:59 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmds_executor.h"
+#include "commands_executor.h"
 
 static bool	set_input_fd(int *infd, t_cmd_data *cmd_data)
 {
@@ -72,6 +72,10 @@ bool	set_input_and_output_fds__minner_(int *infd, int *outfd, t_cmd_data *cmd_da
 	if (set_input_fd(infd, cmd_data) == false)
 		return (false);
 	if (set_output_fd(outfd, cmd_data) == false)
+	{
+		if (*infd > 2)
+			close(*infd);
 		return (false);
+	}
 	return (true);
 }

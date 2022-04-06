@@ -2,7 +2,7 @@
 
 #include "source/source.h"
 #include "strings_parser_and_vars_handler/strings_parser_and_vars_handler.h"
-#include "commands_executor/cmds_executor.h"
+#include "commands_executor/commands_executor.h"
 #include "builtin_commands/builtin_commands.h"
 
 
@@ -41,7 +41,7 @@ static t_env	*initialize_env(void)
 	char	*env1[2] = {"USER", "root"};
 	char	*env2[2] = {"PWD", "/home/jaw"};
 	char	*env3[2] = {"HOME", "/Users/jchakir"};
-	char	*env4[2] = {"PATH", "/usr/bin"};
+	char	*env4[2] = {"PATH", "/Users/jchakir/.brew/bin:/goinfre/jchakir/java/bin:/goinfre/jchakir/py/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/jchakir/.brew/bin:/goinfre/jchakir/java/bin:/goinfre/jchakir/py/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"};
 	char	*env5[2] = {"OLDPWD", "/Users/jchakir/py"};
 
 
@@ -58,19 +58,19 @@ static t_env	*initialize_env(void)
 static t_component	*initialize_component__11_(void)
 {
 	t_component *component;
-	char		*comp1 = "infile";
-	char		*comp2 = "$var";
-	char		*comp3 = "-l";
-	char		*comp4 = "out1";
-	char		*comp5 = "out2";
+	char		*comp1 = "echo";
+	char		*comp2 = "tttttttttffffffff";
+	// char		*comp3 = "-e";
+	// char		*comp4 = "jawad";
+	// char		*comp5 = "out";
 
 	component = NULL;
 
-	component = new_component(comp1, INFILE);
+	component = new_component(comp1, ARGS);
 	lstaddback_component(component, new_component(comp2, ARGS));
-	lstaddback_component(component, new_component(comp3, ARGS));
-	lstaddback_component(component, new_component(comp4, OUTFILE));
-	lstaddback_component(component, new_component(comp5, OUTFILE));
+	// lstaddback_component(component, new_component(comp3, ARGS));
+	// lstaddback_component(component, new_component(comp4, ARGS));
+	// lstaddback_component(component, new_component(comp5, OUTFILE));
 
 	return (component);
 
@@ -79,19 +79,19 @@ static t_component	*initialize_component__11_(void)
 static t_component	*initialize_component__22_(void)
 {
 	t_component *component;
-	char		*comp1 = "export";
-	char		*comp2 = "-e";
-	char		*comp3 = "out1";
-	char		*comp4 = "out2";
-	char		*comp5 = "out3";
+	char		*comp1 = "Makefile";
+	char		*comp2 = "cat";
+	// char		*comp3 = "out";
+	// char		*comp4 = "out1";
+	// char		*comp5 = "out1";
 
 	component = NULL;
 
-	component = new_component(comp1, ARGS);
+	component = new_component(comp1, INFILE);
 	lstaddback_component(component, new_component(comp2, ARGS));
-	lstaddback_component(component, new_component(comp3, OUTFILE));
-	lstaddback_component(component, new_component(comp4, OUTFILE));
-	lstaddback_component(component, new_component(comp5, OUTFILE_APPEND));
+	// lstaddback_component(component, new_component(comp3, INFILE));
+	// lstaddback_component(component, new_component(comp4, OUTFILE));
+	// lstaddback_component(component, new_component(comp5, OUTFILE_APPEND));
 
 	return (component);
 
@@ -100,35 +100,61 @@ static t_component	*initialize_component__22_(void)
 static t_component	*initialize_component__33_(void)
 {
 	t_component *component;
-	char		*comp1 = "$USER$USER$USER$USER$USER";
-	char		*comp2 = "out2";
-	char		*comp3 = "out3";
-	char		*comp4 = "cat";
+	char		*comp1 = "cat";
+	char		*comp2 = "-e";
+	// char		*comp3 = "out5";
+	// char		*comp4 = "/bin/test";
 
 	component = NULL;
 
-	component = new_component(comp1, INFILE);
-	lstaddback_component(component, new_component(comp2, INFILE));
-	lstaddback_component(component, new_component(comp3, INFILE));
-	lstaddback_component(component, new_component(comp4, ARGS));
+	component = new_component(comp1, ARGS);
+	lstaddback_component(component, new_component(comp2, ARGS));
+	// lstaddback_component(component, new_component(comp3, OUTFILE));
+	// lstaddback_component(component, new_component(comp4, OUTFILE));
 
 	return (component);
 
 }
 
+
+static t_component	*initialize_component__44_(void)
+{
+	t_component *component;
+	char		*comp1 = "wc";
+	// char		*comp2 = "-kkkk";
+	// char		*comp3 = "out";
+	// char		*comp4 = "out1";
+	char		*comp5 = "/bin/test";
+
+	component = NULL;
+
+	component = new_component(comp1, ARGS);
+	// lstaddback_component(component, new_component(comp2, ARGS));
+	// lstaddback_component(component, new_component(comp3, INFILE));
+	// lstaddback_component(component, new_component(comp4, OUTFILE));
+	lstaddback_component(component, new_component(comp5, OUTFILE_APPEND));
+
+	return (component);
+
+}
+
+
 static t_shell	*initialize_shell_struct(void)
 {
 	t_shell *shell;
-	int		parts_count = 3;
+	int		parts_count = 4;
 
 	shell = malloc(sizeof(t_shell));
 	shell->separator = malloc(sizeof(t_component *) * parts_count);
 	shell->separator[0] = initialize_component__11_();
 	shell->separator[1] = initialize_component__22_();
 	shell->separator[2] = initialize_component__33_();
+	shell->separator[3] = initialize_component__44_();
 	shell->envp = initialize_env();
 	shell->exit_status = 100;
 	shell->parts_count = parts_count;
+	shell->pids = NULL;
+	shell->pipefds = NULL;
 
 	return (shell);
 }
@@ -161,28 +187,20 @@ int main(int argc, char **argv)
 	shell = initialize_shell_struct();
 
 	(void)argc;
+	(void)argv;
 
+	// shell->parts_count = 3;
 
-	shell->parts_count = 1;
-	shell->envp = NULL;
-
-	char *args[1] = {NULL};
-
-	builtin_cmd__export_(argv + 1, &shell->envp, 1, shell->parts_count);
-
-	printf("\n\n");
-
-	builtin_cmd__export_(args, &shell->envp, 1, shell->parts_count);
-
-	printf("\n\n");
-
-	builtin_cmd__env_(shell->envp, args);
-
-	// print_all_envs(shell->envp);
+	commands_executor(shell);
 
 
 
-	// system("leaks export");
+	// system("leaks test");
 
-	return 0;
+	// printf("pid = %d\n", getpid());
+	// while (1) {}
+
+	// printf(" return status : %d\n", shell->exit_status);
+
+	return shell->exit_status;
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   itoa.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 18:41:13 by jchakir           #+#    #+#             */
-/*   Updated: 2021/11/19 18:48:11 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/06 23:52:58 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "source.h"
 
 static	int	ft_len(long int num)
 {
@@ -63,4 +63,27 @@ char	*ft_itoa(int num)
 	}
 	str = ft_setstring(nbr, is_negative);
 	return (str);
+}
+
+int	ft_atoi(const char *str)
+{
+	int					sign;
+	unsigned long long	res;
+
+	res = 0;
+	sign = 1;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
+		if (*str++ == '-')
+			sign = -1;
+	while (ft_isdigit(*str) && res < LONG_MAX)
+		res = res * 10 + *str++ - 48;
+	if (res > LONG_MAX)
+	{
+		if (sign == -1)
+			return (0);
+		return (-1);
+	}
+	return (sign * (int)res);
 }

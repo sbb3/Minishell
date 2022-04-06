@@ -6,11 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:19:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/05 22:28:04 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/06 23:49:54 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "source.h"
 
 static int	ft_words(const char *s, char c)
 {

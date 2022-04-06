@@ -6,20 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 18:02:16 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/04 01:36:10 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/06 23:39:39 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_commands.h"
-
-static int	ft_isspace(char c)
-{
-	if (c == 32)
-		return (1);
-	if (c > 8 && c < 14)
-		return (1);
-	return (0);
-}
 
 static bool	check_this_string_is_numerical(char *str)
 {
@@ -65,11 +56,13 @@ static void	write_num_arg_required_error_then_exit_255(char *str)
 	exit(255);
 }
 
-void	builtin_cmd__exit_(char	**args)
+void	builtin_cmd__exit_(char	**args, int part_counts)
 {
 	int	result;
 
-	write(2, "exit\n", 5);
+
+	if (part_counts == 1)
+		write(2, "exit\n", 5);
 	if (args[0] == NULL)
 		exit (0);
 
@@ -86,6 +79,8 @@ void	builtin_cmd__exit_(char	**args)
 		put_custom_error("exit: ", "too many arguments");
 		return ;
 	}
+	if (part_counts > 1)
+		return ;
 	exit (result);
 }
 

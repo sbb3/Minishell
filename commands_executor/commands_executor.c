@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/05 23:06:18 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/06 23:07:48 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,54 +23,68 @@ static char	*get_path_env_from_envp(t_env *envp)
 	return (NULL);
 }
 
+static void	wait_all_pids_then_close_pipefds(t_shell *shell, int *pids, int *pipefds)
+{
+	int	index;
+	int	exit_status[1];
+
+	exit_status[0] = 0;
+
+	index = 0;
+	while (index < shell->parts_count)
+	{
+		if (pids[index] > 0)
+			waitpid(pids[index], exit_status, 0);
+		pids[index] = 0;
+		index++;
+
+		printf("exit status : %d\n\n", *exit_status);
+		
+	}
+
+	index = 0;
+	while (index < shell->parts_count)
+	{
+		if (pipefds[index] > 2)
+			close(pipefds[index]);
+		pipefds[index] = 0;
+		index++;
+	}
+	shell->exit_status = exit_status[0];
+
+	// printf(" return status : %d\n", shell->exit_status);
+}
+
 void	commands_executor(t_shell *shell)
 {
 	t_cmd_data	*cmd_data;
 	int			index;
-	int			*pids_and_pipefds;
-	int			exit_status[1];
+	int			*pids;
+	int			*pipefds;
 
-
-	// free();
-
+	free(shell->pids);
+	free(shell->pipefds);
 	cmd_data = ft_calloc(1, sizeof(t_cmd_data));
-	pids_and_pipefds = ft_calloc(shell->parts_count * 2, sizeof(int));
-	exit_status[0] = 0;
+	pids = ft_calloc(shell->parts_count, sizeof(int));
+	pipefds = ft_calloc(shell->parts_count, sizeof(int));
+
 	cmd_data->infd = 0;
 	cmd_data->path_env = get_path_env_from_envp(shell->envp);
+	cmd_data->pids = pids;
+	cmd_data->pipefds = pipefds;
 
 	index = 0;
 	while (index < shell->parts_count)
 	{	
 		cmd_data->component = shell->separator[index];
-		cmd_data->pid_and_pipefd = pids_and_pipefds + index;
-		cmd_data->cmd_id = index;
-		cmd_executor__fork_child_proc_(cmd_data, shell);
-		cmd_data->infd = cmd_data->pid_and_pipefd[index + 1];
+		cmd_executor__fork_child_proc_(cmd_data, shell, index);
+		cmd_data->infd = pipefds[index];
 		index++;
 	}
 
-	index = 0;
-	while (index < shell->parts_count * 2)
-	{
-		if (pids_and_pipefds[index] > 0)
-			waitpid(pids_and_pipefds[index], exit_status, 0);
-		pids_and_pipefds[index] = 0;
-		index = index + 2;
-	}
-
-	index = 0;
-	while (index < shell->parts_count * 2)
-	{
-
-		// printf("fd is: %d\n", pids_and_pipefds[index + 1]);
-		
-		if (pids_and_pipefds[index + 1] > 2)
-			close(pids_and_pipefds[index + 1]);
-		pids_and_pipefds[index + 1] = 0;
-		index = index + 2;
-	}
-	free(pids_and_pipefds);
-	shell->exit_status = exit_status[0];
+	wait_all_pids_then_close_pipefds(shell, pids, pipefds);
+	
+	shell->pids = pids;
+	shell->pipefds = pipefds;
 	free(cmd_data);
 }
