@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calloc.c                                           :+:      :+:    :+:   */
+/*   builtin_cmd__env_.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/19 18:34:56 by jchakir           #+#    #+#             */
-/*   Updated: 2022/03/28 15:48:05 by jchakir          ###   ########.fr       */
+/*   Created: 2022/04/03 17:39:44 by jchakir           #+#    #+#             */
+/*   Updated: 2022/04/03 18:08:08 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "builtin_commands.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	builtin_cmd__env_(t_env	*env, char **args)
 {
-	void	*ptr;
-
-	ptr = malloc(count * size);
-	if (! ptr)
-		return (NULL);
-	ft_bzero(ptr, count * size);
-	return (ptr);
+	if (args[0])
+	{
+		put_custom_error("env: ", "too many arguments");
+		return ;
+	}
+	if (env == NULL)
+		return ;
+	while (env)
+	{
+		if (*env->key != '\0')
+			printf("%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
 }

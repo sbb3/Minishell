@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memcpy.c                                           :+:      :+:    :+:   */
+/*   memcmp.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 10:30:46 by jchakir           #+#    #+#             */
-/*   Updated: 2021/11/20 17:22:26 by jchakir          ###   ########.fr       */
+/*   Created: 2021/11/19 19:05:11 by jchakir           #+#    #+#             */
+/*   Updated: 2022/04/06 23:49:54 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "source.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int	ft_memcmp(const void *str1, const void *str2, size_t n)
 {
-	unsigned char	*d;
-	unsigned char	*s;
+	unsigned char	*s1;
+	unsigned char	*s2;
 
-	d = (unsigned char *)dst;
-	s = (unsigned char *)src;
-	if (!d && !s)
+	s1 = (unsigned char *)str1;
+	s2 = (unsigned char *)str2;
+	if (! n)
 		return (0);
-	if (src == dst)
-		return (dst);
-	while (n--)
-		*d++ = *s++;
-	return (dst);
+	while (*s1 == *s2 && --n)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
 }

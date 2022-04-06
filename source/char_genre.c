@@ -1,27 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strchr.c                                           :+:      :+:    :+:   */
+/*   char_genre.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/19 19:25:17 by jchakir           #+#    #+#             */
-/*   Updated: 2022/03/31 23:50:21 by jchakir          ###   ########.fr       */
+/*   Created: 2021/11/19 18:36:36 by jchakir           #+#    #+#             */
+/*   Updated: 2022/04/06 23:49:54 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "source.h"
 
-char	*ft_strchr(const char *str, int c)
+int	ft_isspace(char c)
 {
-	char	cc;
+	if (c == 32)
+		return (1);
+	if (c > 8 && c < 14)
+		return (1);
+	return (0);
+}
 
-	if (! str)
-		return (NULL);
-	cc = (char)c;
-	while (*str && *str != cc)
-		str++;
-	if (*str == cc)
-		return ((char *)str);
-	return (NULL);
+int	ft_isalpha(int c)
+{
+	if (c > 64 && c < 91)
+		return (1);
+	if (c > 96 && c < 123)
+		return (1);
+	return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c > 47 && c < 58)
+		return (1);
+	return (0);
+}
+
+int	ft_isalnum(int c)
+{
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
+	return (0);
 }
