@@ -6,11 +6,33 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 17:37:51 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:38:26 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/minishell.h"
+
+static void	free_all_unneeded_data(t_shell *shell)
+{
+	t_component	*this_c;
+	t_component	*next_c;
+	int			index;
+
+	index = 0;
+	while (index < shell->parts_count)
+	{
+		this_c = shell->separator[index];
+		while (this_c)
+		{
+			next_c = this_c->next;
+			free(this_c->content);
+			free(this_c);
+			this_c = next_c;
+		}
+		index++;
+	}
+	free(shell->separator);
+}
 
 char	*prompt(void)
 {
@@ -37,6 +59,8 @@ int	main(void)
 {
 	t_shell	*shell;
 
+	// printf("pid: %d\n", getpid());
+
 	shell = init();
 	envinit(shell);
 	while (21)
@@ -48,9 +72,8 @@ int	main(void)
 			strings_parser_and_vars_handler(shell);
 			commands_executor(shell);
 		}
-		// printf("\n");
-		// system("leaks minishell");
-		// printf("\n");
+		free_all_unneeded_data(shell);
+		// printf("\nexit status: %d\n", shell->exit_status);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:55:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 02:30:31 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 21:43:34 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	cmd_executor__fork_child_proc_(t_cmd_data *cmd_data, t_shell *shell, int id
 	int	pipe_fds[2];
 	int	outfd;
 
-	pipe(pipe_fds);
 
-	cmd_data->pipefds[id] = pipe_fds[0];
+	pipe(pipe_fds);
+	cmd_data->pipefd = pipe_fds[0];
 
 	if (id < shell->parts_count - 1)
 		outfd = pipe_fds[1];
@@ -37,5 +37,7 @@ void	cmd_executor__fork_child_proc_(t_cmd_data *cmd_data, t_shell *shell, int id
 			get__infd_outfd__and_cmd_full_path_then_exec_it(cmd_data, outfd);
 		}
 	}
+	if (cmd_data->infd > 2)
+		close(cmd_data->infd);
 	close(pipe_fds[1]);
 }

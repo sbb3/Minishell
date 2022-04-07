@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 23:07:28 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/04 17:38:06 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:49:24 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ void	builtin_cmd__pwd_(char **args, int outfd)
 	char	buff[251];
 	char	*cwd;
 
-	if (args[0])
-	{
-		put_custom_error("pwd: ", "too many arguments");
-		return ;
-	}
+	(void)args;
+	// if (args[0])
+	// {
+	// 	put_custom_error("pwd: ", "too many arguments");
+	// 	return ;
+	// }
 	cwd = getcwd(buff, 251);
 	if (cwd == NULL)
 	{

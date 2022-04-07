@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envinit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:34:26 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 03:08:56 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/07 18:12:15 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*shlvl_helper(char *value)
 
 	num = ft_atoi(value);
 	num++;
+	free(value);
 	return (ft_itoa(num));
 }
 
@@ -44,19 +45,19 @@ void	envinit(t_shell *data)
 	int		envlen;
 
 	envlen = count(environ);
-	data->envs = malloc(sizeof(int *) * (envlen + 1));
-	exit_if_null(data->envs, "Allocation failed");
+	// data->envs = malloc(sizeof(int *) * (envlen + 1));
+	// exit_if_null(data->envs, "Allocation failed");
 	data->envp = NULL;
 	i = -1;
 	while (environ[++i])
 	{
-		data->envs[i] = ft_strdup(environ[i]);
-		key = ft_strdup(getkey(environ[i]));
+		// data->envs[i] = ft_strdup(environ[i]);
+		key = getkey(environ[i]);
 		value = ft_strdup(getenv(key));
-		if (!ft_strcmp(key, "SHLVL"))
-			value = shlvl_helper(value);
+		// if (!ft_memcmp(key, "SHLVL", 6))
+		// 	value = shlvl_helper(value);
 		newnode = lstinit(key, value);
 		pushback(&data->envp, newnode);
 	}
-	data->envs[i] = NULL;
+	// data->envs[i] = NULL;
 }

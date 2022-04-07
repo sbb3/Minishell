@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 11:25:13 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/06 23:51:37 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:55:10 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*ft_get_until_new_line(void)
 	char	*temp_str;
 	ssize_t	read_size;
 
-	str = NULL;
+	str = ft_strdup("");
 	while (1)
 	{
 		read_size = read(0, buff, 1);

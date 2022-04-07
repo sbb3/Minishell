@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:31:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 01:06:01 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 18:12:01 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_shell
 {
 	struct s_component	**separator;
 	struct s_env		*envp;
-	char				**envs;
+	// char				**envs;
 	char				*prompt_input;
 	int					parts_count;
 	int					exit_status;
