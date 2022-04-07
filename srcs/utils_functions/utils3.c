@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:27:57 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/04 12:26:53 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/07 03:02:25 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../parser/parser.h"
 
 void	localhelper2(int *dqstate, int sqstate)
 {

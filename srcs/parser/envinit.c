@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envinit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:34:26 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 01:49:28 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 03:08:56 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ char	*getkey(char *s)
 			return (key = ft_strcut_from_to(s, 0, i));
 	}
 	return (0);
+}
+
+char	*shlvl_helper(char *value)
+{
+	int		num;
+
+	num = ft_atoi(value);
+	num++;
+	return (ft_itoa(num));
 }
 
 void	envinit(t_shell *data)
@@ -44,6 +53,8 @@ void	envinit(t_shell *data)
 		data->envs[i] = ft_strdup(environ[i]);
 		key = ft_strdup(getkey(environ[i]));
 		value = ft_strdup(getenv(key));
+		if (!ft_strcmp(key, "SHLVL"))
+			value = shlvl_helper(value);
 		newnode = lstinit(key, value);
 		pushback(&data->envp, newnode);
 	}
