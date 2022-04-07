@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:29:53 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 21:28:34 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/07 03:02:02 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../parser/parser.h"
 
 void	ft_error(int c)
 {

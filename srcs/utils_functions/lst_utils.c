@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:16:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/29 15:16:34 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/07 03:02:12 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../parser/parser.h"
 
 t_component	*ft_lstnew(char *content, int tkn_type)
 {

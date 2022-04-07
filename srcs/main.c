@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 01:26:30 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 02:57:13 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	main(void)
 	{
 		shell->prompt_input = prompt();
 		parser(shell);
-		// printing(shell);
-
 		if (quotes_and_forbidden_chars_checker(shell))
 		{
 			strings_parser_and_vars_handler(shell);
