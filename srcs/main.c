@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 01:26:30 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 03:01:41 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int	main(void)
 			strings_parser_and_vars_handler(shell);
 			commands_executor(shell);
 		}
+		// printf("\n");
+		// system("leaks minishell");
+		// printf("\n");
 	}
 	return (0);
 }
