@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"builtin_commands.h": "c",
-		"parser.h": "c",
-		"minishell.h": "c",
-		"commands_executor.h": "c",
-		"vars_handler.h": "c"
-	}
-}
