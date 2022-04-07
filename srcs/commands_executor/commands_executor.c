@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/06 23:07:48 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:16:25 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ static void	wait_all_pids_then_close_pipefds(t_shell *shell, int *pids, int *pip
 			waitpid(pids[index], exit_status, 0);
 		pids[index] = 0;
 		index++;
-
-		printf("exit status : %d\n\n", *exit_status);
-		
 	}
 
 	index = 0;
@@ -75,7 +72,8 @@ void	commands_executor(t_shell *shell)
 
 	index = 0;
 	while (index < shell->parts_count)
-	{	
+	{
+		// printf("inside command exec: %d\n", shell->parts_count);
 		cmd_data->component = shell->separator[index];
 		cmd_executor__fork_child_proc_(cmd_data, shell, index);
 		cmd_data->infd = pipefds[index];

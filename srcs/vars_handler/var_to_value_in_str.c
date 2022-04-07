@@ -6,11 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 21:13:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/05 18:27:15 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:06:45 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "strings_parser_and_vars_handler.h"
+#include "vars_handler.h"
 
 char	*ft_strjoin_with_char(char const *s, char c)
 {

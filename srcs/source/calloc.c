@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memcmp.c                                           :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/19 19:05:11 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/06 23:49:54 by jchakir          ###   ########.fr       */
+/*   Created: 2021/11/19 18:34:56 by jchakir           #+#    #+#             */
+/*   Updated: 2022/04/07 00:24:54 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "source.h"
+#include "source_.h"
 
-int	ft_memcmp(const void *str1, const void *str2, size_t n)
+static void	ft_bzero(void *s, size_t n)
 {
-	unsigned char	*s1;
-	unsigned char	*s2;
+	unsigned char	*str;
 
-	s1 = (unsigned char *)str1;
-	s2 = (unsigned char *)str2;
-	if (! n)
-		return (0);
-	while (*s1 == *s2 && --n)
-	{
-		s1++;
-		s2++;
-	}
-	return (*s1 - *s2);
+	str = (unsigned char *)s;
+	while (n--)
+		*str++ = 0;
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
+
+	ptr = malloc(count * size);
+	if (! ptr)
+		return (NULL);
+	ft_bzero(ptr, count * size);
+	return (ptr);
 }

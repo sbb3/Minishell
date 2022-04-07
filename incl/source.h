@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   source.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:31:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/02 18:35:34 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/07 01:06:01 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+extern char	**environ;
+
 
 enum e_id
 {
@@ -76,7 +79,8 @@ typedef struct s_shell
 	int					tokens_len;
 	int					infile_fd;
 	int					outfile_fd;
-	int					*pids_and_pipefds;
+	int					*pids;
+	int					*pipefds;
 
 }	t_shell;
 

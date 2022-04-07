@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 22:36:01 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/05 23:15:19 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:25:45 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**get_cmd_and_args__from_component_(t_component *component)
 	index = 0;
 	while (component)
 	{
-		if (component->type == ARGS)
+		if (component->type == ARGS || component->type == COMMAND)
 		{
 			cmd_and_args[index] = component->content;
 			index++;
@@ -42,7 +42,7 @@ bool	this_is_builtin_command(t_component *component)
 	str = NULL;
 	while (component)
 	{
-		if (component->type == ARGS)
+		if (component->type == COMMAND)
 		{
 			str = component->content;
 			break ;

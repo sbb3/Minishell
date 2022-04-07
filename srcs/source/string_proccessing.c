@@ -6,13 +6,13 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:26:10 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/06 23:49:54 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 00:50:41 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "source.h"
+#include "source_.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	size_t	l;
 

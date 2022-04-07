@@ -6,11 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:55:28 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/01 18:00:41 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:06:34 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "strings_parser_and_vars_handler.h"
+#include "vars_handler.h"
 
 static bool	is_this_char_forbidden_outside_quotes(char c)
 {

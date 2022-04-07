@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 22:44:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/06 20:17:03 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:07:48 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int get__infd_outfd__and_cmd_full_path_then_exec_it(t_cmd_data *cmd_data, int ou
 	char	**cmd_and_args;
 	int		input_fd;
 	int		output_fd;
-
-	// printf("\n%d : infd = %d    outfd = %d\n", cmd_data->cmd_id, cmd_data->infd, outfd);
 
 	if (set_input_and_output_fds__minner_(&input_fd, &output_fd, cmd_data) == false)
 		exit (1);

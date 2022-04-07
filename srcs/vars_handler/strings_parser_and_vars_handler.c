@@ -6,11 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:02:24 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/02 09:56:45 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:06:40 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "strings_parser_and_vars_handler.h"
+#include "vars_handler.h"
 
 static char	*get__address__until_limiter(char *str, char limiter)
 {

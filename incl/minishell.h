@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:00:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/03 18:19:45 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/07 01:05:55 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,12 @@
 # define MINISHELL_H
 
 # include "source.h"
-// # include "../commands_executor/cmds_executor.h"
-// # include "../builtin_commands/builtin_commands.h"
+# include "../srcs/commands_executor/commands_executor.h"
+# include "../srcs/vars_handler/vars_handler.h"
 
-extern char	**environ;
+
 # define INITIAL 200
 
-// BUILTINS FUNCTIONS
-bool		is_builtin_cmd(char *cmd);
-void		builtin_cmd_executor(char **cmd);
-void		cd_cmd(char *next_path);
-void		pwd_cmd(void);
-void		env_cmd(void);
 
 // ERROR FUNCTIONS
 void		ft_error(int c);
@@ -63,15 +57,15 @@ void		check_helper2(int *sq);
 int			another_helper(int *count, int whitespace);
 
 // UTILS FUNCTIONS 1
-int			ft_isalnum(int c);
+// int			ft_isalnum(int c);
 int			isprintable(int c);
-int			ft_strlen(const char *s);
-char		*ft_strdup(const char *s);
+// int			ft_strlen(const char *s);
+// char		*ft_strdup(const char *s);
 char		*ft_strcut_from_to(char *s, int from, int to);
 t_component	*ft_lstnew(char *content, int tkn_type);
 void		ft_lstadd_back(t_component **lst, t_component *new);
 int			ft_strcmp(char *s1, char *s2);
-char		*ft_strchr(char *s, char c);
+// char		*ft_strchr(char *s, char c);
 t_env		*lstinit(char *key, char *value);
 void		pushback(t_env **head, t_env *new);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envinit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:34:26 by adouib            #+#    #+#             */
-/*   Updated: 2022/03/31 15:11:58 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/07 01:49:28 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	envinit(t_shell *data)
 	while (environ[++i])
 	{
 		data->envs[i] = ft_strdup(environ[i]);
-		key = getkey(environ[i]);
-		value = getenv(key);
+		key = ft_strdup(getkey(environ[i]));
+		value = ft_strdup(getenv(key));
 		newnode = lstinit(key, value);
 		pushback(&data->envp, newnode);
 	}

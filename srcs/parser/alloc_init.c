@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:15:30 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/01 18:51:43 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/07 01:05:17 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	pipes_count(char *input)
 void	alloc_init(t_shell *data)
 {
 	data->start = 0;
-	data->pids_and_pipefds = NULL;
+	data->pids = NULL;
+	data->pipefds = NULL;
 	data->exit_status = 0;
 	data->parts_count = pipes_count(data->prompt_input) + 1;
 	data->separator = malloc(sizeof(t_component *) * data->parts_count);
