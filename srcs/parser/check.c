@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:20:36 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/02 18:31:59 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/08 02:51:39 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_redir(char *s, int i, char c)
 				return (syntax_error("Syntax Error!"));
 		}
 		else if ((ws != 0 && s[i + 1] == '\0' && !isprintable(s[i])) || \
-			(s[i] == '|' && ws != 0))
+			(s[i] == '|' && ws != 0) || (s[i] == '>' && ws != 0))
 			return (syntax_error("Syntax Error!"));
 		else if (s[i] != c)
 			return (1);
