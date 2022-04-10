@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 22:44:06 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 01:52:38 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/08 01:08:24 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	exec_builtin_command(t_cmd_data *cmd_data, t_shell *shell, int outfd)
 	int		output_fd;
 
 	if (set_input_and_output_fds__minner_(&input_fd, &output_fd, cmd_data) == false)
+	{
+		shell->exit_status = 1;
 		return ;
+	}
 	if (output_fd > 2)
 		outfd = output_fd;
 	cmd_and_args = get_cmd_and_args__from_component_(cmd_data->component);

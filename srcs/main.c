@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 22:38:26 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/08 23:14:54 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,14 @@ char	*prompt(void)
 		if (input && *input)
 			add_history(input);
 		if (!(*input))
+		{
+			free(input);
 			continue ;
+		}
 		else if (check(input))
 			non_stop = 0;
+		else
+			free(input);
 	}
 	return (input);
 }
@@ -59,10 +64,10 @@ int	main(void)
 {
 	t_shell	*shell;
 
-	// printf("pid: %d\n", getpid());
-
 	shell = init();
 	envinit(shell);
+	shell->exit_status = 0;
+	shell->pids = NULL;
 	while (21)
 	{
 		shell->prompt_input = prompt();
@@ -73,7 +78,7 @@ int	main(void)
 			commands_executor(shell);
 		}
 		free_all_unneeded_data(shell);
-		// printf("\nexit status: %d\n", shell->exit_status);
+		// system("leaks minishell");
 	}
 	return (0);
 }

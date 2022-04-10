@@ -53,5 +53,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strlen(const char *s);
 int		ft_memcmp(const void *str1, const void *str2, size_t n);
 void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
 
 #endif

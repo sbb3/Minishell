@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 22:44:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 01:07:48 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/08 18:51:02 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char *ft_get_cmd_full_path(char *path, char *cmd)
 	if (*cmd == '\0')
 	{
 		put_custom_error("", COMMAND_NOT_FOUND_ERROR);
-		exit (EXIT_FAILURE);
+		exit (127);
 	}
 	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
@@ -37,7 +37,7 @@ char *ft_get_cmd_full_path(char *path, char *cmd)
         paths++;
     }
     put_custom_error(cmd, COMMAND_NOT_FOUND_ERROR);
-	exit (1);
+	exit (127);
 }
 
 static void	ft_execut_command(char *cmd_path, char **args,char **envs, int infd, int outfd)
@@ -45,7 +45,7 @@ static void	ft_execut_command(char *cmd_path, char **args,char **envs, int infd,
 	if (dup2(infd, 0) < 0 || dup2(outfd, 1) < 0)
 	{
 		custom_msg_then_perror(DUP2_ERROR);
-		exit (EXIT_FAILURE);
+		exit (1);
 	}
 	if (execve(cmd_path, args, envs) < 0)
 	{
@@ -69,7 +69,7 @@ int get__infd_outfd__and_cmd_full_path_then_exec_it(t_cmd_data *cmd_data, int ou
 		output_fd = outfd;
 	cmd_and_args = get_cmd_and_args__from_component_(cmd_data->component);
 	if (*cmd_and_args == NULL)
-		exit (EXIT_FAILURE);
+		exit (0);
 
 	cmd_full_path = ft_get_cmd_full_path(cmd_data->path_env, cmd_and_args[0]);
 
@@ -77,14 +77,3 @@ int get__infd_outfd__and_cmd_full_path_then_exec_it(t_cmd_data *cmd_data, int ou
 
 	exit(1);
 }
-
-// void	exec_other_command(t_cmd_data *cmd_data, int outfd)
-// {
-	
-// 		cmd_data->pid_and_pipefd[0] = fork();
-// 		if (cmd_data->pid_and_pipefd[0] == 0)
-// 		{
-// 			close(pipe_fds[0]);
-// 			get__infd_outfd__and_cmd_full_path_then_exec_it(cmd_data,shell->envs, outfd);
-// 		}
-// }

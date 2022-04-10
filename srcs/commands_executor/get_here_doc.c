@@ -6,53 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 11:25:13 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 22:55:10 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/09 23:19:22 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "commands_executor.h"
-
-static char *ft_gunl_strjoin(char const *s1, char const *s2)
-{
-    char *str;
-    char *save_str;
-
-    if (! s1)
-        s1 = "";
-    str = malloc(ft_strlen(s1) + 2);
-    if (! str)
-        return (NULL);
-    save_str = str;
-    while (*s1)
-        *str++ = *s1++;
-    *str++ = *s2;
-    *str = 0;
-    return (save_str);
-}
-
-static char	*ft_get_until_new_line(void)
-{
-	char	buff[1];
-	char	*str;
-	char	*temp_str;
-	ssize_t	read_size;
-
-	str = ft_strdup("");
-	while (1)
-	{
-		read_size = read(0, buff, 1);
-		if (read_size <= 0)
-			return (NULL);
-		if (buff[0] == '\n')
-			return (str);
-		temp_str = ft_gunl_strjoin(str, buff);
-		free(str);
-		str = temp_str;
-		if (! temp_str)
-			return (NULL);
-	}
-	return (str);
-}
 
 static void ft_get_here_doc_with_gunl(char *limiter, int outfd)
 {
@@ -60,8 +18,7 @@ static void ft_get_here_doc_with_gunl(char *limiter, int outfd)
 
 	while (1)
 	{
-		ft_putstr_fd("heredoc> ", 1);
-		line = ft_get_until_new_line();
+		line = readline("heredoc> ");
 		if (! line)
 			break ;
 		if (! ft_memcmp(line, limiter, ft_strlen(limiter) + 1))

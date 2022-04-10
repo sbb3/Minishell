@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:55:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 21:43:34 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/10 16:52:24 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	cmd_executor__fork_child_proc_(t_cmd_data *cmd_data, t_shell *shell, int id
 		{
 			close(pipe_fds[0]);
 			get__infd_outfd__and_cmd_full_path_then_exec_it(cmd_data, outfd);
+			exit (0);
 		}
 	}
 	if (cmd_data->infd > 2)

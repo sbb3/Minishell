@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:31:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 18:12:01 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/08 00:54:24 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,9 @@ typedef struct s_shell
 	int					start;
 	char				**tokens;
 	int					tokens_len;
-	int					infile_fd;
-	int					outfile_fd;
+	// int					infile_fd;
+	// int					outfile_fd;
 	int					*pids;
-	int					*pipefds;
 
 }	t_shell;
 
