@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 18:02:16 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/06 23:39:39 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/10 23:21:05 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,38 +56,27 @@ static void	write_num_arg_required_error_then_exit_255(char *str)
 	exit(255);
 }
 
-void	builtin_cmd__exit_(char	**args, int part_counts)
+void	builtin_cmd__exit_(t_builtin_cmd_data *data)
 {
 	int	result;
 
-
-	if (part_counts == 1)
+	data->ext_stts = 0;
+	if (data->part_counts == 1)
 		write(2, "exit\n", 5);
-	if (args[0] == NULL)
+	if (data->args[0] == NULL)
 		exit (0);
-
-	if (check_this_string_is_numerical(args[0]) == false)
-		write_num_arg_required_error_then_exit_255(args[0]);
-
-	result = ft_atoi(args[0]);
-
-	if (check_this_arg_is_int(args[0], result) == false)
-		write_num_arg_required_error_then_exit_255(args[0]);
-
-	if (args[1])
+	if (check_this_string_is_numerical(data->args[0]) == false)
+		write_num_arg_required_error_then_exit_255(data->args[0]);
+	result = ft_atoi(data->args[0]);
+	if (check_this_arg_is_int(data->args[0], result) == false)
+		write_num_arg_required_error_then_exit_255(data->args[0]);
+	if (data->args[1])
 	{
 		put_custom_error("exit: ", "too many arguments");
+		data->ext_stts = 1;
 		return ;
 	}
-	if (part_counts > 1)
+	if (data->part_counts > 1)
 		return ;
 	exit (result);
 }
-
-// int main(int argc, char *argv[])
-// {
-// 	(void)argc;
-// 	builtin_cmd__exit_(argv + 1);
-// 	printf("non exit\n");
-// 	return 0;
-// }

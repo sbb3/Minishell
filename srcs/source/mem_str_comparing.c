@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memcmp.c                                           :+:      :+:    :+:   */
+/*   mem_str_comparing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:05:11 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 00:24:54 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 06:55:39 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "source_.h"
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	if (s1 == NULL && s2 == NULL)
+		return (0);
+	if (s1 == NULL || s2 == NULL)
+		return (1);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
+}
+
 
 int	ft_memcmp(const void *str1, const void *str2, size_t n)
 {

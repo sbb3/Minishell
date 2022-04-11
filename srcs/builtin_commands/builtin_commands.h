@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:40:29 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 01:52:25 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 06:57:06 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,29 @@
 
 # include "../source/source_.h"
 
-void	builtin_cmd__echo_(char **args, int outfd);
-void	builtin_cmd__env_(t_env	*env, char **args, int outfd);
-void	builtin_cmd__exit_(char	**args, int part_counts);
-void	builtin_cmd__pwd_(char **args, int outfd);
-void	builtin_cmd__unset_(t_shell	*shell, char **args);
-void	builtin_cmd__cd_(char **args, t_env **env, int outfd, int parts_count);
-void	builtin_cmd__export_(char **args, t_env **envs, int outfd, int parts_count);
+typedef struct s_builtin_cmd_data
+{
+	t_env	**env;
+	char	**args;
+	int		part_counts;
+	int		outfd;
+	int		ext_stts;
+} t_builtin_cmd_data;
+
+
+void	builtin_cmd__echo_(t_builtin_cmd_data *data);
+void	builtin_cmd__env_(t_builtin_cmd_data *data);
+void	builtin_cmd__exit_(t_builtin_cmd_data *data);
+void	builtin_cmd__pwd_(t_builtin_cmd_data *data);
+void	builtin_cmd__unset_(t_builtin_cmd_data *data);
+void	builtin_cmd__cd_(t_builtin_cmd_data *data);
+void	builtin_cmd__export_(t_builtin_cmd_data *data);
+void	dir_checker_in_multi_parts(char *dirname, t_builtin_cmd_data *data);
+bool	directory_exist_or_not(char *dirname, t_builtin_cmd_data *data);
+bool	builtin_cmd__cd__chdir_and_modify_env(char *dirname, t_env **envs, t_env *pwd, t_env *old_pwd);
+void	replace_or_add_env__value_key_(t_env **envs, t_env *env, char *key, char *value);
+t_env	*get_env_by_its_key(t_env *env, char *key);
+
+
 
 #endif

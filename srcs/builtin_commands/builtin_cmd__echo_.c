@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:22:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/08 16:12:13 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/10 23:16:04 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,10 @@ static void	set__new_line__args_as_null(char **args)
 	}
 }
 
-void	builtin_cmd__echo_(char **args, int outfd)
+static void	print_all_strings(char **args, int len, int outfd)
 {
 	int	index;
-	int	len;
 
-	if (args[0] == NULL)
-	{
-		write(1, "\n", 1);
-		return ;
-	}
-	len = 0;
-	while (args[len])
-		len++;
-	set__new_line__args_as_null(args);
 	index = 0;
 	while (index < len)
 	{
@@ -64,4 +54,21 @@ void	builtin_cmd__echo_(char **args, int outfd)
 		}
 		index++;
 	}
+}
+
+void	builtin_cmd__echo_(t_builtin_cmd_data *data)
+{
+	int	len;
+
+	data->ext_stts = 0;
+	if (data->args[0] == NULL)
+	{
+		write(1, "\n", 1);
+		return ;
+	}
+	len = 0;
+	while (data->args[len])
+		len++;
+	set__new_line__args_as_null(data->args);
+	print_all_strings(data->args, len, data->outfd);
 }

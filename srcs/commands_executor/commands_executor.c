@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/08 23:17:17 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 07:13:56 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*get_path_env_from_envp(t_env *envp)
 	return (NULL);
 }
 
-static void	wait_all_pids_then_close_pipefds(t_shell *shell, int *pids)
+static void	wait_all_pids(t_shell *shell, int *pids, int builtin_ext_stts)
 {
 	int	index;
 	int	exit_status;
@@ -32,11 +32,15 @@ static void	wait_all_pids_then_close_pipefds(t_shell *shell, int *pids)
 	while (index < shell->parts_count)
 	{
 		if (pids[index] > 0)
+		{
 			waitpid(pids[index], &exit_status, 0);
+			shell->exit_status = exit_status / 256;
+		}
+		else
+			shell->exit_status = builtin_ext_stts;
 		pids[index] = 0;
 		index++;
 	}
-	shell->exit_status = exit_status / 256;
 }
 
 void	commands_executor(t_shell *shell)
@@ -45,7 +49,6 @@ void	commands_executor(t_shell *shell)
 	int			index;
 	int			*pids;
 
-	// free(shell->pids);
 	cmd_data = ft_calloc(1, sizeof(t_cmd_data));
 	pids = ft_calloc(shell->parts_count, sizeof(int));
 	cmd_data->infd = 0;
@@ -59,11 +62,9 @@ void	commands_executor(t_shell *shell)
 		cmd_data->infd = cmd_data->pipefd;
 		index++;
 	}
-	wait_all_pids_then_close_pipefds(shell, pids);
+	wait_all_pids(shell, pids, cmd_data->builtin_ext_stts);
 	if (cmd_data->pipefd > 2)
 		close(cmd_data->pipefd);
-	// shell->pids = pids;
 	free(pids);
-
 	free(cmd_data);
 }

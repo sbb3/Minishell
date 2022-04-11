@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:04:38 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/09 23:51:00 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/10 21:49:07 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,14 @@ void    custom_msg_then_perror(char *str)
 {
     ft_putstr_fd(SHELL_NAME, 2);
     perror(str);
+}
+
+void	check_if_null__malloc__exit_(void *ptr, char *str)
+{
+	if (ptr == NULL)
+	{
+		ft_putstr_fd(SHELL_NAME, 2);
+		perror(str);
+		exit (1);
+	}
 }

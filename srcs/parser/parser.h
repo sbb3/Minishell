@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 02:59:00 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 03:09:06 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/11 06:53:30 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			isprintable(int c);
 char		*ft_strcut_from_to(char *s, int from, int to);
 t_component	*ft_lstnew(char *content, int tkn_type);
 void		ft_lstadd_back(t_component **lst, t_component *new);
-int			ft_strcmp(char *s1, char *s2);
+// int			ft_strcmp(char *s1, char *s2);
 t_env		*lstinit(char *key, char *value);
 void		pushback(t_env **head, t_env *new);
 
