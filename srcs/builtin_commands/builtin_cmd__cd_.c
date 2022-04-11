@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:09:27 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/11 07:07:09 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 23:23:56 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	builtin_cmd__cd__dirname_as_dash(t_builtin_cmd_data *data, t_env *pwd, t_en
 	{
 		if (builtin_cmd__cd__chdir_and_modify_env(old_pwd->value, data->env, pwd, old_pwd))
 		{
-			ft_putstr_fd(pwd->value, data->outfd);
-			write(data->outfd, "\n", 1);
+			if (pwd == NULL)
+				pwd = get_env_by_its_key(*data->env, "PWD");
+			ft_putendl_fd(pwd->value, data->outfd);
 		}
 		else
 			data->ext_stts = 1;
