@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:15:30 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/08 23:14:04 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 23:04:28 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_shell	*init(void)
 {
 	t_shell	*shell;
 
-	shell = malloc(sizeof(t_shell));
+	shell = ft_calloc(1, sizeof(t_shell));
 	exit_if_null(shell, "Allocation failed");
 	return (shell);
 }

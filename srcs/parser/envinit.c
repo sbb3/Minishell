@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:34:26 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 18:12:15 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 22:22:31 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	envinit(t_shell *data)
 	int		envlen;
 
 	envlen = count(environ);
-	// data->envs = malloc(sizeof(int *) * (envlen + 1));
-	// exit_if_null(data->envs, "Allocation failed");
+	data->envs = ft_calloc(envlen + 1, sizeof(char *));
+	exit_if_null(data->envs, "Allocation failed");
 	data->envp = NULL;
 	i = -1;
 	while (environ[++i])
 	{
-		// data->envs[i] = ft_strdup(environ[i]);
+		data->envs[i] = ft_strdup(environ[i]);
 		key = getkey(environ[i]);
 		value = ft_strdup(getenv(key));
 		// if (!ft_memcmp(key, "SHLVL", 6))
@@ -59,5 +59,5 @@ void	envinit(t_shell *data)
 		newnode = lstinit(key, value);
 		pushback(&data->envp, newnode);
 	}
-	// data->envs[i] = NULL;
+	data->envs[i] = NULL;
 }

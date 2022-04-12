@@ -6,7 +6,7 @@
 #    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/11 06:52:52 by jchakir          ###   ########.fr        #
+#    Updated: 2022/04/12 22:46:37 by jchakir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ BUILT_CMD = srcs/builtin_commands/builtin_cmd__unset_.c srcs/builtin_commands/bu
 CMD_EXEC = srcs/commands_executor/cmds_executor.c srcs/commands_executor/cmds_executor_utils.c \
 			srcs/commands_executor/commands_executor.c srcs/commands_executor/exec_builtin_command.c \
 			srcs/commands_executor/exec_other_command.c srcs/commands_executor/get_here_doc.c \
-			srcs/commands_executor/input_and_output_fds_minner.c
+			srcs/commands_executor/input_and_output_fds_minner.c srcs/commands_executor/envs_updater.c 
 
 VARS_HANDLER = srcs/vars_handler/quotes_and_forbidden_chars_checker.c \
 				srcs/vars_handler/strings_parser_and_vars_handler.c \

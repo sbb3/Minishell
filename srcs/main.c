@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/08 23:14:54 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 22:20:41 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int	main(void)
 
 	shell = init();
 	envinit(shell);
-	shell->exit_status = 0;
-	shell->pids = NULL;
 	while (21)
 	{
 		shell->prompt_input = prompt();
@@ -78,7 +76,6 @@ int	main(void)
 			commands_executor(shell);
 		}
 		free_all_unneeded_data(shell);
-		// system("leaks minishell");
 	}
 	return (0);
 }
