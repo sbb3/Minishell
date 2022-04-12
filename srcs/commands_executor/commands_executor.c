@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/11 07:13:56 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/12 22:48:03 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	commands_executor(t_shell *shell)
 	cmd_data->infd = 0;
 	cmd_data->path_env = get_path_env_from_envp(shell->envp);
 	cmd_data->pids = pids;
+	cmd_data->envs = shell->envs;
 	index = 0;
 	while (index < shell->parts_count)
 	{

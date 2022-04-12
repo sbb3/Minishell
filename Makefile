@@ -6,13 +6,17 @@
 #    By: adouib <adouib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/04/11 23:52:01 by adouib           ###   ########.fr        #
+=======
+#    Updated: 2022/04/12 23:43:45 by jchakir          ###   ########.fr        #
+>>>>>>> 5e4a3dd72072d366339bf16bf5ac956e828d5b07
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -I./incl/ -Wall -Wextra -Werror
+CFLAGS = -I./incl/ -Wall -Wextra -Werror -g3 -fsanitize=address 
 # -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = rm -rf
 
@@ -39,7 +43,7 @@ BUILT_CMD = srcs/builtin_commands/builtin_cmd__unset_.c srcs/builtin_commands/bu
 CMD_EXEC = srcs/commands_executor/cmds_executor.c srcs/commands_executor/cmds_executor_utils.c \
 			srcs/commands_executor/commands_executor.c srcs/commands_executor/exec_builtin_command.c \
 			srcs/commands_executor/exec_other_command.c srcs/commands_executor/get_here_doc.c \
-			srcs/commands_executor/input_and_output_fds_minner.c
+			srcs/commands_executor/input_and_output_fds_minner.c srcs/commands_executor/envs_updater.c 
 
 VARS_HANDLER = srcs/vars_handler/quotes_and_forbidden_chars_checker.c \
 				srcs/vars_handler/strings_parser_and_vars_handler.c \

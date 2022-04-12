@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 03:26:03 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/11 06:56:48 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 23:34:10 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	builtin_cmd__cd__chdir_and_modify_env(char *dirname, t_env **envs, t_env *p
 		cwd = getcwd(buff, 251);
 		if (cwd)
 			replace_or_add_env__value_key_(envs, pwd, "PWD", cwd);
-		if (oldcwd && ft_memcmp(cwd, oldcwd, ft_strlen(oldcwd) + 1))
+		if (oldcwd && (ft_strcmp(cwd, oldcwd) || old_pwd == NULL))
 			replace_or_add_env__value_key_(envs, old_pwd, "OLDPWD", oldcwd);
 		return (true);
 	}
