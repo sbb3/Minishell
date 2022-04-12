@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 02:59:00 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/12 00:04:45 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/12 23:49:46 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../../incl/minishell.h"
 
 # define INITIAL 200
-
+// hello
 // ERROR FUNCTIONS
 int			syntax_error(char *s);
 void		quit(char *s, int errornum);
