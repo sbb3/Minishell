@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   envinit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:34:26 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 18:12:15 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 23:46:12 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "parser.h"
 
 char	*getkey(char *s)
 {

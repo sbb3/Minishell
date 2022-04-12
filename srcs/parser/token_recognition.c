@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:29:19 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/03 18:20:55 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/11 23:47:27 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "parser.h"
 
 void	phaseone_helper(t_shell *data, int *k, int type1, int type2)
 {
@@ -25,15 +25,6 @@ void	phaseone_helper(t_shell *data, int *k, int type1, int type2)
 	}
 	else
 		data->tkns_recognition[i] = COMMAND;
-}
-
-void	phasezero(t_shell *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->tokens_len)
-		data->tkns_recognition[i] = ARGS;
 }
 
 void	phaseone(t_shell *data)
@@ -62,4 +53,22 @@ void	phaseone(t_shell *data)
 			}
 		}
 	}
+}
+
+void	phasezero(t_shell *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->tokens_len)
+		data->tkns_recognition[i] = ARGS;
+}
+
+int	*token_recognition(t_shell *data)
+{
+	data->tkns_recognition = malloc(sizeof(int) * data->tokens_len);
+	exit_if_null(data->tkns_recognition, "Allocation failed");
+	phasezero(data);
+	phaseone(data);
+	return (data->tkns_recognition);
 }

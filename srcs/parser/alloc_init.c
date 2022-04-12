@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:15:30 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/08 23:14:04 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 23:46:05 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "parser.h"
 
 int	pipes_count(char *input)
 {

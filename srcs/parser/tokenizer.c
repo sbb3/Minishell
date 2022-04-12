@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:26:22 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/02 15:54:32 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/11 23:46:32 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "parser.h"
 
 void	redirectionhelper(char *s, int *to)
 {

@@ -6,20 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 15:32:20 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/02 15:51:41 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/11 23:47:12 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
-
-int	*token_recognition(t_shell *data)
-{
-	data->tkns_recognition = malloc(sizeof(int) * data->tokens_len);
-	exit_if_null(data->tkns_recognition, "Allocation failed");
-	phasezero(data);
-	phaseone(data);
-	return (data->tkns_recognition);
-}
+#include "parser.h"
 
 char	**tokenizer(char *s, int *start)
 {
@@ -38,7 +29,7 @@ char	**tokenizer(char *s, int *start)
 		if (tkns_len == current_size - 1)
 		{
 			current_size *= 2;
-			tokens = ft_realloc_and_copy(tokens, current_size, tkns_len);
+			tokens = ft_copy(tokens, current_size, tkns_len);
 		}
 		tokens[tkns_len] = ft_strdup(token);
 		free(token);

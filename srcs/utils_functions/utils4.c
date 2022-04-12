@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:31:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 03:02:28 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/11 23:41:42 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strcut_from_to(char *s, int from, int to)
 	return (buf);
 }
 
-char	**ft_realloc_and_copy(char **tokens, size_t size, size_t tkns_len)
+char	**ft_copy(char **tokens, size_t size, size_t tkns_len)
 {
 	char	**new;
 	size_t	y;

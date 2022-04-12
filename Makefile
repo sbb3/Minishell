@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
+#    By: adouib <adouib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/11 06:52:52 by jchakir          ###   ########.fr        #
+#    Updated: 2022/04/11 23:52:01 by adouib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,10 @@ COLOUR_BLUE=\033[0;35m
 COLOUR_END=\033[0m
 
 SRCS = ./srcs/main.c \
-		./srcs/error/error.c \
-		./srcs/parser/alloc_init.c ./srcs/parser/parser.c  ./srcs/parser/check.c ./srcs/parser/token_recognition.c ./srcs/parser/tokenizer.c ./srcs/parser/envinit.c\
-		./srcs/utils_functions/utils.c ./srcs/utils_functions/utils2.c ./srcs/utils_functions/utils3.c ./srcs/utils_functions/utils4.c ./srcs/utils_functions/lst_utils.c\
+		./srcs/parser/alloc_init.c ./srcs/parser/parser.c  ./srcs/parser/check.c ./srcs/parser/token_recognition.c \
+		./srcs/parser/tokenizer.c ./srcs/parser/envinit.c ./srcs/parser/error_quit.c \
+		./srcs/utils_functions/utils.c ./srcs/utils_functions/utils2.c ./srcs/utils_functions/utils3.c \
+		./srcs/utils_functions/utils4.c ./srcs/utils_functions/lst_utils.c
 
 SOURCE = srcs/source/calloc.c srcs/source/char_genre.c srcs/source/itoa_and_atoi.c \
 		srcs/source/linked_lists.c srcs/source/mem_str_comparing.c srcs/source/put_custom_error.c \

@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:20:36 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/08 02:51:39 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/11 23:59:49 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "parser.h"
 
 int	check_pipe(char *s, int i)
 {
@@ -23,7 +23,7 @@ int	check_pipe(char *s, int i)
 		return (syntax_error("Syntax Error!"));
 	while (s[i])
 	{
-		skipspaces2(s, &i, &ws);
+		skipspaces(s, &i, &ws, 0);
 		if (s[i] == '|')
 		{
 			if (count >= 2 || ws != 0)
@@ -50,7 +50,7 @@ int	check_redir(char *s, int i, char c)
 		return (syntax_error("Syntax Error!"));
 	while (s[i])
 	{
-		skipspaces(s, &i, &ws);
+		skipspaces(s, &i, &ws, 1);
 		if (s[i] == c)
 		{
 			if (!another_helper(&count, ws))

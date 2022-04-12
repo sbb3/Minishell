@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 14:13:54 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/11 06:54:33 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/11 23:59:37 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,33 +42,28 @@ void	ft_free(char **tokens, size_t tkns_len)
 	free(tokens);
 }
 
-void	skipspaces(char *s, int *pos, int *space)
+void	skipspaces(char *s, int *pos, int *space, int w)
 {
 	int	i;
 	int	whitespace;
 
 	i = (*pos);
 	whitespace = (*space);
-	while (iswhitespace(s[i]))
+	if (w)
 	{
-		whitespace++;
-		i++;
+		while (iswhitespace(s[i]))
+		{
+			whitespace++;
+			i++;
+		}
 	}
-	(*pos) = i;
-	(*space) = whitespace;
-}
-
-void	skipspaces2(char *s, int *pos, int *space)
-{
-	int	i;
-	int	whitespace;
-
-	i = (*pos);
-	whitespace = (*space);
-	while (iswhitespace(s[i]) || s[i] == '<' || s[i] == '>')
+	else
 	{
-		whitespace++;
-		i++;
+		while (iswhitespace(s[i]) || s[i] == '<' || s[i] == '>')
+		{
+			whitespace++;
+			i++;
+		}
 	}
 	(*pos) = i;
 	(*space) = whitespace;
