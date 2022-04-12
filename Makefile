@@ -6,13 +6,13 @@
 #    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/12 22:46:37 by jchakir          ###   ########.fr        #
+#    Updated: 2022/04/12 23:43:45 by jchakir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -I./incl/ -Wall -Wextra -Werror
+CFLAGS = -I./incl/ -Wall -Wextra -Werror -g3 -fsanitize=address 
 # -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = rm -rf
 
