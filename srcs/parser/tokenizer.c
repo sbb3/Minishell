@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:26:22 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/13 01:05:41 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/13 04:52:57 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ void	quoteshelper(char *s, int *pos, char c)
 	(*pos) = i;
 }
 
-static char	*free_last_tkn_and_return_null(void *ptr)
+static char	*goback_if_null(char *last_token)
 {
-	free(ptr);
+	if (last_token)
+		free(last_token);
 	return (NULL);
 }
 
@@ -89,6 +90,6 @@ char	*get_token(char *s, int *lastpos)
 		gettoken_helper2(s, &to);
 	token = ft_strcut_from_to(s, from, to);
 	if (!gettoken_helper(token, to, lastpos))
-		return (free_last_tkn_and_return_null(token));
+		return (goback_if_null(token));
 	return (token);
 }
