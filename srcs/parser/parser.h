@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 02:59:00 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/12 23:49:46 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/12 23:59:34 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "../../incl/source.h"
+# include "../srcs/commands_executor/commands_executor.h"
+# include "../srcs/vars_handler/vars_handler.h"
 # include "../../incl/minishell.h"
 
 # define INITIAL 200

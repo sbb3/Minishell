@@ -3,21 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adouib <adouib@student.42.fr>              +#+  +:+       +#+         #
+#    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/04/11 23:52:01 by adouib           ###   ########.fr        #
-=======
-#    Updated: 2022/04/12 23:43:45 by jchakir          ###   ########.fr        #
->>>>>>> 5e4a3dd72072d366339bf16bf5ac956e828d5b07
+#    Updated: 2022/04/13 00:23:11 by jchakir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -I./incl/ -Wall -Wextra -Werror -g3 -fsanitize=address 
-# -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -I./incl/ -Wall -Wextra -Werror # -g3 -fsanitize=address
+
 RM = rm -rf
 
 COLOUR_BLUE=\033[0;35m
@@ -49,7 +45,6 @@ VARS_HANDLER = srcs/vars_handler/quotes_and_forbidden_chars_checker.c \
 				srcs/vars_handler/strings_parser_and_vars_handler.c \
 				srcs/vars_handler/var_to_value_in_str.c
 
-# ./srcs/execution/executor.c ./srcs/execution/utils.c
 
 OBJS = $(SRCS:%.c=%.o)
 O_SOURCE = $(SOURCE:%.c=%.o)
