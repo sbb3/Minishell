@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:46:08 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/11 07:01:22 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/13 01:47:43 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,12 @@ static bool	is_this_key_valid_as_var_key__export_(char *str)
 static void	put_not_a_valid_identifier_error(char *str, int *ext_stts)
 {
 	*ext_stts = 1;
-    ft_putstr_fd(SHELL_NAME, 2);
+	ft_putstr_fd(SHELL_NAME, 2);
 	ft_putstr_fd("export: `", 2);
-
-    if (str)
-    	ft_putstr_fd(str, 2);
-
+	ft_putstr_fd(str, 2);
 	ft_putstr_fd("': not a valid identifier", 2);
-    write(2, "\n", 1);
+	write(2, "\n", 1);
 }
-
 
 void	builtin_cmd__export_(t_builtin_cmd_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 16:23:10 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/11 07:23:46 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/13 01:48:01 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,11 @@ static bool	is_this_key_valid_as_var_key__unset_(char *str)
 
 static void	put_not_a_valid_identifier_error(char *str)
 {
-    ft_putstr_fd(SHELL_NAME, 2);
+	ft_putstr_fd(SHELL_NAME, 2);
 	ft_putstr_fd("unset: `", 2);
-
-    if (str)
-    	ft_putstr_fd(str, 2);
-
+	ft_putstr_fd(str, 2);
 	ft_putstr_fd("': not a valid identifier", 2);
-    write(2, "\n", 1);
+	write(2, "\n", 1);
 }
 
 static void	delete_this_env_varible(t_env **envs, char *key)

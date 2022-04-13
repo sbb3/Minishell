@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:31:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/11 23:41:42 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/13 01:46:59 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,8 @@ int	gettoken_helper(char *token, int to, int *lastpos)
 
 void	gettoken_helper2(char *token, int *end)
 {
-	int	dquotes_state;
-	int	squotes_state;
 	int	to;
 
-	dquotes_state = 0;
-	squotes_state = 0;
 	to = (*end);
 	while (token[to])
 	{
