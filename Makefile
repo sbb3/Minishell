@@ -6,7 +6,7 @@
 #    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/13 00:23:11 by jchakir          ###   ########.fr        #
+#    Updated: 2022/04/13 03:41:48 by jchakir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,12 @@ SRCS = ./srcs/main.c \
 		./srcs/parser/alloc_init.c ./srcs/parser/parser.c  ./srcs/parser/check.c ./srcs/parser/token_recognition.c \
 		./srcs/parser/tokenizer.c ./srcs/parser/envinit.c ./srcs/parser/error_quit.c \
 		./srcs/utils_functions/utils.c ./srcs/utils_functions/utils2.c ./srcs/utils_functions/utils3.c \
-		./srcs/utils_functions/utils4.c ./srcs/utils_functions/lst_utils.c
+		./srcs/utils_functions/utils4.c ./srcs/utils_functions/lst_utils.c 
 
 SOURCE = srcs/source/calloc.c srcs/source/char_genre.c srcs/source/itoa_and_atoi.c \
-		srcs/source/linked_lists.c srcs/source/mem_str_comparing.c srcs/source/put_custom_error.c \
-		srcs/source/split.c srcs/source/string_proccessing.c
+		srcs/source/envp_proccessing.c srcs/source/mem_str_comparing.c \
+		srcs/source/put_custom_error.c srcs/source/split.c srcs/source/string_proccessing.c \
+		srcs/source/shlvl_initializer.c srcs/source/linked_lists.c 
 
 
 BUILT_CMD = srcs/builtin_commands/builtin_cmd__unset_.c srcs/builtin_commands/builtin_cmd__echo_.c \

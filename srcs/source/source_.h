@@ -36,8 +36,6 @@
 void	custom_msg_then_perror(char *str);
 void	put_custom_error(char *str_error1, char *str_error2);
 int		list_component_size(t_component *lst);
-t_env	*new_env(char *key, char *value);
-void	env_add_back_to_envs(t_env **envs, t_env *new_env);
 char	*strdup_from_to__address_(char *start, char *end);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
@@ -56,7 +54,11 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	check_if_null__malloc__exit_(void *ptr, char *str);
-
+t_env	*new_env(char *key, char *value);
+void	env_add_back_to_envs(t_env **envs, t_env *new_env);
+void	replace_or_add_env__value_key_(t_env **envs, t_env *env, char *key, char *value);
+t_env	*get_env_by_its_key(t_env *env, char *key);
+void	shlvl_initializer(t_env **envp, char **envs);
 
 
 #endif

@@ -6,22 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:46:08 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/13 01:47:43 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/13 02:39:35 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_commands.h"
-
-// static t_env	*get_env_by_its_key(t_env *env, char *key)
-// {
-// 	while (env)
-// 	{
-// 		if (ft_memcmp(env->key, key, ft_strlen(key) + 1) == 0)
-// 			return (env);
-// 		env = env->next;
-// 	}
-// 	return (NULL);
-// }
 
 static void	replace_or_add_env__value_key_for_export(t_env **envs, char *key, char *value, int part_counts)
 {
