@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:20:36 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/11 23:59:49 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/13 04:57:59 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,38 +127,3 @@ int	check(char *s)
 		return (syntax_error("Quotes Error!"));
 	return (1);
 }
-
-/*
- handle hardcoded arrays
- check more errors
- handle leaks
-//  handle realloc function
-//  handle norm (header file)
-//  handle exit quotes in check function
-//  ignore whitespaces in check < > |
-
-
-// fzdsz|dcxz|sdaf"|""||||" sdafasdf   => realloc
-// fzdsz|dcxz|sdaf"|""||||" sdafasdf
-// fzdsz|dcxz|sdaf"|""||||" sdafasdf5 er fefef
-// fzdsz|dcxz|sdaf'"fxg|'"xfd"   => realloc
-// dfgsgd || fsgs
-
-< whitespace
-< a
-sdgf < | sd
-sdf > a > d
-dsfd > a > d <f < t > l > y < s
-
-
-echo $'$dfgdf'"$user"
-echo '$dfgd'
-echo "dfg'$d'f"dfgdf
-
-echo $dfgdfg
-
-echo |      space => error
-
-; & \
-ls <| ls
-*/
