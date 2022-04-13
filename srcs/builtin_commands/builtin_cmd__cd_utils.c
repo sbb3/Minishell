@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 03:26:03 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/11 23:34:10 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/13 01:53:00 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ bool	builtin_cmd__cd__chdir_and_modify_env(char *dirname, t_env **envs, t_env *p
 		return (true);
 	}
 	else
-		perror(dirname);
+		custom_msg_then_perror(dirname);
 	return (false);
 }
 
