@@ -6,13 +6,13 @@
 #    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/14 02:51:44 by jchakir          ###   ########.fr        #
+#    Updated: 2022/04/14 04:48:20 by jchakir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-RDFLAGS= -lreadline # -L/goinfre/jchakir/.brew/opt/readline/lib 
+RDFLAGS= -lreadline -L/goinfre/jchakir/.brew/opt/readline/lib 
 
 CFLAGS = -I./incl/ -Wall -Wextra -Werror  # -g3 -fsanitize=address 
 
