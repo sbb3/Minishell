@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:31:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/11 22:18:42 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/13 21:36:28 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 
 extern char	**environ;
 

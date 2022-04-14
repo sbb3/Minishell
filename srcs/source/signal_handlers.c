@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   signal_handlers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 22:00:44 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/14 00:52:27 by jchakir          ###   ########.fr       */
+/*   Created: 2022/04/13 21:12:27 by jchakir           #+#    #+#             */
+/*   Updated: 2022/04/13 21:36:55 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+# include "source_.h"
 
-# include "source.h"
-# include "../srcs/commands_executor/commands_executor.h"
-# include "../srcs/vars_handler/vars_handler.h"
-# include "../srcs/parser/parser.h"
-
-
-void rl_replace_line (const char *text, int clear_undo);
-
-
-#endif
+void	sig_handler_ctrl(int sig)
+{
+	if (sig == SIGQUIT)
+		return ;
+	if (sig == SIGINT)
+		return ;
+	
+}

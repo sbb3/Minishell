@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/13 00:22:41 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/14 01:09:53 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,33 @@ char	*prompt(void)
 	return (input);
 }
 
+
+
+void	sig_handler_ctrl(int sig)
+{
+	if (sig == SIGQUIT)
+		exit (0);
+	if (sig == SIGINT)
+	{
+		// printf("ctrl c\n");
+		// rl_replace_line("", 0);
+		// rl_on_new_line();
+		// rl_redisplay();
+		return ;
+	}
+	if (sig == SIGABRT)
+		return ;
+}
+
+
+
 int	main(void)
 {
 	t_shell	*shell;
+
+	signal(SIGINT, sig_handler_ctrl);
+	signal(SIGQUIT, sig_handler_ctrl);
+	signal(SIGABRT, sig_handler_ctrl);
 
 	shell = init();
 	envinit(shell);

@@ -6,7 +6,7 @@
 #    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/13 03:41:48 by jchakir          ###   ########.fr        #
+#    Updated: 2022/04/14 00:23:52 by jchakir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,8 +63,8 @@ $(NAME): $(OBJS) $(O_SOURCE) $(O_BUILT_CMD) $(O_CMD_EXEC) $(O_VAR_HANDLER)
 	@$(CC) $(OBJS) $(O_SOURCE) $(O_BUILT_CMD) $(O_CMD_EXEC) $(O_VAR_HANDLER) -lreadline -o $(NAME)
 	@echo "👉 $(COLOUR_BLUE)COMPILING DONE$(COLOUR_END) 👈"
 
-./srcs/%.o: %.c
-	@$(CC) $(CFLAGS) -c $<
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJS) $(O_SOURCE) $(O_BUILT_CMD) $(O_CMD_EXEC) $(O_VAR_HANDLER)
