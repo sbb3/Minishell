@@ -6,13 +6,15 @@
 #    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/14 00:23:52 by jchakir          ###   ########.fr        #
+#    Updated: 2022/04/14 02:51:44 by jchakir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = cc
 
-CFLAGS = -I./incl/ -Wall -Wextra -Werror # -g3 -fsanitize=address
+RDFLAGS= -lreadline # -L/goinfre/jchakir/.brew/opt/readline/lib 
+
+CFLAGS = -I./incl/ -Wall -Wextra -Werror  # -g3 -fsanitize=address 
 
 RM = rm -rf
 
@@ -60,7 +62,7 @@ $(VERBOSE).SILENT:
 all: $(NAME)
 
 $(NAME): $(OBJS) $(O_SOURCE) $(O_BUILT_CMD) $(O_CMD_EXEC) $(O_VAR_HANDLER)
-	@$(CC) $(OBJS) $(O_SOURCE) $(O_BUILT_CMD) $(O_CMD_EXEC) $(O_VAR_HANDLER) -lreadline -o $(NAME)
+	@$(CC) $(RDFLAGS) $(OBJS) $(O_SOURCE) $(O_BUILT_CMD) $(O_CMD_EXEC) $(O_VAR_HANDLER) -o $(NAME)
 	@echo "👉 $(COLOUR_BLUE)COMPILING DONE$(COLOUR_END) 👈"
 
 %.o: %.c

@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/14 01:09:53 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/14 03:25:36 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,21 @@ static void	free_all_unneeded_data(t_shell *shell)
 	free(shell->separator);
 }
 
-char	*prompt(void)
+static void	sig_hundler__ctrl_c__before_readline(int sig)
+{
+	(void)sig;
+	// rl_replace_line("");
+	rl_on_new_line();
+	rl_redisplay();
+}
+
+static void	sig_hundler__ctrl_c__after_readline(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+}
+
+char	*prompt(struct sigaction *ctrl_c)
 {
 	char	*input;
 	int		non_stop;
@@ -42,7 +56,10 @@ char	*prompt(void)
 	non_stop = 1;
 	while (non_stop)
 	{
-		input = readline("🤙 ");
+		ctrl_c->sa_handler = sig_hundler__ctrl_c__before_readline;
+		input = readline("MiniShell: $🤙 ");
+		ctrl_c->sa_handler = sig_hundler__ctrl_c__after_readline;
+
 		if (!input)
 			exit(0);
 		if (input && *input)
@@ -60,39 +77,24 @@ char	*prompt(void)
 	return (input);
 }
 
-
-
-void	sig_handler_ctrl(int sig)
-{
-	if (sig == SIGQUIT)
-		exit (0);
-	if (sig == SIGINT)
-	{
-		// printf("ctrl c\n");
-		// rl_replace_line("", 0);
-		// rl_on_new_line();
-		// rl_redisplay();
-		return ;
-	}
-	if (sig == SIGABRT)
-		return ;
-}
-
-
-
 int	main(void)
 {
-	t_shell	*shell;
+	t_shell				*shell;
+	struct sigaction	ctrl_back_slash;
+	struct sigaction	ctrl_c;
 
-	signal(SIGINT, sig_handler_ctrl);
-	signal(SIGQUIT, sig_handler_ctrl);
-	signal(SIGABRT, sig_handler_ctrl);
+	ctrl_back_slash.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &ctrl_back_slash, NULL);
+
+	ctrl_c.sa_handler = sig_hundler__ctrl_c__before_readline;
+	ctrl_c.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &ctrl_c, NULL);
 
 	shell = init();
 	envinit(shell);
-	while (21)
+	while (1337)
 	{
-		shell->prompt_input = prompt();
+		shell->prompt_input = prompt(&ctrl_c);
 		parser(shell);
 		if (quotes_and_forbidden_chars_checker(shell))
 		{
