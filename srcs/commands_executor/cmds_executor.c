@@ -6,26 +6,24 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:55:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/10 16:52:24 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/15 01:20:35 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "commands_executor.h"
+#include "commands_executor.h"
 
-void	cmd_executor__fork_child_proc_(t_cmd_data *cmd_data, t_shell *shell, int id)
+void	cmd_executor__fork_child_proc_(t_cmd_data *cmd_data, \
+										t_shell *shell, int id)
 {
 	int	pipe_fds[2];
 	int	outfd;
 
-
 	pipe(pipe_fds);
 	cmd_data->pipefd = pipe_fds[0];
-
 	if (id < shell->parts_count - 1)
 		outfd = pipe_fds[1];
 	else
 		outfd = 1;
-
 	if (this_is_builtin_command(cmd_data->component))
 		exec_builtin_command(cmd_data, shell, outfd);
 	else

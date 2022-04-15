@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:10:32 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/06 17:06:59 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/15 02:10:19 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ static bool	set_output_fd(int *outfd, t_cmd_data *cmd_data)
 			if (*outfd > 2)
 				close(*outfd);
 			if (component->type == OUTFILE)
-				*outfd = open(component->content, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+				*outfd = open(component->content, \
+										O_WRONLY | O_TRUNC | O_CREAT, 0644);
 			if (component->type == OUTFILE_APPEND)
-				*outfd = open(component->content, O_WRONLY | O_APPEND | O_CREAT, 0644);
+				*outfd = open(component->content, \
+										O_WRONLY | O_APPEND | O_CREAT, 0644);
 			if (*outfd < 0)
 			{
 				custom_msg_then_perror(component->content);
@@ -64,11 +66,11 @@ static bool	set_output_fd(int *outfd, t_cmd_data *cmd_data)
 	return (true);
 }
 
-bool	set_input_and_output_fds__minner_(int *infd, int *outfd, t_cmd_data *cmd_data)
+bool	set_input_and_output_fds__minner_(int *infd, int *outfd, \
+											t_cmd_data *cmd_data)
 {
 	*infd = 0;
 	*outfd = 1;
-
 	if (set_input_fd(infd, cmd_data) == false)
 		return (false);
 	if (set_output_fd(outfd, cmd_data) == false)

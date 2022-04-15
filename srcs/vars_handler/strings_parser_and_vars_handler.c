@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:02:24 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 01:06:40 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/15 02:40:54 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,27 @@ static char	*get__address__until_limiter(char *str, char limiter)
 	return (str);
 }
 
+static void	det_limiter_and_str_type(char *limiter, int *str_type, char **str)
+{
+	if (**str == '"')
+	{
+		*str_type = DOUBLE_Q;
+		*limiter = '"';
+		*str = *str + 1;
+	}
+	else if (**str == '\'')
+	{
+		*str_type = SINGLE_Q;
+		*limiter = '\'';
+		*str = *str + 1;
+	}
+	else
+	{
+		*str_type = SIMPLE_STR;
+		*limiter = '\0';
+	}
+}
+
 static char	*squotes_dquotes_and_vars_hundler(char *str, t_env *env, int exit_status)
 {
 	int		str_type;
@@ -38,40 +59,19 @@ static char	*squotes_dquotes_and_vars_hundler(char *str, t_env *env, int exit_st
 	final_str = ft_strdup("");
 	while (*str)
 	{
-		if (*str == '"')
-		{
-			str_type = DOUBLE_Q;
-			limiter = '"';
-			str++;
-		}
-		else if (*str == '\'')
-		{
-			str_type = SINGLE_Q;
-			limiter = '\'';
-			str++;
-		}
-		else
-		{
-			str_type = SIMPLE_STR;
-			limiter = '\0';
-		}
+		det_limiter_and_str_type(&limiter, &str_type, &str);
 		end_str = get__address__until_limiter(str, limiter);
-
 		extra_param[0] = str_type;
 		extra_param[1] = *end_str;
-
 		if (str_type == SINGLE_Q)
 			temp_ptr = strdup_from_to__address_(str, end_str);
 		else
 			temp_ptr = var_to_value_in__str__from_to__address_(str, end_str, env, exit_status, extra_param);
 		temp_final_str = ft_strjoin(final_str, temp_ptr);
-
 		free(temp_ptr);
 		free(final_str);
 		final_str = temp_final_str;
-
 		str = end_str;
-
 		if (limiter)
 			str++;
 	}

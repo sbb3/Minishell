@@ -6,11 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 22:44:06 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/12 22:41:48 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/15 01:54:49 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "commands_executor.h"
+#include "commands_executor.h"
 
 static t_builtin_cmd_data	*set_init_data_struct(t_shell *shell, int outfd)
 {
@@ -42,7 +42,8 @@ static void	builtin_commands_executor(char *cmd, t_builtin_cmd_data *data)
 		builtin_cmd__exit_(data);
 }
 
-static void	free_unneeded_data_and_close_fds(void *data, void *args, int fd1, int fd2)
+static void	free_unneeded_data_and_close_fds(void *data, void *args, \
+											int fd1, int fd2)
 {
 	free(args);
 	free(data);
@@ -60,7 +61,8 @@ void	exec_builtin_command(t_cmd_data *cmd_data, t_shell *shell, int outfd)
 	t_builtin_cmd_data	*builtin_data;
 
 	cmd_data->builtin_ext_stts = 0;
-	if (set_input_and_output_fds__minner_(&input_fd, &output_fd, cmd_data) == false)
+	if (set_input_and_output_fds__minner_(&input_fd, &output_fd, \
+														cmd_data) == false)
 	{
 		cmd_data->builtin_ext_stts = 1;
 		return ;
@@ -74,8 +76,7 @@ void	exec_builtin_command(t_cmd_data *cmd_data, t_shell *shell, int outfd)
 	builtin_data->args = cmd_and_args + 1;
 	builtin_commands_executor(cmd_and_args[0], builtin_data);
 	cmd_data->builtin_ext_stts = builtin_data->ext_stts;
-
 	envs_updater(cmd_and_args[0], shell);
-
-	free_unneeded_data_and_close_fds(builtin_data, cmd_and_args, input_fd, output_fd);	
+	free_unneeded_data_and_close_fds(builtin_data, cmd_and_args, \
+										input_fd, output_fd);
 }

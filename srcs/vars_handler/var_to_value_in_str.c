@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 21:13:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 01:06:45 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/15 02:18:22 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ char    *var_to_value_in_str(char *src, t_env *env, int exit_status, int *extra_
 
 char	*var_to_value_in__str__from_to__address_(char *start, char *end, t_env *env, int exit_status, int *extra_param)
 {
-	// copy str from (address) start to end (start included, end excluded)
 	char	*str;
 	char	*vars_in_str;
 

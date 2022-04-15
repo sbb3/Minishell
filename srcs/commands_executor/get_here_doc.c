@@ -6,17 +6,17 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 11:25:13 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/09 23:19:22 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/15 02:08:47 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "commands_executor.h"
+#include "commands_executor.h"
 
-static void ft_get_here_doc_with_gunl(char *limiter, int outfd)
+static void	ft_get_here_doc_with_gunl(char *limiter, int outfd)
 {
-    char *line;
+	char	*line;
 
-	while (1)
+	while (1337)
 	{
 		line = readline("heredoc> ");
 		if (! line)
@@ -31,16 +31,16 @@ static void ft_get_here_doc_with_gunl(char *limiter, int outfd)
 	exit (0);
 }
 
-int ft_get_here_doc(char *limiter)
+int	ft_get_here_doc(char *limiter)
 {
-    int fd_pipe[2];
-    pid_t pid;
+	int		fd_pipe[2];
+	pid_t	pid;
 
 	if (pipe(fd_pipe) < 0)
-		return -1;
+		return (-1);
 	pid = fork();
 	if (pid < 0)
-		return -1;
+		return (-1);
 	if (! pid)
 		ft_get_here_doc_with_gunl(limiter, fd_pipe[1]);
 	close(fd_pipe[1]);

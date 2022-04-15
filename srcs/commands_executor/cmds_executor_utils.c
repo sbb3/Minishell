@@ -6,11 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 22:36:01 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 01:25:45 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/15 01:38:56 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "commands_executor.h"
+#include "commands_executor.h"
 
 char	**get_cmd_and_args__from_component_(t_component *component)
 {
@@ -32,29 +32,38 @@ char	**get_cmd_and_args__from_component_(t_component *component)
 	return (cmd_and_args);
 }
 
-bool	this_is_builtin_command(t_component *component)
+static char	*this_is_builtin_command__cmd_getter__(t_component *component)
 {
-	char	*str;
-	char	*builtin_cmds[7] = {"echo", "cd", "pwd", "export", "unset", "env", "exit"};
-	// char	*builtin_cmds[7];
-	int		index;
-
-	str = NULL;
 	while (component)
 	{
 		if (component->type == COMMAND)
-		{
-			str = component->content;
-			break ;
-		}
+			return (component->content);
 		component = component->next;
 	}
+	return (NULL);
+}
+
+bool	this_is_builtin_command(t_component *component)
+{
+	char	*str;
+	char	*builtin_cmds[8];
+	int		index;
+
+	builtin_cmds[0] = "echo";
+	builtin_cmds[1] = "cd";
+	builtin_cmds[2] = "pwd";
+	builtin_cmds[3] = "export";
+	builtin_cmds[4] = "unset";
+	builtin_cmds[5] = "env";
+	builtin_cmds[6] = "exit";
+	builtin_cmds[7] = NULL;
+	str = this_is_builtin_command__cmd_getter__(component);
 	if (str == NULL)
 		return (false);
 	index = 0;
-	while (index < 7)
+	while (builtin_cmds[index])
 	{
-		if (ft_memcmp(str, builtin_cmds[index], ft_strlen(str) + 1) == 0)
+		if (ft_strcmp(str, builtin_cmds[index]) == 0)
 			return (true);
 		index++;
 	}

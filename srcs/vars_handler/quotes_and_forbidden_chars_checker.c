@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:55:28 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/07 01:06:34 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/15 02:14:49 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool	quotes_error_and_forbidden_chars_checker(char *str)
 			return (false);
 		str++;
 	}
-	return is_closed;
+	return (is_closed);
 }
 
 bool	quotes_and_forbidden_chars_checker(t_shell *shell)
@@ -62,7 +62,8 @@ bool	quotes_and_forbidden_chars_checker(t_shell *shell)
 		component = shell->separator[i];
 		while (component)
 		{
-			if (quotes_error_and_forbidden_chars_checker(component->content) == false)
+			if (quotes_error_and_forbidden_chars_checker(component->content) \
+																	== false)
 				return (false);
 			component = component->next;
 		}

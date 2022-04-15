@@ -6,13 +6,14 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:46:08 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/13 02:39:35 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/15 00:56:01 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_commands.h"
 
-static void	replace_or_add_env__value_key_for_export(t_env **envs, char *key, char *value, int part_counts)
+static void	replace_or_add_env__value_key_for_export(t_env **envs, \
+								char *key, char *value, int part_counts)
 {
 	t_env	*env;
 
@@ -52,36 +53,38 @@ static void	builtin_cmd__export__print_all_envs(t_env *env, int outfd)
 	}
 }
 
-static bool	is_this_key_valid_as_var_key__export_(char *str)
+static void	__export__add_empty_key(char *arg, t_builtin_cmd_data *data)
 {
-	if (*str == '\0')
-		return (false);
-	if (ft_isdigit(*str))
-		return (false);
-	while (*str)
+	if (is_this_key_valid_as_var_key(arg))
+		replace_or_add_env__value_key_for_export(data->env, "", \
+											arg, data->part_counts);
+	else
 	{
-		if (ft_isalnum(*str) || *str == '_')
-			str++;
-		else
-			return (false);
+		data->ext_stts = 1;
+		put_not_a_valid_identifier_error("export", arg);
 	}
-	return (true);
 }
 
-static void	put_not_a_valid_identifier_error(char *str, int *ext_stts)
+static void	__export__add_new_env(char *arg, char *equal_index, \
+									t_builtin_cmd_data *data)
 {
-	*ext_stts = 1;
-	ft_putstr_fd(SHELL_NAME, 2);
-	ft_putstr_fd("export: `", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd("': not a valid identifier", 2);
-	write(2, "\n", 1);
+	char	*key;
+
+	key = strdup_from_to__address_(arg, equal_index);
+	if (is_this_key_valid_as_var_key(key))
+		replace_or_add_env__value_key_for_export(data->env, key, \
+										equal_index + 1, data->part_counts);
+	else
+	{
+		data->ext_stts = 1;
+		put_not_a_valid_identifier_error("export", arg);
+	}
+	free(key);
 }
 
 void	builtin_cmd__export_(t_builtin_cmd_data *data)
 {
 	char	*equal_index;
-	char	*key;
 	char	**args;
 
 	data->ext_stts = 0;
@@ -92,21 +95,9 @@ void	builtin_cmd__export_(t_builtin_cmd_data *data)
 	{
 		equal_index = ft_strchr(*args, '=');
 		if (equal_index == NULL)
-		{
-			if (is_this_key_valid_as_var_key__export_(*args))
-				replace_or_add_env__value_key_for_export(data->env, "", *args, data->part_counts);
-			else
-				put_not_a_valid_identifier_error(*args, &data->ext_stts);
-		}
+			__export__add_empty_key(*args, data);
 		else
-		{
-			key = strdup_from_to__address_(*args, equal_index);
-			if (is_this_key_valid_as_var_key__export_(key))
-				replace_or_add_env__value_key_for_export(data->env, key, equal_index + 1, data->part_counts);
-			else
-				put_not_a_valid_identifier_error(*args, &data->ext_stts);
-			free(key);
-		}
+			__export__add_new_env(*args, equal_index, data);
 		args++;
 	}
 }
