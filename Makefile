@@ -6,7 +6,7 @@
 #    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/15 02:00:26 by jchakir          ###   ########.fr        #
+#    Updated: 2022/04/16 02:10:14 by jchakir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,11 @@ COLOUR_BLUE=\033[0;35m
 
 COLOUR_END=\033[0m
 
-SRCS = ./srcs/main.c \
-		./srcs/parser/alloc_init.c ./srcs/parser/parser.c  ./srcs/parser/check.c ./srcs/parser/token_recognition.c \
-		./srcs/parser/tokenizer.c ./srcs/parser/envinit.c ./srcs/parser/error_quit.c \
-		./srcs/utils_functions/utils.c ./srcs/utils_functions/utils2.c ./srcs/utils_functions/utils3.c \
-		./srcs/utils_functions/utils4.c ./srcs/utils_functions/lst_utils.c 
+SRCS = srcs/main.c \
+		srcs/parser/alloc_init.c srcs/parser/parser.c  srcs/parser/check.c srcs/parser/token_recognition.c \
+		srcs/parser/tokenizer.c srcs/parser/envinit.c srcs/parser/error_quit.c \
+		srcs/utils_functions/utils.c srcs/utils_functions/utils2.c srcs/utils_functions/utils3.c \
+		srcs/utils_functions/utils4.c srcs/utils_functions/lst_utils.c 
 
 SOURCE = srcs/source/calloc.c srcs/source/char_genre.c srcs/source/itoa_and_atoi.c \
 		srcs/source/envp_proccessing.c srcs/source/mem_str_comparing.c \
@@ -48,7 +48,8 @@ CMD_EXEC = srcs/commands_executor/cmds_executor.c srcs/commands_executor/cmds_ex
 
 VARS_HANDLER = srcs/vars_handler/quotes_and_forbidden_chars_checker.c \
 				srcs/vars_handler/strings_parser_and_vars_handler.c \
-				srcs/vars_handler/var_to_value_in_str.c
+				srcs/vars_handler/var_to_value_in_str.c \
+				srcs/vars_handler/var_to_value_in_str_utils.c 
 
 
 OBJS = $(SRCS:%.c=%.o)

@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   source_.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/16 22:06:59 by jchakir           #+#    #+#             */
+/*   Updated: 2022/04/16 22:07:26 by jchakir          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef SOURCE__H
-#define SOURCE__H
+# define SOURCE__H
 
 # include <unistd.h>
 # include <stdio.h>
@@ -31,8 +42,6 @@
 # define READ_OR_WRITE_ERROR "error read()/write()"
 # define COMMAND_NOT_FOUND_ERROR ": command not found"
 
-
-
 void	custom_msg_then_perror(char *str);
 void	put_custom_error(char *str_error1, char *str_error2);
 int		list_component_size(t_component *lst);
@@ -56,9 +65,9 @@ void	ft_putendl_fd(char *s, int fd);
 void	check_if_null__malloc__exit_(void *ptr, char *str);
 t_env	*new_env(char *key, char *value);
 void	env_add_back_to_envs(t_env **envs, t_env *new_env);
-void	replace_or_add_env__value_key_(t_env **envs, t_env *env, char *key, char *value);
+void	replace_or_add_env__value_key_(t_env **envs, \
+										t_env *env, char *key, char *value);
 t_env	*get_env_by_its_key(t_env *env, char *key);
 void	shlvl_initializer(t_env **envp, char **envs);
-
 
 #endif

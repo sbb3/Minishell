@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:02:24 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/15 02:40:54 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 21:53:11 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,93 +25,89 @@ static char	*get__address__until_limiter(char *str, char limiter)
 	return (str);
 }
 
-static void	det_limiter_and_str_type(char *limiter, int *str_type, char **str)
+static void	set_limiter_and_str_type(char **str, t_v_h_data *v_h_data)
 {
 	if (**str == '"')
 	{
-		*str_type = DOUBLE_Q;
-		*limiter = '"';
+		v_h_data->str_type = DOUBLE_Q;
+		v_h_data->limiter = '"';
 		*str = *str + 1;
 	}
 	else if (**str == '\'')
 	{
-		*str_type = SINGLE_Q;
-		*limiter = '\'';
+		v_h_data->str_type = SINGLE_Q;
+		v_h_data->limiter = '\'';
 		*str = *str + 1;
 	}
 	else
 	{
-		*str_type = SIMPLE_STR;
-		*limiter = '\0';
+		v_h_data->str_type = SIMPLE_STR;
+		v_h_data->limiter = '\0';
 	}
 }
 
-static char	*squotes_dquotes_and_vars_hundler(char *str, t_env *env, int exit_status)
+static char	*quotes_and_vars_hundler(char *str, t_v_h_data *v_h_data)
 {
-	int		str_type;
-	char	limiter;
-	char	*end_str;
 	char	*final_str;
 	char	*temp_final_str;
 	char	*temp_ptr;
-	int 	extra_param[2];
 
 	final_str = ft_strdup("");
 	while (*str)
 	{
-		det_limiter_and_str_type(&limiter, &str_type, &str);
-		end_str = get__address__until_limiter(str, limiter);
-		extra_param[0] = str_type;
-		extra_param[1] = *end_str;
-		if (str_type == SINGLE_Q)
-			temp_ptr = strdup_from_to__address_(str, end_str);
+		set_limiter_and_str_type(&str, v_h_data);
+		v_h_data->end_str = get__address__until_limiter(str, v_h_data->limiter);
+		if (v_h_data->str_type == SINGLE_Q)
+			temp_ptr = strdup_from_to__address_(str, v_h_data->end_str);
 		else
-			temp_ptr = var_to_value_in__str__from_to__address_(str, end_str, env, exit_status, extra_param);
+			temp_ptr = var_to_value_in__str__from_to__address_(str, v_h_data);
 		temp_final_str = ft_strjoin(final_str, temp_ptr);
 		free(temp_ptr);
 		free(final_str);
 		final_str = temp_final_str;
-		str = end_str;
-		if (limiter)
+		str = v_h_data->end_str;
+		if (v_h_data->limiter)
 			str++;
 	}
 	return (final_str);
 }
 
-static void	strings_parser_and_vars_handler__in_components_(t_component *component, t_env *envp, int exit_status)
+static void	vars_handler__in_components_(t_component *component, \
+											t_v_h_data *v_h_data)
 {
-	char		*str;
+	char	*str;
 
 	while (component)
 	{
-		if (ft_strchr(component->content, '"') || ft_strchr(component->content, '\''))
-			str = squotes_dquotes_and_vars_hundler(component->content, envp, exit_status);
+		v_h_data->end_str = "";
+		v_h_data->str_type = SIMPLE_STR;
+		if (ft_strchr(component->content, '"') || \
+										ft_strchr(component->content, '\''))
+			str = quotes_and_vars_hundler(component->content, v_h_data);
 		else
-			str = var_to_value_in_str(component->content, envp, exit_status, NULL);
-
+			str = var_to_value_in_str(component->content, v_h_data);
 		free(component->content);
 		component->content = str;
 		component = component->next;
 	}
 }
 
-bool	strings_parser_and_vars_handler(t_shell *shell)
+void	strings_parser_and_vars_handler(t_shell *shell)
 {
 	t_component	*component;
+	t_v_h_data	*v_h_data;
 	int			index;
 
-	if (quotes_and_forbidden_chars_checker(shell) == false)
-	{
-		put_custom_error(NULL, QUOTES_OR_FORB_CHAR_ERROR);
-		return (false);
-	}
-
+	v_h_data = ft_calloc(1, sizeof(t_v_h_data));
+	check_if_null__malloc__exit_(v_h_data, MALLOC_ERROR);
+	v_h_data->env = shell->envp;
+	v_h_data->exit_status = shell->exit_status;
 	index = 0;
 	while (index < shell->parts_count)
 	{
 		component = shell->separator[index];
-		strings_parser_and_vars_handler__in_components_(component, shell->envp, shell->exit_status);
+		vars_handler__in_components_(component, v_h_data);
 		index++;
 	}
-	return (true);
+	free(v_h_data);
 }

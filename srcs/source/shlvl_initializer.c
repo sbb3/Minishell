@@ -6,11 +6,11 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 02:36:10 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/13 03:40:01 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 22:06:15 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "source_.h"
+#include "source_.h"
 
 static bool	is_valid_as_shlvl_value__all_numeric(char *str)
 {
@@ -32,7 +32,7 @@ static void	join_key_value_to_set_to_envs(char *key, char *value, char **envs)
 	str = ft_strjoin(temp_str, value);
 	free(temp_str);
 	free(*envs);
-	*envs = str;	
+	*envs = str;
 }
 
 static char	**get_varible_address_by_its_key(char *key, char **envs)

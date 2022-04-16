@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/14 06:00:58 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 21:37:54 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	sig_hundler__ctrl_c__after_readline(int sig)
 {
 	(void)sig;
 	is_last_ctrl_c = 1;
-	// set_or_get_last_ctrl_c(1, 1);
 	write(1, "\n", 1);
 }
 
@@ -77,7 +76,7 @@ char	*prompt(struct sigaction *ctrl_c)
 		is_last_ctrl_c = 0;
 		ctrl_c->sa_handler = sig_hundler__ctrl_c__before_readline;
 		sigaction(SIGINT, ctrl_c, NULL);
-		input = readline("MiniShell: $🤙 ");
+		input = readline("MiniShell: $ ");
 		ctrl_c->sa_handler = sig_hundler__ctrl_c__after_readline;
 		sigaction(SIGINT, ctrl_c, NULL);
 		if (!input)

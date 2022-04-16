@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:31:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/13 21:36:28 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 22:00:55 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <signal.h>
 
 extern char	**environ;
-
 
 enum e_id
 {
@@ -78,7 +77,6 @@ typedef struct s_shell
 	int					start;
 	char				**tokens;
 	int					tokens_len;
-	// int					*pids;
 
 }	t_shell;
 

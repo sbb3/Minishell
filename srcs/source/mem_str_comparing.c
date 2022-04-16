@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:05:11 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/11 06:55:39 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 22:03:44 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (*s1 - *s2);
 }
-
 
 int	ft_memcmp(const void *str1, const void *str2, size_t n)
 {

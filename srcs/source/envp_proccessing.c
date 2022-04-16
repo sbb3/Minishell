@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp_add_back_or_get_it.c                          :+:      :+:    :+:   */
+/*   envp_proccessing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 02:44:16 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/13 02:46:03 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 22:03:05 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ t_env	*get_env_by_its_key(t_env *env, char *key)
 	return (NULL);
 }
 
-void	replace_or_add_env__value_key_(t_env **envs, t_env *env, char *key, char *value)
+void	replace_or_add_env__value_key_(t_env **envs, \
+										t_env *env, char *key, char *value)
 {
-	
 	if (env)
 	{
 		free(env->value);
