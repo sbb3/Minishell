@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:15:30 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/13 04:59:58 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/16 23:54:25 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ void	alloc_init(t_shell *data)
 	set_null(data);
 }
 
-t_shell	*init(void)
+t_shell	*init(int ac, char *av[])
 {
 	t_shell	*shell;
 
+	(void) ac;
+	(void) av;
 	shell = ft_calloc(1, sizeof(t_shell));
 	exit_if_null(shell, "Allocation failed");
 	return (shell);

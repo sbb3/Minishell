@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   source_.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 22:06:59 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/16 22:07:26 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 23:44:59 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # include "../../incl/source.h"
 
-# define SHELL_NAME "MiniShell: "
+# define SHELL_NAME "minishell-1.0: "
 
 # define MALLOC_ERROR "error malloc()"
 # define PIPE_ERROR "error pipe()"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   source.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:31:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/16 23:28:48 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 23:56:02 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-
-extern char	**environ;
 
 enum e_id
 {

@@ -6,13 +6,13 @@
 #    By: adouib <adouib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/16 23:35:10 by adouib           ###   ########.fr        #
+#    Updated: 2022/04/16 23:37:32 by adouib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-RDFLAGS= -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib 
+RDFLAGS= -lreadline -L/Volumes/SBB3/homebrew/opt/readline/lib 
 
 CFLAGS = -I./incl/ -Wall -Wextra -Werror  # -g3 -fsanitize=address 
 

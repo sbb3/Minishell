@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envinit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:34:26 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/16 22:01:46 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 23:55:48 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*getkey(char *s)
 	return (0);
 }
 
-void	envinit(t_shell *data)
+void	envinit(t_shell *data, char *environ[])
 {
 	t_env	*newnode;
 	char	*key;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/16 23:29:20 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 23:55:00 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*prompt(void)
 	{
 		ctrl_c.sa_handler = sig_hundler__ctrl_c__before_readline;
 		sigaction(SIGINT, &ctrl_c, NULL);
-		input = readline("MiniShell: $ ");
+		input = readline("minishell-1.0$ ");
 		ctrl_c.sa_handler = sig_hundler__ctrl_c__after_readline;
 		sigaction(SIGINT, &ctrl_c, NULL);
 		if (input == NULL)
@@ -60,15 +60,15 @@ char	*prompt(void)
 	return (input);
 }
 
-int	main(void)
+int	main(int ac, char *av[], char *envp[])
 {
 	t_shell				*shell;
 	struct sigaction	ctrl_back_slash;
 
 	ctrl_back_slash.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &ctrl_back_slash, NULL);
-	shell = init();
-	envinit(shell);
+	shell = init(ac, av);
+	envinit(shell, envp);
 	while (1337)
 	{
 		check_ctrl_c_and_reset_checker_value(shell);

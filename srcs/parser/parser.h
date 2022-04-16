@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 02:59:00 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/13 04:56:24 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/16 23:55:14 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void		parser(t_shell *data);
 char		**tokenizer(char *s, int *start);
 int			*token_recognition(t_shell *data);
 char		*get_token(char *s, int *lastpos);
-t_shell		*init(void);
+t_shell		*init(int ac, char *av[]);
 void		alloc_init(t_shell *data);
-void		envinit(t_shell *data);
+void		envinit(t_shell *data, char *envp[]);
 char		**ft_copy(char **tokens, size_t size, size_t tkns_len);
 
 // CHECKIN'
