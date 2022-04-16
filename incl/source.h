@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:31:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/16 22:00:55 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/16 23:28:48 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,10 @@ typedef struct s_shell
 	int					tokens_len;
 
 }	t_shell;
+
+void	rl_replace_line(const char *text, int clear_undo);
+void	sig_hundler__ctrl_c__before_readline(int sig);
+void	sig_hundler__ctrl_c__after_readline(int sig);
+void	check_ctrl_c_and_reset_checker_value(t_shell *shell);
 
 #endif
