@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
+#    By: adouib <adouib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/16 23:15:51 by jchakir          ###   ########.fr        #
+#    Updated: 2022/04/16 23:35:10 by adouib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-RDFLAGS= -lreadline -L/goinfre/jchakir/.brew/opt/readline/lib 
+RDFLAGS= -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib 
 
 CFLAGS = -I./incl/ -Wall -Wextra -Werror  # -g3 -fsanitize=address 
 
