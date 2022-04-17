@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:55:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 22:25:34 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 23:47:00 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	exec_other_command(t_cmd_data *cmd_data, int id, int outfd)
 	int		input_fd;
 	int		output_fd;
 
-	cmd_data->builtin_ext_stts = 0;
 	if (set__in_out__files_fds(&input_fd, &output_fd, cmd_data) == false)
 	{
 		cmd_data->builtin_ext_stts = 1;
@@ -32,6 +31,7 @@ static void	exec_other_command(t_cmd_data *cmd_data, int id, int outfd)
 			cmd_data->infd = input_fd;
 		if (output_fd > 2)
 			outfd = output_fd;
+		close(cmd_data->pipefd);
 		get_cmd_full_path_then_exec_it(cmd_data, outfd);
 		exit (0);
 	}
