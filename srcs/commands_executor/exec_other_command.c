@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_other_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 22:44:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/15 02:40:28 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 02:16:24 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	ft_execut_command(char *cmd_path, char **args, char **envs, \
 	}
 }
 
-int	get__infd_outfd__and_cmd_full_path_then_exec_it(t_cmd_data *cmd_data, \
+void	get__infd_outfd__and_cmd_full_path_then_exec_it(t_cmd_data *cmd_data, \
 															int outfd)
 {
 	char	*cmd_full_path;

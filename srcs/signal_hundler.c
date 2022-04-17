@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_hundler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 23:11:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/16 23:31:28 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 01:51:40 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	sig_hundler__ctrl_c__before_readline(int sig)
 void	sig_hundler__ctrl_c__after_readline(int sig)
 {
 	(void)sig;
-	set_or_get_last_ctrl_c(1, 2);
 	write(1, "\n", 1);
 }
 
@@ -42,7 +41,5 @@ void	check_ctrl_c_and_reset_checker_value(t_shell *shell)
 {
 	if (set_or_get_last_ctrl_c(0, 1) == 1)
 		shell->exit_status = 1;
-	else if (set_or_get_last_ctrl_c(0, 1) == 2)
-		shell->exit_status = 130;
 	set_or_get_last_ctrl_c(1, 0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_executor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/15 01:41:52 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 01:48:43 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ static void	wait_all_pids(t_shell *shell, int *pids, int builtin_ext_stts)
 		if (pids[index] > 0)
 		{
 			waitpid(pids[index], &exit_status, 0);
-			shell->exit_status = exit_status / 256;
+			if (WIFSIGNALED(exit_status))
+				shell->exit_status = 130;
+			else
+				shell->exit_status = WEXITSTATUS(exit_status);
 		}
 		else
 			shell->exit_status = builtin_ext_stts;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_executor.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:17:02 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/15 01:52:28 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 02:01:15 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**get_cmd_and_args__from_component_(t_component *component);
 bool	this_is_builtin_command(t_component *component);
 void	exec_builtin_command(t_cmd_data *cmd_data, t_shell *shell, \
 												int outfd);
-int		get__infd_outfd__and_cmd_full_path_then_exec_it(\
+void		get__infd_outfd__and_cmd_full_path_then_exec_it(\
 										t_cmd_data *cmd_data, int outfd);
 int		ft_get_here_doc(char *limiter);
 void	envs_updater(char *cmd, t_shell *shell);

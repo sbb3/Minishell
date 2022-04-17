@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/16 23:55:00 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/17 02:18:18 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	main(int ac, char *av[], char *envp[])
 	envinit(shell, envp);
 	while (1337)
 	{
-		check_ctrl_c_and_reset_checker_value(shell);
 		shell->prompt_input = prompt();
 		check_ctrl_c_and_reset_checker_value(shell);
 		if (check(shell->prompt_input) == 0)
