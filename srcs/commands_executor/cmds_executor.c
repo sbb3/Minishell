@@ -6,14 +6,13 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:55:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/15 01:20:35 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 01:23:32 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "commands_executor.h"
 
-void	cmd_executor__fork_child_proc_(t_cmd_data *cmd_data, \
-										t_shell *shell, int id)
+void	cmd_executor__fork_child_proc_(t_cmd_data *cmd_data, t_shell *shell, int id)
 {
 	int	pipe_fds[2];
 	int	outfd;
