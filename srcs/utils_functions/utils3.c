@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:27:57 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/07 03:02:25 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/17 01:07:03 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,5 @@ int	check_redir_helper(char *s, int i)
 	if ((s[i] == '>' && s[i + 1] == '<') || (s[i] == '<' && s[i + 1] == '>') || \
 		(s[i] == '<' && s[i + 1] == '|') || (s[i] == '>' && s[i + 1] == '|'))
 		return (0);
-	return (1);
-}
-
-int	check_helper(char *s, int i, int dqstate, int sqstate)
-{
-	if ((s[i] == PIPE) && (!dqstate && !sqstate))
-	{
-		if (!check_pipe(s, i))
-			return (0);
-	}
-	else if ((s[i] == '&' || s[i] == '\\' || s[i] == ';') && \
-		(!dqstate && !sqstate))
-		return (syntax_error("Unsupported character!"));
 	return (1);
 }

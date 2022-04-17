@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 02:59:00 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/16 23:55:14 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/17 01:06:58 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void		ft_free(char **tokens, size_t tkns_len);
 // HELPER FUNCTIONS
 void		phasezero(t_shell *data);
 void		phaseone(t_shell *data);
-int			check_helper(char *s, int i, int dqstate, int sqstate);
 void		quoteshelper(char *s, int *to, char c);
 char		*pipehelper(int *from, int *lastpos);
 char		*shlvl_helper(char *value);

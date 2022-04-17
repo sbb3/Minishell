@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:20:36 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/13 04:57:59 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/17 01:14:41 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,13 @@ int	check(char *s)
 	{
 		if (s[i] == DOUBLEQUOTE || s[i] == SINGLEQUOTE)
 			quotescheck(s[i], &dqstate, &sqstate);
-		else if (s[i] == LREDIR || s[i] == RREDIR)
+		else if ((s[i] == LREDIR || s[i] == RREDIR) && (!dqstate && !sqstate))
 		{
 			if (!check_redirec(s, i))
 				return (0);
 		}
-		else
-			if (!check_helper(s, i, dqstate, dqstate))
+		else if ((s[i] == PIPE) && (!dqstate && !sqstate))
+			if (!check_pipe(s, i))
 				return (0);
 	}
 	if (dqstate || sqstate)
