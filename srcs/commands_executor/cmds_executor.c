@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:55:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 22:16:39 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 22:25:34 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	command_executor(t_cmd_data *cmd_data, t_shell *shell, int id)
 	int	outfd;
 
 	if (pipe(pipe_fds) < 0)
-	check_if_null__malloc__exit_(NULL, PIPE_ERROR);
+		check_if_null__malloc__exit_(NULL, PIPE_ERROR);
 	cmd_data->pipefd = pipe_fds[0];
 	if (id < shell->parts_count - 1)
 		outfd = pipe_fds[1];

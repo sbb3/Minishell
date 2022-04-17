@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:09:27 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 02:49:32 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 22:26:46 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	builtin_cmd__cd__dirname_as_telda(char *dirname, \
 	if (home)
 	{
 		dirname = ft_strjoin(home->value, dirname + 1);
-		if (_cd__chdir_and_modify_env(dirname, data->env, pwd, old_pwd) == false)
+		if (! _cd__chdir_and_modify_env(dirname, data->env, pwd, old_pwd))
 			data->ext_stts = 1;
 		free(dirname);
 	}
@@ -73,7 +73,7 @@ static void	builtin_cmd__cd__dirname_parser(char *dirname, \
 	}
 	else
 	{
-		if (_cd__chdir_and_modify_env(dirname, data->env, pwd, old_pwd) == false)
+		if (! _cd__chdir_and_modify_env(dirname, data->env, pwd, old_pwd))
 			data->ext_stts = 1;
 	}
 }
