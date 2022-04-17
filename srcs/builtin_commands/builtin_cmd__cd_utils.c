@@ -6,13 +6,13 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 03:26:03 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/15 00:09:31 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 02:48:19 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_commands.h"
 
-bool	builtin_cmd__cd__chdir_and_modify_env(char *dirname, t_env **envs, \
+bool	_cd__chdir_and_modify_env(char *dirname, t_env **envs, \
 												t_env *pwd, t_env *old_pwd)
 {
 	char	buff[251];

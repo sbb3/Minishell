@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:09:27 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/14 23:58:17 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 02:49:32 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	builtin_cmd__cd__dirname_as_dash(t_builtin_cmd_data *data, \
 {
 	if (old_pwd)
 	{
-		if (builtin_cmd__cd__chdir_and_modify_env(old_pwd->value, \
-												data->env, pwd, old_pwd))
+		if (_cd__chdir_and_modify_env(old_pwd->value, data->env, pwd, old_pwd))
 		{
 			if (pwd == NULL)
 				pwd = get_env_by_its_key(*data->env, "PWD");
@@ -43,8 +42,7 @@ void	builtin_cmd__cd__dirname_as_telda(char *dirname, \
 	if (home)
 	{
 		dirname = ft_strjoin(home->value, dirname + 1);
-		if (builtin_cmd__cd__chdir_and_modify_env(dirname, \
-										data->env, pwd, old_pwd) == false)
+		if (_cd__chdir_and_modify_env(dirname, data->env, pwd, old_pwd) == false)
 			data->ext_stts = 1;
 		free(dirname);
 	}
@@ -75,8 +73,7 @@ static void	builtin_cmd__cd__dirname_parser(char *dirname, \
 	}
 	else
 	{
-		if (builtin_cmd__cd__chdir_and_modify_env(dirname, \
-									data->env, pwd, old_pwd) == false)
+		if (_cd__chdir_and_modify_env(dirname, data->env, pwd, old_pwd) == false)
 			data->ext_stts = 1;
 	}
 }

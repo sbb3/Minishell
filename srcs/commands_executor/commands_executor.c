@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_executor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 01:48:43 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/17 18:58:05 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*get_path_env_from_envp(t_env *envp)
 {
 	while (envp)
 	{
-		if (ft_memcmp(envp->key, "PATH", 5) == 0)
+		if (ft_strcmp(envp->key, "PATH") == 0)
 			return (envp->value);
 		envp = envp->next;
 	}
@@ -62,7 +62,7 @@ void	commands_executor(t_shell *shell)
 	while (index < shell->parts_count)
 	{
 		cmd_data->component = shell->separator[index];
-		cmd_executor__fork_child_proc_(cmd_data, shell, index);
+		command_executor(cmd_data, shell, index);
 		cmd_data->infd = cmd_data->pipefd;
 		index++;
 	}

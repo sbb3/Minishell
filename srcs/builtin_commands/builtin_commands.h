@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:40:29 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/15 00:50:52 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 02:48:32 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	builtin_cmd__cd_(t_builtin_cmd_data *data);
 void	builtin_cmd__export_(t_builtin_cmd_data *data);
 void	dir_checker_in_multi_parts(char *dirname, t_builtin_cmd_data *data);
 bool	directory_exist_or_not(char *dirname, t_builtin_cmd_data *data);
-bool	builtin_cmd__cd__chdir_and_modify_env(char *dirname, t_env **envs, \
-												t_env *pwd, t_env *old_pwd);
+bool	_cd__chdir_and_modify_env(char *dirname, t_env **envs, t_env *pwd, t_env *old_pwd);
 
 #endif

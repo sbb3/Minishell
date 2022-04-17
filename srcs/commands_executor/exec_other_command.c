@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_other_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 22:44:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 02:16:24 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/17 21:44:17 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_get_cmd_full_path(char *path, char *cmd)
 		exit (127);
 	}
 	if (ft_strchr(cmd, '/'))
-		return (ft_strdup(cmd));
+		return (cmd);
 	paths = ft_split(path, ':');
 	while (paths && *paths)
 	{
@@ -40,10 +40,9 @@ char	*ft_get_cmd_full_path(char *path, char *cmd)
 	exit (127);
 }
 
-static void	ft_execut_command(char *cmd_path, char **args, char **envs, \
-														int in_out_fds[2])
+static void	execut_command(char *cmd_path, char **args, char **envs, int fds[2])
 {
-	if (dup2(in_out_fds[0], 0) < 0 || dup2(in_out_fds[1], 1) < 0)
+	if (dup2(fds[0], 0) < 0 || dup2(fds[1], 1) < 0)
 	{
 		custom_msg_then_perror(DUP2_ERROR);
 		exit (1);
@@ -55,24 +54,18 @@ static void	ft_execut_command(char *cmd_path, char **args, char **envs, \
 	}
 }
 
-void	get__infd_outfd__and_cmd_full_path_then_exec_it(t_cmd_data *cmd_data, \
-															int outfd)
+void	get_cmd_full_path_then_exec_it(t_cmd_data *cmd_data, int outfd)
 {
 	char	*cmd_full_path;
 	char	**cmd_and_args;
 	int		in_out_fds[2];
 
-	if (set_input_and_output_fds__minner_(in_out_fds, in_out_fds + 1, \
-															cmd_data) == false)
-		exit (1);
-	if (in_out_fds[0] == 0)
-		in_out_fds[0] = cmd_data->infd;
-	if (in_out_fds[1] == 1)
-		in_out_fds[1] = outfd;
+	in_out_fds[0] = cmd_data->infd;
+	in_out_fds[1] = outfd;
 	cmd_and_args = get_cmd_and_args__from_component_(cmd_data->component);
 	if (*cmd_and_args == NULL)
 		exit (0);
 	cmd_full_path = ft_get_cmd_full_path(cmd_data->path_env, cmd_and_args[0]);
-	ft_execut_command(cmd_full_path, cmd_and_args, cmd_data->envs, in_out_fds);
-	exit(1);
+	execut_command(cmd_full_path, cmd_and_args, cmd_data->envs, in_out_fds);
+	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:10:32 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/15 02:10:19 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 02:44:31 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ static bool	set_output_fd(int *outfd, t_cmd_data *cmd_data)
 	return (true);
 }
 
-bool	set_input_and_output_fds__minner_(int *infd, int *outfd, \
-											t_cmd_data *cmd_data)
+bool	set__in_out__files_fds(int *infd, int *outfd, t_cmd_data *cmd_data)
 {
 	*infd = 0;
 	*outfd = 1;
