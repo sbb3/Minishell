@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:55:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 01:23:32 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/17 02:27:00 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	cmd_executor__fork_child_proc_(t_cmd_data *cmd_data, t_shell *shell, int id
 		cmd_data->pids[id] = fork();
 		if (cmd_data->pids[id] == 0)
 		{
+			signal(SIGQUIT, SIG_DFL);
+			signal(SIGINT, SIG_DFL);
 			close(pipe_fds[0]);
 			get__infd_outfd__and_cmd_full_path_then_exec_it(cmd_data, outfd);
 			exit (0);
