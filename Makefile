@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adouib <adouib@student.42.fr>              +#+  +:+       +#+         #
+#    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/17 02:18:33 by adouib           ###   ########.fr        #
+#    Updated: 2022/04/18 22:15:15 by jchakir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-RDFLAGS= -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib 
+RDFLAGS= -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib
+# RDFLAGS= -lreadline -L/Volumes/SBB3/homebrew/opt/readline/lib
 
 CFLAGS = -I./incl/ -Wall -Wextra -Werror  # -g3 -fsanitize=address 
 
