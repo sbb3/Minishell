@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 21:13:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/16 21:59:10 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/18 01:49:13 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,22 @@ static char	*find_ext_stts__replace_it(char **src, char *str, int exit_status)
 	return (temp_str);
 }
 
-char	*find_var_and_replace_it(char **src, char *str, t_env *env, \
-													int exit_status)
+char	*find_var_and_replace_it(char **src, char *str, t_v_h_data *v_h_data)
 {
 	char	*var_key;
 	char	*var_value;
 
-	if (! **src)
-		return (NULL);
 	if (ft_isdigit(**src))
 	{
 		*src = *src + 1;
 		return (NULL);
 	}
 	if (**src == '?')
-		return (find_ext_stts__replace_it(src, str, exit_status));
+		return (find_ext_stts__replace_it(src, str, v_h_data->exit_status));
 	var_key = get_var_name__key_(*src);
 	*src = *src + ft_strlen(var_key);
-	var_value = get_var_value_by_its_key(var_key, env);
+	var_value = get_var_value_by_its_key(var_key, v_h_data->env);
 	free(var_key);
-	if (! var_value)
-		return (NULL);
 	return (ft_strjoin(str, var_value));
 }
 
@@ -88,8 +83,7 @@ char	*var_to_value_in_str(char *src, t_v_h_data *v_h_data)
 		if (*src == '$' && valid_char_in_var_name(*(src + 1)))
 		{
 			src++;
-			temp_str = find_var_and_replace_it(&src, str, v_h_data->env, \
-														v_h_data->exit_status);
+			temp_str = find_var_and_replace_it(&src, str, v_h_data);
 			if (temp_str)
 			{
 				free(str);

@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 23:51:12 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/16 00:11:15 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/18 01:55:53 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	*get_var_name__key_(char *begin_var_key)
 	char	*str;
 	char	*end_var_key;
 
-	str = ft_strdup("");
 	end_var_key = begin_var_key;
 	while (valid_char_in_var_key(*end_var_key))
 		end_var_key++;
