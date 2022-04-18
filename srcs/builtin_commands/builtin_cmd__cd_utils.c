@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 03:26:03 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 02:48:19 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/18 01:25:14 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	_cd__chdir_and_modify_env(char *dirname, t_env **envs, \
 		cwd = getcwd(buff, 251);
 		if (cwd)
 			replace_or_add_env__value_key_(envs, pwd, "PWD", cwd);
-		if (oldcwd && (ft_strcmp(cwd, oldcwd) || old_pwd == NULL))
+		if (oldcwd)
 			replace_or_add_env__value_key_(envs, old_pwd, "OLDPWD", oldcwd);
 		return (true);
 	}
@@ -75,14 +75,12 @@ static void	dir_checker__telda__(char *dirname, t_builtin_cmd_data *data)
 	home = get_env_by_its_key(*data->env, "HOME");
 	if (home)
 	{
-		dirname = ft_strjoin(home->value, dirname + 1);
+		if (*home->value)
+			dirname = ft_strjoin(home->value, dirname + 1);
+		else
+			dirname = ft_strdup(".");
 		directory_exist_or_not(dirname, data);
 		free(dirname);
-	}
-	else
-	{
-		data->ext_stts = 1;
-		put_custom_error("cd: ", "HOME not set");
 	}
 }
 
