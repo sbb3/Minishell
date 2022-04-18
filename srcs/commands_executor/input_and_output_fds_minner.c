@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 20:10:32 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 02:44:31 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/18 21:58:03 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ static bool	set_input_fd(int *infd, t_cmd_data *cmd_data)
 				*infd = ft_get_here_doc(component->content);
 			if (*infd < 0)
 			{
-				custom_msg_then_perror(component->content);
+				if (component->type == INFILE)
+					custom_msg_then_perror(component->content);
+				else
+					cmd_data->heredoc_exit_with_sg_c = 1;
 				return (false);
 			}
 		}

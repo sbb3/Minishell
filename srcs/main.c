@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/18 02:01:16 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/18 22:03:26 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ char	*prompt(void)
 		ctrl_c.sa_handler = sig_hundler__ctrl_c__after_readline;
 		sigaction(SIGINT, &ctrl_c, NULL);
 		if (input == NULL)
+		{
+			write(1, "exit\n", 5);
 			exit(0);
+		}
 		if (*input == '\0')
 		{
 			free(input);

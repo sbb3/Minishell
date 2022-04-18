@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 18:58:05 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/18 22:01:28 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	commands_executor(t_shell *shell)
 		cmd_data->component = shell->separator[index];
 		command_executor(cmd_data, shell, index);
 		cmd_data->infd = cmd_data->pipefd;
+		if (cmd_data->heredoc_exit_with_sg_c)
+			break ;
 		index++;
 	}
 	wait_all_pids(shell, pids, cmd_data->builtin_ext_stts);

@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 11:25:13 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 22:10:27 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/18 21:59:23 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	ft_get_here_doc(char *limiter)
 {
 	int		fd_pipe[2];
 	pid_t	pid;
+	int		exit_status;
 
 	if (pipe(fd_pipe) < 0)
 		return (-1);
@@ -48,6 +49,11 @@ int	ft_get_here_doc(char *limiter)
 		ft_get_here_doc_with_gunl(limiter, fd_pipe[1]);
 	}
 	close(fd_pipe[1]);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &exit_status, 0);
+	if (WIFSIGNALED(exit_status))
+	{
+		close(fd_pipe[0]);
+		return (-1);
+	}
 	return (fd_pipe[0]);
 }

@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:17:02 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 02:43:28 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/18 21:53:15 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_cmd_data
 	int			pipefd;
 	int			infd;
 	int			builtin_ext_stts;
+	int			heredoc_exit_with_sg_c;
 }	t_cmd_data;
 
 bool	set__in_out__files_fds(int *infd, int *outfd, t_cmd_data *cmd_data);
