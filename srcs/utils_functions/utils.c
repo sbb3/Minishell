@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 14:13:54 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/11 23:59:37 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/19 02:09:39 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser/parser.h"
-
-// int	ft_strcmp(char *s1, char *s2)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (s1[i] && s2[i] && (s1[i] == s2[i]))
-// 		i++;
-// 	return ((s1[i] - s2[i]));
-// }
 
 int	isprintable(int c)
 {
