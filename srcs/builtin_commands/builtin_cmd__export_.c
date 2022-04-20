@@ -6,14 +6,13 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:46:08 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/15 00:56:01 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/20 02:37:11 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_commands.h"
 
-static void	replace_or_add_env__value_key_for_export(t_env **envs, \
-								char *key, char *value, int part_counts)
+static void	modify_envs(t_env **envs, char *key, char *value, int part_counts)
 {
 	t_env	*env;
 
@@ -53,11 +52,21 @@ static void	builtin_cmd__export__print_all_envs(t_env *env, int outfd)
 	}
 }
 
-static void	__export__add_empty_key(char *arg, t_builtin_cmd_data *data)
+static void	add_empty_key(char *arg, t_builtin_cmd_data *data)
 {
+	t_env	*env;
+
 	if (is_this_key_valid_as_var_key(arg))
-		replace_or_add_env__value_key_for_export(data->env, "", \
-											arg, data->part_counts);
+	{
+		env = *data->env;
+		while (env)
+		{
+			if (*env->key == '\0' && ft_strcmp(env->value, arg) == 0)
+				return ;
+			env = env->next;
+		}
+		modify_envs(data->env, "", arg, data->part_counts);
+	}
 	else
 	{
 		data->ext_stts = 1;
@@ -65,15 +74,13 @@ static void	__export__add_empty_key(char *arg, t_builtin_cmd_data *data)
 	}
 }
 
-static void	__export__add_new_env(char *arg, char *equal_index, \
-									t_builtin_cmd_data *data)
+static void	add_new_env(char *arg, char *equal_index, t_builtin_cmd_data *data)
 {
 	char	*key;
 
 	key = strdup_from_to__address_(arg, equal_index);
 	if (is_this_key_valid_as_var_key(key))
-		replace_or_add_env__value_key_for_export(data->env, key, \
-										equal_index + 1, data->part_counts);
+		modify_envs(data->env, key, equal_index + 1, data->part_counts);
 	else
 	{
 		data->ext_stts = 1;
@@ -95,9 +102,9 @@ void	builtin_cmd__export_(t_builtin_cmd_data *data)
 	{
 		equal_index = ft_strchr(*args, '=');
 		if (equal_index == NULL)
-			__export__add_empty_key(*args, data);
+			add_empty_key(*args, data);
 		else
-			__export__add_new_env(*args, equal_index, data);
+			add_new_env(*args, equal_index, data);
 		args++;
 	}
 }

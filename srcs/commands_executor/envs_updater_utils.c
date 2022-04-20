@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 01:51:07 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/15 01:53:19 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/20 03:14:47 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	update_envs__only_changed_varibles__(t_shell *shell)
 	envs = shell->envs;
 	while (envp)
 	{
-		if (envp->key)
+		if (*(envp->key))
 		{
 			if (compare__key_value__with__varible_str__(envp, *envs) == false)
 				join_key_and_value_to_set_to_envs(envp, envs);
@@ -77,8 +77,11 @@ void	update_envs__all_from_scratch__(t_shell *shell, int len_envp)
 	envp = shell->envp;
 	while (envp)
 	{
-		join_key_and_value_to_set_to_envs(envp, new_envs);
-		new_envs++;
+		if (*(envp->key))
+		{
+			join_key_and_value_to_set_to_envs(envp, new_envs);
+			new_envs++;
+		}
 		envp = envp->next;
 	}
 }

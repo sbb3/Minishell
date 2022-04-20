@@ -6,13 +6,13 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:55:25 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/20 01:17:01 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/20 03:18:58 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "commands_executor.h"
 
-static void	exec_other_command(t_cmd_data *cmd_data, int id, int outfd)
+void	exec_other_command(t_cmd_data *cmd_data, int id, int outfd)
 {
 	int		input_fd;
 	int		output_fd;

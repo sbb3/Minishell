@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 22:44:06 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 02:44:12 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/20 02:41:22 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ static void	builtin_commands_executor(char *cmd, t_builtin_cmd_data *data)
 		builtin_cmd__exit_(data);
 }
 
-static void	free_unneeded_data_and_close_fds(void *data, void *args, \
-											int fd1, int fd2)
+static void	free_data__close_fds(void *data, void *args, int fd1, int fd2)
 {
 	free(args);
 	free(data);
@@ -76,6 +75,5 @@ void	exec_builtin_command(t_cmd_data *cmd_data, t_shell *shell, int outfd)
 	builtin_commands_executor(cmd_and_args[0], builtin_data);
 	cmd_data->builtin_ext_stts = builtin_data->ext_stts;
 	envs_updater(cmd_and_args[0], shell);
-	free_unneeded_data_and_close_fds(builtin_data, cmd_and_args, \
-										input_fd, output_fd);
+	free_data__close_fds(builtin_data, cmd_and_args, input_fd, output_fd);
 }
