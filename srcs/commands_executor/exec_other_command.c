@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 22:44:35 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 21:44:17 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/20 01:07:04 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*ft_get_cmd_full_path(char *path, char *cmd)
 	char	*path_slash;
 	char	*cmd_full_path;
 	char	**paths;
+	char	*temp_cmd_full_path;
 
 	if (*cmd == '\0')
 	{
@@ -26,16 +27,28 @@ char	*ft_get_cmd_full_path(char *path, char *cmd)
 	if (ft_strchr(cmd, '/'))
 		return (cmd);
 	paths = ft_split(path, ':');
+	temp_cmd_full_path = NULL;
 	while (paths && *paths)
 	{
 		path_slash = ft_strjoin(*paths, "/");
 		cmd_full_path = ft_strjoin(path_slash, cmd);
 		free(path_slash);
 		if (access(cmd_full_path, F_OK) == 0)
-			return (cmd_full_path);
-		free(cmd_full_path);
+		{
+			if (access(cmd_full_path, X_OK) == 0)
+				return (cmd_full_path);
+			else
+			{
+				free(temp_cmd_full_path);
+				temp_cmd_full_path = cmd_full_path;
+			}
+		}
+		else
+			free(cmd_full_path);
 		paths++;
 	}
+	if (temp_cmd_full_path)
+		return (temp_cmd_full_path);
 	put_custom_error(cmd, COMMAND_NOT_FOUND_ERROR);
 	exit (127);
 }

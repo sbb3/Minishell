@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:44:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/18 22:01:28 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/20 01:23:58 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	wait_all_pids(t_shell *shell, int *pids, int builtin_ext_stts)
 		{
 			waitpid(pids[index], &exit_status, 0);
 			if (WIFSIGNALED(exit_status))
-				shell->exit_status = 130;
+				shell->exit_status = exit_status + 128;
 			else
 				shell->exit_status = WEXITSTATUS(exit_status);
 		}
