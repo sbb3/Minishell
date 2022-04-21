@@ -6,7 +6,7 @@
 #    By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 22:27:37 by adouib            #+#    #+#              #
-#    Updated: 2022/04/21 03:26:12 by jchakir          ###   ########.fr        #
+#    Updated: 2022/04/21 21:25:42 by jchakir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ COLOUR_BLUE=\033[0;35m
 
 COLOUR_END=\033[0m
 
-SRCS = srcs/main.c srcs/signal_hundler.c srcs/prompt_designer.c \
+SRCS = srcs/main.c srcs/signal_hundler.c \
 		srcs/parser/alloc_init.c srcs/parser/parser.c  srcs/parser/check.c \
 		srcs/parser/token_recognition.c srcs/parser/tokenizer.c \
 		srcs/parser/envinit.c srcs/parser/error_quit.c srcs/utils_functions/utils.c \

@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/21 18:48:07 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/21 21:39:06 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	free_all_unneeded_data(t_shell *shell)
 	free(shell->separator);
 }
 
-char	*prompt(t_shell *shell)
+char	*prompt(void)
 {
 	char				*input;
 	struct sigaction	ctrl_c;
@@ -42,11 +42,9 @@ char	*prompt(t_shell *shell)
 	ctrl_c.sa_flags = SA_RESTART;
 	while (1337)
 	{
-		prompt_string__designed__(shell);
 		ctrl_c.sa_handler = sig_hundler__ctrl_c__before_readline;
 		sigaction(SIGINT, &ctrl_c, NULL);
-		// input = readline(GRN "minishell-1.0" CRESET "$ ");
-		input = readline(NULL);
+		input = readline(BGRN "minishell-1.0" RESET "$ ");
 		ctrl_c.sa_handler = sig_hundler__ctrl_c__after_readline;
 		sigaction(SIGINT, &ctrl_c, NULL);
 		if (input == NULL)
@@ -76,7 +74,7 @@ int	main(int ac, char *av[], char *envp[])
 	envinit(shell, envp);
 	while (1337)
 	{
-		shell->prompt_input = prompt(shell);
+		shell->prompt_input = prompt();
 		check_ctrl_c_and_reset_checker_value(shell);
 		if (check(shell->prompt_input) == 0)
 		{
