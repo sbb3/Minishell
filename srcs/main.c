@@ -6,7 +6,7 @@
 /*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:05:47 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/19 02:10:47 by jchakir          ###   ########.fr       */
+/*   Updated: 2022/04/21 03:23:05 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	free_all_unneeded_data(t_shell *shell)
 	free(shell->separator);
 }
 
-char	*prompt(void)
+char	*prompt(t_shell *shell)
 {
 	char				*input;
 	struct sigaction	ctrl_c;
@@ -42,9 +42,11 @@ char	*prompt(void)
 	ctrl_c.sa_flags = SA_RESTART;
 	while (1337)
 	{
+		prompt_string__designed__(shell);
 		ctrl_c.sa_handler = sig_hundler__ctrl_c__before_readline;
 		sigaction(SIGINT, &ctrl_c, NULL);
-		input = readline("minishell-1.0$ ");
+		// input = readline("minishell-1.0$ ");
+		input = readline(NULL);
 		ctrl_c.sa_handler = sig_hundler__ctrl_c__after_readline;
 		sigaction(SIGINT, &ctrl_c, NULL);
 		if (input == NULL)
@@ -74,7 +76,7 @@ int	main(int ac, char *av[], char *envp[])
 	envinit(shell, envp);
 	while (1337)
 	{
-		shell->prompt_input = prompt();
+		shell->prompt_input = prompt(shell);
 		check_ctrl_c_and_reset_checker_value(shell);
 		if (check(shell->prompt_input) == 0)
 		{

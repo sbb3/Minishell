@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   source.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:31:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/16 23:56:02 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/21 03:23:04 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ void	rl_replace_line(const char *text, int clear_undo);
 void	sig_hundler__ctrl_c__before_readline(int sig);
 void	sig_hundler__ctrl_c__after_readline(int sig);
 void	check_ctrl_c_and_reset_checker_value(t_shell *shell);
+void	prompt_string__designed__(t_shell *shell);
 
 #endif

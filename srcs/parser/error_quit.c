@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_quit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 23:43:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/04/11 23:45:45 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/21 02:50:58 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	syntax_error(char *s)
 {
-	printf("%s\n", s);
+	ft_putendl_fd(s, 2);
 	return (0);
 }
 
@@ -22,13 +22,13 @@ void	exit_if_null(void *p, char *message)
 {
 	if (!p)
 	{
-		printf("%s\n", message);
+		ft_putendl_fd(message, 2);
 		exit(EXIT_FAILURE);
 	}
 }
 
 void	quit(char *s, int errornum)
 {
-	printf("%s\n", s);
+	ft_putendl_fd(s, 2);
 	exit(errornum);
 }

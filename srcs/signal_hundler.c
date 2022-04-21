@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_hundler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchakir <jchakir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 23:11:26 by jchakir           #+#    #+#             */
-/*   Updated: 2022/04/17 01:51:40 by adouib           ###   ########.fr       */
+/*   Updated: 2022/04/21 03:24:47 by jchakir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	sig_hundler__ctrl_c__before_readline(int sig)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
+	// prompt_string__designed__();
 }
 
 void	sig_hundler__ctrl_c__after_readline(int sig)
